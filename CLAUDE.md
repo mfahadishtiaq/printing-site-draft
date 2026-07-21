@@ -1,7 +1,7 @@
 # AZ Printing and Signs — Website Project
 
-Website for AZ Printing and Signs, a family-run print shop at 499 Ray Lawson Blvd #24,
-Brampton, ON L6Y 4E3. Owner: Fahad's uncle (65, recently bought the business). Goal: local
+Website for AZ Printing and Signs, a family-run print shop at 499 Ray Lawson Blvd, Unit 24,
+Brampton, ON L6Y 4E6 (verified against Google, 2026-07-22). Phone 416-731-9229 (REAL). Owner: Fahad's uncle (65, recently bought the business). Goal: local
 leads (calls / WhatsApp / quote form) + local SEO ("printing Brampton"). Phase 2 later:
 online ordering/payments.
 

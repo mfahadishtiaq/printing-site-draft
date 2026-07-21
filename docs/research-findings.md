@@ -2,7 +2,7 @@
 
 ## Business details
 - Name: AZ Printing and Signs (confirm styling: "AZ" vs "A-Z" vs "A to Z")
-- 499 Ray Lawson Blvd #24, Brampton, ON L6Y 4E3 · family-run · new owner (Fahad's uncle, 65)
+- 499 Ray Lawson Blvd, Unit 24, Brampton, ON L6Y 4E6 · family-run · new owner (Fahad's uncle, 65)
 - No existing website (printa2z.com is an unrelated US chain). No Google presence — fresh GBP start.
 - Open questions: storefront sign/logo colors? Who answers WhatsApp/quotes? Existing socials?
 

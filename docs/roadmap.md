@@ -1,7 +1,7 @@
 # AZ Printing and Signs — Website & Growth Roadmap
 *Drafted 2026-07-19 by web-consultant. Approved direction of travel.*
 
-Client: Fahad's uncle, 65, new owner of AZ Printing and Signs, 499 Ray Lawson Blvd #24, Brampton ON L6Y 4E3. Family-run. Ambition: grow as much as possible — website first, then social media.
+Client: Fahad's uncle, 65, new owner of AZ Printing and Signs, 499 Ray Lawson Blvd, Unit 24, Brampton ON L6Y 4E6. Family-run. Ambition: grow as much as possible — website first, then social media.
 
 Key fact: the old business had NO Google presence. Google Business Profile is a fresh start — no reviews to claim.
 

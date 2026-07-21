@@ -13,7 +13,8 @@ is canonical; the root `index.html` is a rejected v1 and must be ignored)
 ## 1. The business
 
 Family-run print and sign shop at 499 Ray Lawson Blvd, Unit 24, Brampton, ON
-L6Y 4E6. Phone 416-731-9229. Owner is Fahad's uncle, 65, who ran a print and
+L6Y 4E6. Phone 416-731-9229. Both verified real (postal code checked against
+Google, 2026-07-22) and already live in the page and its LocalBusiness schema. Owner is Fahad's uncle, 65, who ran a print and
 shipping counter for about 25 years before buying this shop. Two customer types
 on one page: South Asian families ordering wedding and shaadi cards, and small
 businesses ordering cards, signs, apparel and repeat jobs.
@@ -84,6 +85,41 @@ this, and it still applies: no section with more than four equal-weight items,
 at least two asymmetric sections above 900px, one element at 70vw or wider, at
 least three structurally distinct section types, homepage 7 to 9 screenfuls at
 390px.
+
+### Measured, not guessed (studio critic pass, 2026-07-22)
+
+Computed at 1400px, so these are facts about the current build rather than
+impressions:
+
+- `.doors` = `556px 556px`, `.why` = `538px 538px`, `.show` =
+  `268px 268px 268px 268px`, `.stats` and `.revs` = `repeat(3,1fr)`.
+  **Zero asymmetric sections against a required minimum of two.**
+- Six sections open with the identical `eyebrow` + `h2.uline` skeleton.
+- `.door`, `.piece` and `.rev` share `border-radius:18px` + `1px solid
+  var(--border)`: the same card, three sections running.
+- The v1 design was rejected in this repo for "five `repeat(N,1fr)` grids under
+  identical centred headings". This page has five grids and six identical heads.
+  The structural fault that killed v1 is present in the approved direction.
+
+### Non-visual findings the design pass should know about
+
+These belong to structure and journey rather than to colour and type, and a
+redesign is the natural moment to fix them:
+
+- All four work tiles link to `href="#"`, so every one of them scrolls the
+  customer back to the top of the page.
+- Both audience doors resolve to the same `#quote` form, so the dual-audience
+  fork the homepage architecture rests on does not actually fork. The event door
+  even says "Visit the shop to see the materials" while its arrow fires at a
+  form.
+- The stats band restates the hero's "twenty-five years" as the largest number
+  on the page, which breaks the studio rule that nothing claimed in the hero is
+  repeated below it.
+- From the doors section down, almost every line could be pasted onto a
+  competitor's site unchanged. Everything uncopyable about this business (the
+  languages, Ray Lawson Blvd, the owner at the counter) sits in the top two
+  screenfuls. If the redesign can pull one concrete local detail further down
+  the page, that is worth more than any single visual move.
 
 ## 5. What a good design pass would deliver
 
