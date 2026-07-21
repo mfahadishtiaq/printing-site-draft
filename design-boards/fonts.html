@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Font options — AZ Printing and Signs</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Archivo:wdth,wght@100..125,500..800&family=Instrument+Serif:ital@0;1&family=Syne:wght@600;800&family=Big+Shoulders+Display:wght@600;800&family=Outfit:wght@500;700&family=Fraunces:opsz,wght@9..144,600..900&family=Plus+Jakarta+Sans:wght@500;800&family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Deliberately neutral: colour is being chosen separately, so these
+     specimens are black-and-white to keep the judgement on letterforms. */
+  --accent:#0E0E12; --accent-deep:#000; --accent-wash:#EFEFF3;
+  --ink:#0E0E12; --ink-soft:#5A5A6B;
+  --surface:#fff; --surface-2:#F7F7FA; --border:#E6E6EE;
+  --maxw:1000px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--surface-2);color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:24px}
+
+.flag{background:repeating-linear-gradient(45deg,#111 0 12px,#f5c518 12px 24px);
+  color:#fff;font-size:12px;font-weight:600;letter-spacing:.08em;text-align:center;
+  padding:8px 16px;text-transform:uppercase}
+.flag span{background:#111;padding:2px 8px;border-radius:6px}
+
+.intro{padding:56px 0 32px}
+.intro h1{font-family:'Inter',sans-serif;font-size:clamp(26px,4vw,38px);font-weight:600;
+  letter-spacing:-.02em;line-height:1.15;margin:0 0 12px}
+.intro p{color:var(--ink-soft);max-width:62ch;margin:0 0 8px}
+.intro strong{color:var(--ink)}
+
+/* --- specimen card --- */
+.spec{background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  padding:40px 32px;margin-bottom:24px;overflow:hidden}
+.spec__head{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;
+  padding-bottom:20px;margin-bottom:28px;border-bottom:1px solid var(--border)}
+.spec__num{font-size:12px;font-weight:700;color:#fff;background:var(--accent);
+  width:26px;height:26px;border-radius:50%;display:grid;place-content:center;flex:none}
+.spec__name{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.spec__pair{font-size:13px;color:var(--ink-soft)}
+.spec__tag{margin-left:auto;font-size:11px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--accent);background:var(--accent-wash);
+  padding:5px 12px;border-radius:999px;white-space:nowrap}
+
+.spec__h{font-size:clamp(34px,5.6vw,60px);line-height:1.04;letter-spacing:-.025em;
+  margin:0 0 16px;font-weight:700}
+.spec__h em{font-style:normal;color:var(--accent)}
+.spec__sub{font-family:'Inter',sans-serif;font-size:17px;color:var(--ink-soft);
+  max-width:56ch;margin:0 0 24px}
+
+.spec__ui{display:flex;flex-wrap:wrap;gap:20px;align-items:center;
+  padding-top:24px;border-top:1px dashed var(--border)}
+.btn{display:inline-flex;align-items:center;font-family:'Inter',sans-serif;
+  font-size:15px;font-weight:600;background:var(--accent);color:#fff;
+  padding:13px 24px;border-radius:999px;text-decoration:none}
+.chip{font-size:14px;font-weight:600;color:var(--accent)}
+.cardlet{border:1px solid var(--border);border-radius:12px;padding:14px 18px;min-width:190px}
+.cardlet__t{font-size:16px;font-weight:600;margin-bottom:2px}
+.cardlet__p{font-family:'Inter',sans-serif;font-size:13px;color:var(--ink-soft)}
+.note{font-family:'Inter',sans-serif;font-size:14px;color:var(--ink-soft);
+  margin-top:24px;padding-left:14px;border-left:3px solid var(--accent-wash)}
+
+/* --- the ten pairings --- */
+.f1  .spec__h,.f1  .cardlet__t{font-family:'Space Grotesk',sans-serif}
+.f2  .spec__h,.f2  .cardlet__t{font-family:'Bricolage Grotesque',sans-serif;font-weight:800}
+.f3  .spec__h,.f3  .cardlet__t{font-family:'Archivo',sans-serif;font-weight:800;font-stretch:118%}
+.f4  .spec__h,.f4  .cardlet__t{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.01em}
+.f4  .spec__h em{font-style:italic}
+.f5  .spec__h,.f5  .cardlet__t{font-family:'Syne',sans-serif;font-weight:800}
+.f6  .spec__h,.f6  .cardlet__t{font-family:'Big Shoulders Display',sans-serif;font-weight:800;letter-spacing:0}
+.f6  .spec__h{font-size:clamp(42px,7.4vw,82px);line-height:.96}
+.f7  .spec__h,.f7  .cardlet__t{font-family:'Outfit',sans-serif;font-weight:700}
+.f8  .spec__h,.f8  .cardlet__t{font-family:'Fraunces',Georgia,serif;font-weight:700}
+.f9  .spec__h,.f9  .cardlet__t{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800}
+.f10 .spec__h,.f10 .cardlet__t{font-family:'Anton',sans-serif;font-weight:400;letter-spacing:-.01em;text-transform:uppercase}
+.f10 .spec__h{font-size:clamp(38px,6.4vw,72px);line-height:1}
+
+.outro{padding:16px 0 80px}
+.outro h2{font-family:'Inter',sans-serif;font-size:22px;font-weight:600;letter-spacing:-.01em;margin:0 0 12px}
+.outro ol{color:var(--ink-soft);padding-left:20px;max-width:64ch}
+.outro li{margin-bottom:8px}
+@media(max-width:640px){.spec{padding:28px 20px}.spec__tag{margin-left:0}}
+</style>
+</head>
+<body>
+
+<div class="flag">Font specimen sheet &nbsp;·&nbsp; <span>Headline text is placeholder</span></div>
+
+<div class="wrap intro">
+  <h1>Ten typefaces, same headline, same colours.</h1>
+  <p>Every one of these is free on Google Fonts, so any of them can ship. Judge them by <strong>feel</strong>, not by name — scroll through, and note the numbers of the two or three that stop you.</p>
+  <p>The body text stays <strong>Inter</strong> in all ten. Only the headline font changes, because that's what carries the personality. Number 1 is what Direction D uses now, so it's your baseline.</p>
+  <p>This page is deliberately <strong>black and white</strong> — the purple is gone and colour is being chosen separately. Judging type and colour at the same time is how you end up blaming the font for the colour.</p>
+</div>
+
+<div class="wrap">
+
+  <section class="spec f1">
+    <div class="spec__head"><span class="spec__num">1</span>
+      <span class="spec__name">Space Grotesk</span><span class="spec__pair">+ Inter</span>
+      <span class="spec__tag">Current</span></div>
+    <h2 class="spec__h">Printing that makes your business <em>look the part</em>.</h2>
+    <p class="spec__sub">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <div class="spec__ui"><a class="btn" href="#">Get a Free Quote</a><span class="chip">from $XX / 500</span>
+      <div class="cardlet"><div class="cardlet__t">Banners &amp; signs</div><div class="cardlet__p">Vinyl, roll-up, lawn signs</div></div></div>
+    <p class="note">Techy and neutral. Clean, but it's the default choice of a lot of startups — which is exactly the "could be any company" problem.</p>
+  </section>
+
+  <section class="spec f2">
+    <div class="spec__head"><span class="spec__num">2</span>
+      <span class="spec__name">Bricolage Grotesque</span><span class="spec__pair">+ Inter</span>
+      <span class="spec__tag">Character</span></div>
+    <h2 class="spec__h">Printing that makes your business <em>look the part</em>.</h2>
+    <p class="spec__sub">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <div class="spec__ui"><a class="btn" href="#">Get a Free Quote</a><span class="chip">from $XX / 500</span>
+      <div class="cardlet"><div class="cardlet__t">Banners &amp; signs</div><div class="cardlet__p">Vinyl, roll-up, lawn signs</div></div></div>
+    <p class="note">Modern with deliberate quirks in the letter shapes. Feels designed and current without being cold. Strong candidate for "personality".</p>
+  </section>
+
+  <section class="spec f3">
+    <div class="spec__head"><span class="spec__num">3</span>
+      <span class="spec__name">Archivo Expanded</span><span class="spec__pair">+ Inter</span>
+      <span class="spec__tag">Poster</span></div>
+    <h2 class="spec__h">Printing that makes your business <em>look the part</em>.</h2>
+    <p class="spec__sub">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <div class="spec__ui"><a class="btn" href="#">Get a Free Quote</a><span class="chip">from $XX / 500</span>
+      <div class="cardlet"><div class="cardlet__t">Banners &amp; signs</div><div class="cardlet__p">Vinyl, roll-up, lawn signs</div></div></div>
+    <p class="note">Wide and grounded, like ink laid down heavy. Reads as printed matter rather than software. Very good for a signs shop.</p>
+  </section>
+
+  <section class="spec f4">
+    <div class="spec__head"><span class="spec__num">4</span>
+      <span class="spec__name">Instrument Serif</span><span class="spec__pair">+ Inter</span>
+      <span class="spec__tag">Premium</span></div>
+    <h2 class="spec__h">Printing that makes your business <em>look the part</em>.</h2>
+    <p class="spec__sub">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <div class="spec__ui"><a class="btn" href="#">Get a Free Quote</a><span class="chip">from $XX / 500</span>
+      <div class="cardlet"><div class="cardlet__t">Banners &amp; signs</div><div class="cardlet__p">Vinyl, roll-up, lawn signs</div></div></div>
+    <p class="note">A serif headline over a clean sans body is the fastest route to "expensive" — it's what fashion and editorial sites use. Elegant, and excellent for wedding cards.</p>
+  </section>
+
+  <section class="spec f5">
+    <div class="spec__head"><span class="spec__num">5</span>
+      <span class="spec__name">Syne</span><span class="spec__pair">+ Inter</span>
+      <span class="spec__tag">Designy</span></div>
+    <h2 class="spec__h">Printing that makes your business <em>look the part</em>.</h2>
+    <p class="spec__sub">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <div class="spec__ui"><a class="btn" href="#">Get a Free Quote</a><span class="chip">from $XX / 500</span>
+      <div class="cardlet"><div class="cardlet__t">Banners &amp; signs</div><div class="cardlet__p">Vinyl, roll-up, lawn signs</div></div></div>
+    <p class="note">Art-gallery energy — unusual widths, strong personality. Highest style ceiling here, but the most likely to feel "too cool" for a family shop.</p>
+  </section>
+
+  <section class="spec f6">
+    <div class="spec__head"><span class="spec__num">6</span>
+      <span class="spec__name">Big Shoulders Display</span><span class="spec__pair">+ Inter</span>
+      <span class="spec__tag">Signage</span></div>
+    <h2 class="spec__h">Printing that makes your business <em>look the part</em>.</h2>
+    <p class="spec__sub">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <div class="spec__ui"><a class="btn" href="#">Get a Free Quote</a><span class="chip">from $XX / 500</span>
+      <div class="cardlet"><div class="cardlet__t">Banners &amp; signs</div><div class="cardlet__p">Vinyl, roll-up, lawn signs</div></div></div>
+    <p class="note">Tall and condensed — the language of actual signage and workshop stencils. Lets headlines get enormous without overflowing on a phone.</p>
+  </section>
+
+  <section class="spec f7">
+    <div class="spec__head"><span class="spec__num">7</span>
+      <span class="spec__name">Outfit</span><span class="spec__pair">+ Inter</span>
+      <span class="spec__tag">Friendly</span></div>
+    <h2 class="spec__h">Printing that makes your business <em>look the part</em>.</h2>
+    <p class="spec__sub">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <div class="spec__ui"><a class="btn" href="#">Get a Free Quote</a><span class="chip">from $XX / 500</span>
+      <div class="cardlet"><div class="cardlet__t">Banners &amp; signs</div><div class="cardlet__p">Vinyl, roll-up, lawn signs</div></div></div>
+    <p class="note">Geometric, round and approachable. Very easy to read for older visitors. Safe — possibly too safe, given "not there yet".</p>
+  </section>
+
+  <section class="spec f8">
+    <div class="spec__head"><span class="spec__num">8</span>
+      <span class="spec__name">Fraunces</span><span class="spec__pair">+ Inter</span>
+      <span class="spec__tag">Craft</span></div>
+    <h2 class="spec__h">Printing that makes your business <em>look the part</em>.</h2>
+    <p class="spec__sub">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <div class="spec__ui"><a class="btn" href="#">Get a Free Quote</a><span class="chip">from $XX / 500</span>
+      <div class="cardlet"><div class="cardlet__t">Banners &amp; signs</div><div class="cardlet__p">Vinyl, roll-up, lawn signs</div></div></div>
+    <p class="note">The one from the rejected boards — shown here on white with indigo instead of cream. Worth a second look: it may have been the palette you disliked, not the letterforms.</p>
+  </section>
+
+  <section class="spec f9">
+    <div class="spec__head"><span class="spec__num">9</span>
+      <span class="spec__name">Plus Jakarta Sans</span><span class="spec__pair">+ Inter</span>
+      <span class="spec__tag">Polished</span></div>
+    <h2 class="spec__h">Printing that makes your business <em>look the part</em>.</h2>
+    <p class="spec__sub">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <div class="spec__ui"><a class="btn" href="#">Get a Free Quote</a><span class="chip">from $XX / 500</span>
+      <div class="cardlet"><div class="cardlet__t">Banners &amp; signs</div><div class="cardlet__p">Vinyl, roll-up, lawn signs</div></div></div>
+    <p class="note">Crisp and premium-feeling in a quiet way. A more expensive-looking cousin of what you have now.</p>
+  </section>
+
+  <section class="spec f10">
+    <div class="spec__head"><span class="spec__num">10</span>
+      <span class="spec__name">Anton</span><span class="spec__pair">+ Inter</span>
+      <span class="spec__tag">Loud</span></div>
+    <h2 class="spec__h">Printing that makes your business <em>look the part</em>.</h2>
+    <p class="spec__sub">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <div class="spec__ui"><a class="btn" href="#">Get a Free Quote</a><span class="chip">from $XX / 500</span>
+      <div class="cardlet"><div class="cardlet__t">Banners &amp; signs</div><div class="cardlet__p">Vinyl, roll-up, lawn signs</div></div></div>
+    <p class="note">Maximum impact, zero subtlety — billboard type. Great for a huge one-line hero, hard to use anywhere else on the page.</p>
+  </section>
+
+</div>
+
+<div class="wrap outro">
+  <h2>How to choose</h2>
+  <ol>
+    <li><strong>Squint at the screen.</strong> The one that still reads clearly and still has a personality is usually the right one.</li>
+    <li><strong>Ignore the words.</strong> The headline is placeholder — react to the letter shapes.</li>
+    <li><strong>Picture your uncle's shop sign next to it.</strong> Does it fit a family print shop on Ray Lawson Blvd, or does it belong to a different business?</li>
+    <li><strong>Pick two, not one.</strong> Tell me your top two and I'll build the real homepage in both so you can compare them properly.</li>
+  </ol>
+</div>
+
+</body>
+</html>

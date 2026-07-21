@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AZ Printing and Signs — Printing in Brampton</title>
+<meta name="description" content="Family-run print shop in Brampton. Business cards, banners, signs, wedding cards and apparel. Same-day rush available — get a free quote.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..900;1,9..144,600..900&family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400..500&family=Familjen+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =============================================================
+   DIRECTION F — Fraunces + Literata, flame red/orange, max motion
+   Contrast checked: ink 18.9:1 · accent 4.88:1 (AA normal text)
+   flame 3.3:1 (AA large text only — never used under 24px)
+   ============================================================= */
+:root{
+  --flame:#FF4D1C;        /* display + graphics ONLY, never small text */
+  --accent:#D92B0E;       /* buttons, links, small accent text — AA */
+  --accent-deep:#B01F04;  /* hover / pressed */
+  --ink:#14100F;          /* 18.9:1 on white */
+  --ink-soft:#5C5650;
+  --surface:#fff;
+  --surface-2:#F6F4F2;
+  --border:#E7E3DF;
+  --c:#00AEEF; --m:#EC008C; --y:#FFD400;   /* press inks — motif only */
+
+  /* three roles: display = character · body = reading · ui = interface */
+  --display:'Fraunces',Georgia,serif;
+  --body:'Literata',Georgia,serif;
+  --ui:'Familjen Grotesk',system-ui,sans-serif;
+
+  --ease:cubic-bezier(.16,.84,.44,1);
+  --out:cubic-bezier(.22,1,.36,1);
+  --maxw:1180px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:var(--body);
+  font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,.disp{font-family:var(--display);margin:0;line-height:1.02;letter-spacing:-.03em;
+  font-weight:800;font-variation-settings:'SOFT' 0,'WONK' 1}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:24px}
+.section{padding-block:clamp(72px,10vw,132px);position:relative}
+.tint{background:var(--surface-2)}
+
+.flag{background:repeating-linear-gradient(45deg,#111 0 12px,#f5c518 12px 24px);
+  color:#fff;font-size:11px;font-weight:600;letter-spacing:.08em;text-align:center;
+  padding:7px 14px;text-transform:uppercase;position:relative;z-index:95;font-family:var(--body)}
+.flag span{background:#111;padding:2px 8px;border-radius:6px}
+
+.progress{position:fixed;top:0;left:0;height:3px;width:100%;z-index:100;
+  background:linear-gradient(90deg,var(--flame),var(--accent));
+  transform:scaleX(0);transform-origin:left;will-change:transform}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(14px);border-bottom:1px solid transparent;
+  transition:transform .4s var(--ease),border-color .3s var(--ease)}
+.nav.hidden{transform:translateY(-100%)}
+.nav.stuck{border-bottom-color:var(--border)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:72px}
+.logo{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:-.04em}
+.logo b{color:var(--accent)}
+.nav__links{display:none;gap:34px;list-style:none;margin:0;padding:0}
+.nav__links a{position:relative;padding-block:4px;font-family:var(--ui);font-size:13px;
+  font-weight:700;text-transform:uppercase;letter-spacing:.13em}
+.nav__links a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;
+  background:var(--accent);transform:scaleX(0);transform-origin:right;
+  transition:transform .35s var(--out)}
+.nav__links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav__ph{display:none;font-size:15px;font-weight:600}
+@media(min-width:960px){.nav__links{display:flex}.nav__ph{display:inline-flex}}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--body);font-size:16px;font-weight:600;padding:16px 30px;border-radius:999px;
+  border:1.5px solid transparent;cursor:pointer;min-height:56px;position:relative;
+  overflow:hidden;will-change:transform;
+  transition:transform .25s var(--ease),background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease)}
+.btn span{position:relative;z-index:2}
+.btn--primary{background:var(--accent);color:#fff}
+.btn--primary::after{content:"";position:absolute;inset:0;background:var(--accent-deep);
+  transform:translateY(101%);transition:transform .4s var(--out);z-index:1}
+.btn--primary:hover::after{transform:translateY(0)}
+.btn--ghost{border-color:var(--border);color:var(--ink)}
+.btn--ghost:hover{border-color:var(--ink)}
+
+/* ---------- reveals ---------- */
+.js .rv{opacity:0;transform:translateY(28px);
+  transition:opacity .8s var(--out),transform .8s var(--out);
+  transition-delay:calc(var(--i,0) * 80ms)}
+.js .rv.in{opacity:1;transform:none}
+.js .wipe{clip-path:inset(0 100% 0 0);transition:clip-path 1s var(--out);
+  transition-delay:calc(var(--i,0) * 90ms)}
+.js .wipe.in{clip-path:inset(0 0 0 0)}
+.uline{position:relative;display:inline-block;padding-bottom:12px}
+.uline::after{content:"";position:absolute;left:0;bottom:0;height:5px;width:100%;
+  background:var(--flame);transform-origin:left;
+  transition:transform .9s var(--out) .15s}
+.js .uline::after{transform:scaleX(0)}
+.js .uline.in::after{transform:scaleX(1)}
+
+.eyebrow{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;
+  color:var(--accent);margin-bottom:18px}
+.h2{font-size:clamp(32px,5.6vw,64px)}
+.lead{font-size:19px;color:var(--ink-soft);max-width:56ch;margin-top:22px}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(120px,16vw,168px);padding-bottom:48px}
+h1{font-size:clamp(46px,9vw,124px);font-weight:900;letter-spacing:-.045em}
+h1 em{font-style:italic;color:var(--flame)}
+.line{display:block;overflow:hidden}
+.js .word{display:inline-block;transform:translateY(112%);
+  transition:transform .9s var(--out);transition-delay:calc(var(--w) * 70ms)}
+.loaded .word{transform:translateY(0)}
+.hero__sub{font-size:20px;color:var(--ink-soft);max-width:54ch;margin-top:32px}
+.hero__act{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+
+/* ---------- hero showcase: slides crossfade slowly, no arrows, no dots ----------
+   Each .slide is a stand-in for ONE REAL PHOTO. When the photo shoot happens,
+   each slide's contents get replaced by a single <img> — the fade machinery
+   below does not change. ------------------------------------------------------ */
+.showcase{position:relative;margin-top:72px;aspect-ratio:16/10;max-height:580px;
+  border-radius:22px;overflow:hidden;background:var(--surface-2);border:1px solid var(--border)}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s var(--ease);
+  display:grid;place-items:center;pointer-events:none}
+.slide.active{opacity:1;pointer-events:auto}
+.slide__cap{position:absolute;left:20px;bottom:18px;z-index:8;font-size:12px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
+  background:rgba(255,255,255,.9);padding:9px 15px;border-radius:999px;
+  border:1px solid var(--border)}
+
+/* No-JS fallback: the crossfade needs script, so without it the showcase
+   becomes a swipeable strip with all five pieces visible rather than one. */
+html:not(.js) .showcase{display:flex;gap:14px;padding:14px;aspect-ratio:auto;
+  overflow-x:auto;scroll-snap-type:x mandatory}
+html:not(.js) .slide{position:relative;inset:auto;opacity:1;pointer-events:auto;
+  flex:0 0 86%;aspect-ratio:16/10;scroll-snap-align:center;border-radius:12px;
+  background:linear-gradient(158deg,#fff,var(--surface-2))}
+html:not(.js) .slide--press .plate{opacity:.8;transform:none}
+html:not(.js) .reg{opacity:.45}
+
+/* slide 1 — the press: CMYK plates slide into register */
+.sheet{position:absolute;inset:8%;border-radius:12px;background:#fff;
+  box-shadow:0 34px 74px rgba(20,16,15,.16);display:grid;place-content:center;
+  text-align:center;padding:24px;will-change:transform}
+.plate{position:absolute;inset:0;border-radius:12px;mix-blend-mode:multiply;opacity:0;
+  transition:transform 1.15s var(--out),opacity .8s var(--out)}
+.plate--c{background:radial-gradient(circle at 30% 34%,var(--c),transparent 62%);transform:translate(-48px,-32px)}
+.plate--m{background:radial-gradient(circle at 68% 42%,var(--m),transparent 62%);transform:translate(44px,-18px)}
+.plate--y{background:radial-gradient(circle at 48% 72%,var(--y),transparent 62%);transform:translate(-8px,46px)}
+.slide--press.active .plate{opacity:.8;transform:translate(0,0)}
+.sheet__t{font-family:var(--display);font-size:clamp(26px,4.6vw,58px);font-weight:900;
+  letter-spacing:-.04em;position:relative;z-index:3;line-height:1.02}
+.sheet__s{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);
+  margin-top:12px;position:relative;z-index:3}
+.reg{position:absolute;width:32px;height:32px;opacity:0;transition:opacity .6s var(--ease) .55s}
+.slide--press.active .reg{opacity:.45}
+
+/* Shared: soft paper sheen + layered shadow so pieces read as physical objects
+   rather than flat rectangles. Two shadows — a tight contact one and a wide
+   ambient one — is what makes something look like it's sitting on a surface. */
+.pc{position:relative;box-shadow:0 2px 4px rgba(20,16,15,.10),0 26px 60px rgba(20,16,15,.20)}
+.pc::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(118deg,rgba(255,255,255,.42) 0%,transparent 34%,transparent 66%,rgba(20,16,15,.05) 100%)}
+
+/* slide 2 — business cards, one face up, one face down */
+.bcards{position:relative;width:min(74%,520px);aspect-ratio:7/4.4}
+.bcard{position:absolute;width:72%;aspect-ratio:3.5/2;border-radius:9px;background:#fff;
+  padding:7% 8%;display:flex;flex-direction:column;justify-content:space-between}
+.bcard--back{right:0;top:0;transform:rotate(6deg);background:var(--ink);color:#fff;
+  align-items:center;justify-content:center}
+.bcard--front{left:0;bottom:0;transform:rotate(-3deg)}
+.bcard__n{font-family:var(--display);font-weight:800;font-size:clamp(15px,2.6vw,30px);
+  letter-spacing:-.035em;line-height:.98}
+.bcard__r{width:26px;height:3px;background:var(--flame);margin-top:5%;border-radius:2px}
+.bcard__d{font-family:var(--ui);font-size:clamp(6px,.92vw,10px);font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);line-height:1.9}
+.bcard__mark{font-family:var(--display);font-weight:900;font-size:clamp(13px,2.1vw,24px);
+  letter-spacing:-.04em;color:var(--flame)}
+
+/* slide 3 — wedding invitation, botanical.
+   The floral garland is drawn as SVG so it scales without ever going soft. */
+.invite{width:min(40%,252px);aspect-ratio:5/7;border-radius:3px;
+  background:radial-gradient(120% 90% at 50% 0%,#FFFEFA,#FBF6EA 68%,#F7EFDE);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:11% 9%}
+.invite__vine{position:absolute;left:8%;right:8%;height:auto}
+.invite__vine--t{top:6%}
+.invite__vine--b{bottom:6%;transform:scaleY(-1)}
+.invite__pre,.invite__post{font-family:var(--ui);font-size:clamp(5px,.78vw,8px);font-weight:600;
+  letter-spacing:.32em;text-transform:uppercase;color:#A8925C}
+.invite__n{font-family:var(--display);font-style:italic;font-weight:600;
+  font-size:clamp(20px,3.3vw,40px);letter-spacing:-.015em;line-height:1.08;margin:6% 0 5%;
+  background:linear-gradient(128deg,#8C6B18 6%,#F2E2A6 30%,#B08829 50%,#F7EBC2 70%,#8C6B18 96%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.invite__amp{display:block;font-size:.4em;margin:3% 0;font-style:italic;opacity:.85}
+.invite__rule{display:flex;align-items:center;gap:6px;width:52%;margin:2% 0 6%}
+.invite__rule i{flex:1;height:1px;background:linear-gradient(90deg,transparent,#C9A227)}
+.invite__rule i+i{background:linear-gradient(90deg,#C9A227,transparent)}
+.invite__rule b{width:4px;height:4px;flex:none;background:#C9A227;transform:rotate(45deg)}
+
+/* slide 4 — vinyl banner, properly composed:
+   ink panel + monogram on the left, message stack on the right, info bar beneath.
+   The MS-Paint look came from having no composition at all — just text on a gradient. */
+.banner{width:min(92%,660px);aspect-ratio:24/9;border-radius:4px;overflow:hidden;
+  display:grid;grid-template-columns:26% 1fr;color:#fff;background:var(--accent-deep)}
+.banner__panel{background:var(--ink);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8%;padding:6% 3%;position:relative}
+.banner__panel::after{content:"";position:absolute;right:0;top:8%;bottom:8%;width:1px;
+  background:rgba(255,255,255,.16)}
+.banner__mono{font-family:var(--display);font-weight:900;font-size:clamp(15px,2.9vw,34px);
+  letter-spacing:-.05em;color:var(--flame);line-height:1}
+.banner__vert{font-family:var(--ui);font-size:clamp(5px,.78vw,8px);font-weight:700;
+  letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+.banner__main{position:relative;display:flex;flex-direction:column;justify-content:center;
+  padding:5% 6%;background:
+    linear-gradient(112deg,var(--accent-deep) 0%,var(--flame) 58%,#FF7C41 100%)}
+.banner__main::before{content:"";position:absolute;inset:0;opacity:.16;
+  background:repeating-linear-gradient(58deg,#fff 0 1px,transparent 1px 13px)}
+.banner__k{position:relative;font-family:var(--ui);font-size:clamp(5px,.8vw,9px);font-weight:700;
+  letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.86);margin-bottom:2%}
+.banner__t{position:relative;font-family:var(--display);font-weight:900;
+  font-size:clamp(17px,4.1vw,50px);letter-spacing:-.04em;line-height:.9}
+.banner__badge{position:absolute;right:5%;top:12%;background:#fff;color:var(--accent-deep);
+  font-family:var(--ui);font-weight:700;font-size:clamp(5px,.86vw,10px);letter-spacing:.1em;
+  text-transform:uppercase;padding:.5em .9em;border-radius:999px;transform:rotate(4deg);
+  box-shadow:0 4px 12px rgba(0,0,0,.22)}
+.banner__bar{position:relative;margin-top:auto;display:flex;flex-wrap:wrap;gap:4% 7%;
+  align-items:center;padding-top:3.4%;border-top:1px solid rgba(255,255,255,.34);
+  font-family:var(--ui);font-size:clamp(5px,.82vw,10px);font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(255,255,255,.94)}
+.grommet{position:absolute;width:2.6%;aspect-ratio:1;border-radius:50%;z-index:4;
+  background:radial-gradient(circle at 34% 30%,#fff,#B9B3AC 62%,#6E6862);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.55),0 1px 2px rgba(0,0,0,.3)}
+.grommet:nth-of-type(1){top:6%;left:1.8%}.grommet:nth-of-type(2){top:6%;right:1.8%}
+.grommet:nth-of-type(3){bottom:6%;left:1.8%}.grommet:nth-of-type(4){bottom:6%;right:1.8%}
+
+/* slide 5 — restaurant flyer / menu */
+.flyer{width:min(40%,240px);aspect-ratio:1/1.414;border-radius:3px;background:#fff;
+  padding:9%;display:flex;flex-direction:column;gap:6%}
+.flyer__k{font-family:var(--ui);font-size:clamp(5px,.8vw,8px);font-weight:700;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--flame)}
+.flyer__t{font-family:var(--display);font-weight:900;font-size:clamp(15px,2.5vw,28px);
+  letter-spacing:-.035em;line-height:.98}
+.flyer__rows{display:flex;flex-direction:column;gap:9%;margin-top:auto}
+.flyer__row{display:flex;align-items:baseline;gap:6px}
+.flyer__row i{flex:1;height:1px;background:var(--border)}
+.flyer__row b{font-family:var(--ui);font-size:clamp(5px,.82vw,9px);font-weight:700;color:var(--ink)}
+.flyer__row s{flex:none;width:34%;height:5px;border-radius:3px;background:#EDEAE6;text-decoration:none}
+.flyer__band{height:12%;border-radius:3px;background:linear-gradient(100deg,var(--accent-deep),var(--flame))}
+.reg::before,.reg::after{content:"";position:absolute;background:var(--ink)}
+.reg::before{left:50%;top:0;bottom:0;width:1px;transform:translateX(-50%)}
+.reg::after{top:50%;left:0;right:0;height:1px;transform:translateY(-50%)}
+.reg--tl{top:16px;left:16px}.reg--tr{top:16px;right:16px}
+.reg--bl{bottom:16px;left:16px}.reg--br{bottom:16px;right:16px}
+
+/* ---------- marquee ---------- */
+.marq{border-block:1px solid var(--border);background:var(--ink);color:#fff;
+  padding-block:20px;overflow:hidden;white-space:nowrap}
+.marq__t{display:inline-flex;gap:44px;animation:slide 34s linear infinite;will-change:transform}
+.marq:hover .marq__t{animation-play-state:paused}
+.marq__i{font-family:var(--display);font-size:23px;font-weight:800;letter-spacing:-.02em;
+  display:inline-flex;align-items:center;gap:44px}
+.marq__i::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--flame);flex:none}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ---------- doors ---------- */
+.doors{display:grid;gap:20px;margin-top:56px}
+.door{position:relative;border:1px solid var(--border);border-radius:18px;padding:52px 36px;
+  overflow:hidden;background:#fff;transition:color .45s var(--ease),transform .45s var(--ease)}
+.door::before{content:"";position:absolute;inset:0;background:var(--ink);
+  transform:translateY(100%);transition:transform .55s var(--out);z-index:0}
+.door:hover{color:#fff;transform:translateY(-5px)}
+.door:hover::before{transform:translateY(0)}
+.door>*{position:relative;z-index:1}
+.door h3{font-size:32px;margin-bottom:12px}
+.door p{color:var(--ink-soft);transition:color .45s var(--ease)}
+.door:hover p{color:rgba(255,255,255,.76)}
+.door__go{margin-top:26px;font-weight:600;font-size:15px;display:inline-flex;align-items:center;gap:8px;color:var(--accent)}
+.door:hover .door__go{color:var(--flame)}
+.door__go svg{transition:transform .3s var(--ease)}
+.door:hover .door__go svg{transform:translateX(6px)}
+@media(min-width:900px){.doors{grid-template-columns:1fr 1fr}}
+
+/* ---------- work showcase ---------- */
+.show{display:grid;gap:20px;margin-top:60px}
+.piece{position:relative;border-radius:18px;overflow:hidden;background:var(--surface-2);
+  border:1px solid var(--border);min-height:330px;display:flex;flex-direction:column;
+  transition:box-shadow .4s var(--ease);will-change:transform}
+.piece:hover{box-shadow:0 30px 62px rgba(20,16,15,.15)}
+.piece__art{position:relative;flex:1;min-height:190px;display:grid;place-items:center;
+  padding:30px;overflow:hidden;background:linear-gradient(158deg,#fff,var(--surface-2))}
+.piece__txt{padding:22px 28px 28px}
+
+/* ---------- project artwork ---------- */
+/* lawn sign */
+.lawn{width:min(86%,220px);aspect-ratio:4/3.4;display:flex;flex-direction:column;align-items:center}
+.lawn__b{width:100%;flex:1;background:#fff;border-radius:3px;overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:0 2px 3px rgba(20,16,15,.1),0 16px 34px rgba(20,16,15,.16)}
+.lawn__top{background:var(--accent-deep);color:#fff;font-family:var(--ui);font-weight:700;
+  font-size:clamp(7px,1.2vw,12px);letter-spacing:.24em;text-transform:uppercase;
+  text-align:center;padding:7% 0}
+.lawn__mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5%;padding:6%}
+.lawn__n{font-family:var(--display);font-weight:900;font-size:clamp(11px,1.9vw,20px);
+  letter-spacing:-.03em;line-height:1;text-align:center}
+.lawn__p{font-family:var(--ui);font-size:clamp(6px,1vw,10px);font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.lawn__legs{display:flex;gap:38%;width:64%;height:16%}
+.lawn__legs i{flex:1;background:linear-gradient(90deg,#C7C2BB,#9A948C)}
+
+/* apparel */
+.tee{width:min(84%,215px)}
+.tee svg{width:100%;height:auto;filter:drop-shadow(0 16px 30px rgba(20,16,15,.18))}
+.tee__print{font-family:var(--display);font-weight:900;letter-spacing:-.04em}
+
+/* sticker sheet */
+.stick{width:min(88%,235px);aspect-ratio:1/1.06;background:#fff;border-radius:4px;padding:8%;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:9%;place-content:center;
+  box-shadow:0 2px 3px rgba(20,16,15,.1),0 18px 36px rgba(20,16,15,.16)}
+.stick i{aspect-ratio:1;border-radius:50%;display:grid;place-content:center;
+  font-family:var(--display);font-weight:900;font-size:clamp(7px,1.15vw,13px);
+  letter-spacing:-.03em;outline:1.5px dashed rgba(20,16,15,.22);outline-offset:3px}
+.stick i:nth-child(3n+1){background:var(--flame);color:#fff}
+.stick i:nth-child(3n+2){background:var(--ink);color:var(--flame)}
+.stick i:nth-child(3n+3){background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.stick i:nth-child(even){border-radius:6px}
+
+/* event poster */
+.poster{width:min(58%,170px);aspect-ratio:1/1.414;background:var(--ink);color:#fff;
+  border-radius:3px;padding:9%;display:flex;flex-direction:column;overflow:hidden;
+  box-shadow:0 2px 4px rgba(20,16,15,.14),0 22px 44px rgba(20,16,15,.24)}
+.poster__k{font-family:var(--ui);font-size:clamp(5px,.8vw,8px);font-weight:700;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--flame)}
+.poster__t{font-family:var(--display);font-weight:900;font-size:clamp(15px,2.6vw,30px);
+  letter-spacing:-.045em;line-height:.88;margin-top:6%}
+.poster__disc{width:46%;aspect-ratio:1;border-radius:50%;margin:auto 0 6% auto;
+  background:linear-gradient(140deg,var(--flame),var(--accent-deep));
+  display:grid;place-content:center;text-align:center;
+  font-family:var(--ui);font-weight:700;font-size:clamp(5px,.86vw,9px);
+  letter-spacing:.14em;text-transform:uppercase}
+.poster__f{font-family:var(--ui);font-size:clamp(5px,.78vw,8px);font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6);
+  padding-top:5%;border-top:1px solid rgba(255,255,255,.22)}
+.piece__t{position:relative;z-index:2;font-family:var(--display);font-size:27px;font-weight:800;letter-spacing:-.03em}
+.piece__p{position:relative;z-index:2;font-size:15px;color:var(--ink-soft);margin-top:6px}
+.piece__f{position:relative;z-index:2;margin-top:16px;font-size:13px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+/* each tile links to its own service page — those pages come after launch,
+   and each one can rank separately for "<service> printing Brampton" */
+.piece__go{position:relative;z-index:2;margin-top:10px;font-size:13px;font-weight:600;
+  color:var(--ink-soft);opacity:0;transform:translateY(6px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.piece:hover .piece__go,.piece:focus-visible .piece__go{opacity:1;transform:none}
+@media(min-width:700px){.show{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){.show{grid-template-columns:repeat(4,1fr)}}
+
+/* ---------- why us ---------- */
+.why{display:grid;gap:36px;margin-top:56px}
+.why__i{display:flex;gap:18px;align-items:flex-start}
+.why__n{font-family:var(--display);font-size:44px;font-weight:900;color:var(--flame);
+  line-height:1;flex:none;letter-spacing:-.05em}
+.why__t{font-family:var(--display);font-size:21px;font-weight:800;margin-bottom:6px;letter-spacing:-.02em}
+.why__p{font-size:16px;color:var(--ink-soft)}
+@media(min-width:760px){.why{grid-template-columns:repeat(2,1fr);gap:44px 56px}}
+
+/* ---------- stats ---------- */
+.stats{display:grid;gap:44px;text-align:center}
+.stat__n{font-family:var(--display);font-size:clamp(50px,8vw,88px);font-weight:900;
+  letter-spacing:-.05em;line-height:1;color:var(--flame)}
+.stat__l{font-size:15px;color:var(--ink-soft);margin-top:8px}
+@media(min-width:640px){.stats{grid-template-columns:repeat(3,1fr)}}
+
+/* ---------- reviews ---------- */
+.revs{display:grid;gap:20px;margin-top:56px}
+.rev{background:#fff;border:1px solid var(--border);border-radius:18px;padding:34px 30px;
+  display:flex;flex-direction:column;gap:14px;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.rev:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(20,16,15,.09)}
+.rev__stars{color:var(--flame);letter-spacing:.16em;font-size:16px}
+.rev__q{font-size:17px;line-height:1.6}
+.rev__w{font-size:14px;color:var(--ink-soft);font-weight:600;margin-top:auto}
+.rev__note{margin-top:28px;font-size:14px;color:var(--ink-soft);
+  border-left:3px solid var(--flame);padding-left:14px}
+@media(min-width:820px){.revs{grid-template-columns:repeat(3,1fr)}}
+
+/* ---------- FAQ ---------- */
+.faq{margin-top:48px;border-top:1px solid var(--border)}
+.qa{border-bottom:1px solid var(--border)}
+.qa__b{width:100%;background:none;border:0;cursor:pointer;text-align:left;
+  font-family:var(--display);font-size:clamp(19px,2.4vw,24px);font-weight:800;color:var(--ink);
+  padding:26px 44px 26px 0;position:relative;letter-spacing:-.02em;
+  transition:color .25s var(--ease)}
+.qa__b:hover{color:var(--accent)}
+.qa__b::after,.qa__b::before{content:"";position:absolute;right:8px;top:50%;background:var(--accent);
+  transition:transform .35s var(--out)}
+.qa__b::before{width:18px;height:2px;transform:translateY(-50%)}
+.qa__b::after{width:2px;height:18px;right:16px;transform:translateY(-50%) scaleY(1)}
+.qa[open] .qa__b::after,.qa.open .qa__b::after{transform:translateY(-50%) scaleY(0)}
+.qa__p{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--out)}
+.qa.open .qa__p{grid-template-rows:1fr}
+.qa__inner{overflow:hidden}
+.qa__inner p{padding-bottom:26px;color:var(--ink-soft);max-width:70ch}
+
+/* ---------- quote ---------- */
+.quote{background:var(--ink);color:#fff;border-radius:26px;padding:72px 30px;position:relative;overflow:hidden}
+.quote::before{content:"";position:absolute;inset:auto -12% -60% auto;width:72%;aspect-ratio:1;
+  background:radial-gradient(circle,rgba(255,77,28,.30),transparent 68%)}
+.quote>*{position:relative}
+.quote .eyebrow{color:var(--flame)}
+.quote .lead{color:rgba(255,255,255,.72)}
+.form{display:grid;gap:16px;margin-top:40px}
+.field{display:grid;gap:8px}
+.field label{font-size:15px;font-weight:500;color:rgba(255,255,255,.86)}
+.field input,.field select,.field textarea{font-family:inherit;font-size:16px;color:#fff;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:10px;
+  padding:15px 16px;min-height:56px;width:100%;transition:border-color .25s,background .25s}
+.field textarea{min-height:110px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.42)}
+.field input:focus,.field select:focus,.field textarea:focus{background:rgba(255,255,255,.14);border-color:#fff}
+.field select option{color:var(--ink)}
+.form .btn--primary{justify-self:start;background:var(--flame);color:#2A0A00}
+.form .btn--primary::after{background:#fff}
+@media(min-width:640px){.form{grid-template-columns:1fr 1fr}
+  .field--full,.form .btn--primary{grid-column:1/-1}}
+@media(min-width:900px){.quote{padding:104px 72px}}
+
+/* ---------- footer ---------- */
+.footer{background:var(--surface-2);border-top:1px solid var(--border);padding-block:64px 100px;margin-top:clamp(72px,10vw,132px)}
+.footer__g{display:grid;gap:36px}
+.footer h4{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-soft);
+  margin:0 0 12px;font-weight:600;font-family:var(--body)}
+.footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
+.footer a:hover{color:var(--accent)}
+.legal{margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:13px;color:var(--ink-soft)}
+@media(min-width:640px){.footer__g{grid-template-columns:2fr 1fr 1fr}}
+
+.wa{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:85;
+  display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#062E14;
+  font-weight:600;font-size:15px;padding:14px 20px;min-height:54px;border-radius:999px;
+  box-shadow:0 10px 26px rgba(0,0,0,.22);transition:transform .25s var(--ease)}
+.wa:hover{transform:translateY(-3px) scale(1.03)}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .word{transform:none}.rv{opacity:1;transform:none}.wipe{clip-path:none}
+  .uline::after{transform:scaleX(1)}.press .plate{opacity:.8;transform:none}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+
+<div class="flag">Direction F &nbsp;·&nbsp; Fraunces + Literata + flame &nbsp;·&nbsp; <span>All names, numbers, prices and reviews are PLACEHOLDER</span></div>
+
+<div class="progress" id="prog"></div>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__in">
+    <a href="#" class="logo">AZ <b>Printing</b></a>
+    <nav aria-label="Main">
+      <ul class="nav__links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#why">About</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex;align-items:center;gap:14px">
+      <a class="nav__ph" href="tel:+19055550142">(905) 555-0142</a>
+      <a class="btn btn--primary" href="#quote"><span>Free Quote</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <h1>
+        <span class="line"><span class="word" style="--w:0">Printed</span> <span class="word" style="--w:1">properly.</span></span>
+        <span class="line"><span class="word" style="--w:2">Printed</span> <span class="word" style="--w:3"><em>here.</em></span></span>
+      </h1>
+      <p class="hero__sub rv" style="--i:5">Business cards, banners, signs, wedding cards and apparel — from a family shop on Ray Lawson Blvd that checks your file before it goes on the press.</p>
+      <div class="hero__act rv" style="--i:6">
+        <a class="btn btn--primary" href="#quote"><span>Get a Free Quote</span></a>
+        <a class="btn btn--ghost" href="tel:+19055550142"><span>Call (905) 555-0142</span></a>
+      </div>
+
+      <!-- Each slide stands in for one real photo. Swap contents for <img> after the shoot. -->
+      <div class="showcase rv" id="showcase" aria-label="Recent work" aria-roledescription="carousel">
+        <div class="slide slide--press active" role="group" aria-label="1 of 5">
+          <div class="reg reg--tl"></div><div class="reg reg--tr"></div>
+          <div class="reg reg--bl"></div><div class="reg reg--br"></div>
+          <div class="sheet" id="sheet">
+            <div class="plate plate--c"></div><div class="plate plate--m"></div><div class="plate plate--y"></div>
+            <div class="sheet__t">YOUR WORK,<br>PRINTED SHARP</div>
+            <div class="sheet__s">Cyan · Magenta · Yellow · Black</div>
+          </div>
+          <span class="slide__cap">Four-colour press · CMYK</span>
+        </div>
+        <div class="slide" role="group" aria-label="2 of 5">
+          <div class="bcards">
+            <div class="bcard bcard--back pc"><span class="bcard__mark">SR</span></div>
+            <div class="bcard bcard--front pc">
+              <div><div class="bcard__n">Sandhu<br>Realty</div><div class="bcard__r"></div></div>
+              <div class="bcard__d">Priya Sandhu · Broker<br>905 555 0142 · Brampton</div>
+            </div>
+          </div>
+          <span class="slide__cap">Business cards · 16pt matte</span>
+        </div>
+        <div class="slide" role="group" aria-label="3 of 5">
+          <div class="invite pc">
+            <svg class="invite__vine invite__vine--t" viewBox="0 0 240 54" fill="none" aria-hidden="true">
+              <defs>
+                <path id="leaf" d="M0 0c7-5.4 17.5-5.4 24.5 0-7 5.4-17.5 5.4-24.5 0z"/>
+                <g id="bloom">
+                  <g fill="#EED9A0" fill-opacity=".85" stroke="#B08829" stroke-width=".7">
+                    <ellipse cx="0" cy="-5.6" rx="2.9" ry="5.6"/>
+                    <ellipse cx="0" cy="-5.6" rx="2.9" ry="5.6" transform="rotate(72)"/>
+                    <ellipse cx="0" cy="-5.6" rx="2.9" ry="5.6" transform="rotate(144)"/>
+                    <ellipse cx="0" cy="-5.6" rx="2.9" ry="5.6" transform="rotate(216)"/>
+                    <ellipse cx="0" cy="-5.6" rx="2.9" ry="5.6" transform="rotate(288)"/>
+                  </g>
+                  <circle r="2.1" fill="#B08829"/>
+                </g>
+              </defs>
+              <g stroke="#B08829" stroke-width="1" stroke-linecap="round">
+                <path d="M120 50C99 47 74 39 52 25 42 18 33 13 24 10"/>
+                <path d="M120 50c21-3 46-11 68-25 10-7 19-12 28-15"/>
+                <path d="M120 50c-8-6-13-13-15-21M120 50c8-6 13-13 15-21"/>
+              </g>
+              <g fill="#D9C48A" fill-opacity=".7" stroke="#B08829" stroke-width=".65">
+                <use href="#leaf" transform="translate(96 40) rotate(196)"/>
+                <use href="#leaf" transform="translate(74 32) rotate(208)"/>
+                <use href="#leaf" transform="translate(52 22) rotate(220)"/>
+                <use href="#leaf" transform="translate(88 30) rotate(150)"/>
+                <use href="#leaf" transform="translate(64 18) rotate(160)"/>
+                <use href="#leaf" transform="translate(144 40) rotate(-16)"/>
+                <use href="#leaf" transform="translate(166 32) rotate(-28)"/>
+                <use href="#leaf" transform="translate(188 22) rotate(-40)"/>
+                <use href="#leaf" transform="translate(152 30) rotate(-150)"/>
+                <use href="#leaf" transform="translate(176 18) rotate(-160)"/>
+                <use href="#leaf" transform="translate(112 26) rotate(-108)"/>
+                <use href="#leaf" transform="translate(128 26) rotate(-72)"/>
+              </g>
+              <use href="#bloom" transform="translate(120 20) scale(1.15)"/>
+              <use href="#bloom" transform="translate(84 33) scale(.8)"/>
+              <use href="#bloom" transform="translate(156 33) scale(.8)"/>
+              <use href="#bloom" transform="translate(40 17) scale(.62)"/>
+              <use href="#bloom" transform="translate(200 17) scale(.62)"/>
+            </svg>
+            <span class="invite__pre">Together with their families</span>
+            <div class="invite__n">Aisha<span class="invite__amp">and</span>Bilal</div>
+            <div class="invite__rule"><i></i><b></b><i></i></div>
+            <span class="invite__post">Fourteenth September</span>
+            <svg class="invite__vine invite__vine--b" viewBox="0 0 240 54" fill="none" aria-hidden="true">
+              <g stroke="#B08829" stroke-width="1" stroke-linecap="round">
+                <path d="M120 50c-16-2-35-8-52-19M120 50c16-2 35-8 52-19"/>
+              </g>
+              <g fill="#D9C48A" fill-opacity=".7" stroke="#B08829" stroke-width=".65">
+                <use href="#leaf" transform="translate(98 42) rotate(198)"/>
+                <use href="#leaf" transform="translate(78 34) rotate(210)"/>
+                <use href="#leaf" transform="translate(142 42) rotate(-18)"/>
+                <use href="#leaf" transform="translate(162 34) rotate(-30)"/>
+              </g>
+              <use href="#bloom" transform="translate(120 40) scale(.72)"/>
+            </svg>
+          </div>
+          <span class="slide__cap">Wedding cards · gold foil</span>
+        </div>
+        <div class="slide" role="group" aria-label="4 of 5">
+          <div class="banner pc">
+            <i class="grommet"></i><i class="grommet"></i><i class="grommet"></i><i class="grommet"></i>
+            <div class="banner__panel">
+              <span class="banner__mono">TK</span>
+              <span class="banner__vert">Est. 2019</span>
+            </div>
+            <div class="banner__main">
+              <span class="banner__badge">20% off</span>
+              <span class="banner__k">Tandoori Kitchen</span>
+              <div class="banner__t">GRAND<br>OPENING</div>
+              <div class="banner__bar">
+                <span>Sat 14 Sept · 10am</span>
+                <span>905 555 0142</span>
+                <span>Ray Lawson Blvd</span>
+              </div>
+            </div>
+          </div>
+          <span class="slide__cap">Vinyl banner · 3 × 6 ft</span>
+        </div>
+        <div class="slide" role="group" aria-label="5 of 5">
+          <div class="flyer pc">
+            <span class="flyer__k">Now serving</span>
+            <div class="flyer__t">Lunch<br>Specials</div>
+            <div class="flyer__rows">
+              <div class="flyer__row"><b>Butter chicken</b><i></i><b>$14</b></div>
+              <div class="flyer__row"><b>Lamb karahi</b><i></i><b>$17</b></div>
+              <div class="flyer__row"><b>Daal &amp; naan</b><i></i><b>$11</b></div>
+            </div>
+            <div class="flyer__band"></div>
+          </div>
+          <span class="slide__cap">Flyers · 100 double-sided</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marq" aria-hidden="true">
+    <div class="marq__t">
+      <span class="marq__i">Business cards</span><span class="marq__i">Vinyl banners</span>
+      <span class="marq__i">Lawn signs</span><span class="marq__i">Wedding cards</span>
+      <span class="marq__i">T-shirts</span><span class="marq__i">Stickers</span>
+      <span class="marq__i">Flyers</span><span class="marq__i">Storefront signs</span>
+      <span class="marq__i">Business cards</span><span class="marq__i">Vinyl banners</span>
+      <span class="marq__i">Lawn signs</span><span class="marq__i">Wedding cards</span>
+      <span class="marq__i">T-shirts</span><span class="marq__i">Stickers</span>
+      <span class="marq__i">Flyers</span><span class="marq__i">Storefront signs</span>
+    </div>
+  </div>
+
+  <!-- WORK -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <p class="eyebrow rv">Recent work</p>
+      <h2 class="h2 uline rv" style="--i:1">Things we printed<br>this month.</h2>
+      <div class="show">
+        <a class="piece wipe tilt" href="#" data-page="lawn-signs">
+          <div class="piece__art">
+            <div class="lawn">
+              <div class="lawn__b">
+                <div class="lawn__top">Open House</div>
+                <div class="lawn__mid">
+                  <div class="lawn__n">42 Maple<br>Grove Ave</div>
+                  <div class="lawn__p">Sun 1–4pm</div>
+                </div>
+              </div>
+              <div class="lawn__legs"><i></i><i></i></div>
+            </div>
+          </div>
+          <div class="piece__txt">
+            <div class="piece__t">Lawn signs</div>
+            <div class="piece__p">Coroplast with H-stakes — 25 for a realtor</div>
+            <div class="piece__f">from $XX each</div>
+            <div class="piece__go">Lawn signs page →</div>
+          </div></a>
+
+        <a class="piece wipe tilt" href="#" data-page="apparel" style="--i:1">
+          <div class="piece__art">
+            <div class="tee">
+              <svg viewBox="0 0 200 180" aria-hidden="true">
+                <path d="M68 14 44 26 18 44l16 26 18-11v90c0 3 2 5 5 5h86c3 0 5-2 5-5V59l18 11 16-26-26-18-24-12h-20a16 16 0 0 1-32 0H68z"
+                      fill="#1D3B6E" stroke="#14294D" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M68 14a32 32 0 0 0 64 0" fill="none" stroke="#14294D" stroke-width="2"/>
+                <text class="tee__print" x="100" y="104" text-anchor="middle" font-size="26" fill="#FFD400">SHARMA</text>
+                <text class="tee__print" x="100" y="126" text-anchor="middle" font-size="15" fill="#fff" letter-spacing="2">PLUMBING</text>
+                <circle cx="100" cy="140" r="3" fill="#FFD400"/>
+              </svg>
+            </div>
+          </div>
+          <div class="piece__txt">
+            <div class="piece__t">Team uniforms</div>
+            <div class="piece__p">24 shirts, front and back print — two days</div>
+            <div class="piece__f">from $XX each</div>
+            <div class="piece__go">Apparel page →</div>
+          </div></a>
+
+        <a class="piece wipe tilt" href="#" data-page="stickers" style="--i:2">
+          <div class="piece__art">
+            <div class="stick"><i>AZ</i><i>★</i><i>24h</i><i>♥</i><i>AZ</i><i>★</i><i>NEW</i><i>AZ</i><i>♥</i></div>
+          </div>
+          <div class="piece__txt">
+            <div class="piece__t">Stickers &amp; decals</div>
+            <div class="piece__p">Die-cut vinyl sheet — 200 for a café</div>
+            <div class="piece__f">from $XX / sheet</div>
+            <div class="piece__go">Stickers page →</div>
+          </div></a>
+
+        <a class="piece wipe tilt" href="#" data-page="posters" style="--i:3">
+          <div class="piece__art">
+            <div class="poster">
+              <span class="poster__k">Brampton Mela</span>
+              <div class="poster__t">SUMMER<br>NIGHTS</div>
+              <div class="poster__disc">Aug<br>23</div>
+              <div class="poster__f">Chinguacousy Park</div>
+            </div>
+          </div>
+          <div class="piece__txt">
+            <div class="piece__t">Event posters</div>
+            <div class="piece__p">A2 satin, 50 printed overnight</div>
+            <div class="piece__f">from $XX</div>
+            <div class="piece__go">Posters page →</div>
+          </div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOORS -->
+  <section class="section tint" id="services">
+    <div class="wrap">
+      <p class="eyebrow rv">Start here</p>
+      <h2 class="h2 uline rv" style="--i:1">What do you need?</h2>
+      <div class="doors">
+        <a class="door rv" href="#quote"><h3>For your event</h3>
+          <p>Wedding and shaadi cards, invitations, banners and photo gifts. Come in — we'll show you samples you can hold.</p>
+          <span class="door__go">Event printing
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        <a class="door rv" href="#quote" style="--i:1"><h3>For your business</h3>
+          <p>Cards, flyers, signs, decals, uniforms and repeat orders. Send your artwork — we'll quote it the same day.</p>
+          <span class="door__go">Business printing
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="section" id="why">
+    <div class="wrap">
+      <p class="eyebrow rv">Why us</p>
+      <h2 class="h2 uline rv" style="--i:1">A family shop, not<br>a print button.</h2>
+      <div class="why">
+        <div class="why__i rv"><div class="why__n">01</div><div>
+          <div class="why__t">We check your file first</div>
+          <p class="why__p">Low-resolution logo, wrong size, no bleed — we catch it before it prints, and tell you. You don't pay twice for someone else's mistake.</p></div></div>
+        <div class="why__i rv" style="--i:1"><div class="why__n">02</div><div>
+          <div class="why__t">You talk to the owner</div>
+          <p class="why__p">Same family, same counter, every time. No call centre, no ticket number, no upselling.</p></div></div>
+        <div class="why__i rv" style="--i:2"><div class="why__n">03</div><div>
+          <div class="why__t">English, Punjabi, Urdu, Hindi</div>
+          <p class="why__p">Explain what you need in whichever language is easiest. We'll get it right the first time.</p></div></div>
+        <div class="why__i rv" style="--i:3"><div class="why__n">04</div><div>
+          <div class="why__t">No job too small</div>
+          <p class="why__p">One t-shirt or a thousand flyers — walk-ins welcome, and rush jobs get done when we can do them properly.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section tint">
+    <div class="wrap stats">
+      <div class="rv"><div class="stat__n" data-count="12">0</div><div class="stat__l">Years printing in Brampton</div></div>
+      <div class="rv" style="--i:1"><div class="stat__n" data-count="24">0</div><div class="stat__l">Hour rush service</div></div>
+      <div class="rv" style="--i:2"><div class="stat__n" data-count="1200">0</div><div class="stat__l">Local jobs printed</div></div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow rv">What customers say</p>
+      <h2 class="h2 uline rv" style="--i:1">Reviews.</h2>
+      <div class="revs">
+        <article class="rev rv"><div class="rev__stars" aria-label="5 out of 5">★★★★★</div>
+          <p class="rev__q">"PLACEHOLDER — real Google review goes here once the Business Profile is live and customers start leaving them."</p>
+          <p class="rev__w">— Placeholder Name</p></article>
+        <article class="rev rv" style="--i:1"><div class="rev__stars" aria-label="5 out of 5">★★★★★</div>
+          <p class="rev__q">"PLACEHOLDER — real Google review goes here once the Business Profile is live and customers start leaving them."</p>
+          <p class="rev__w">— Placeholder Name</p></article>
+        <article class="rev rv" style="--i:2"><div class="rev__stars" aria-label="5 out of 5">★★★★★</div>
+          <p class="rev__q">"PLACEHOLDER — real Google review goes here once the Business Profile is live and customers start leaving them."</p>
+          <p class="rev__w">— Placeholder Name</p></article>
+      </div>
+      <p class="rev__note"><strong>Note for Fahad:</strong> this section is built and empty on purpose. Reviews are the strongest local trust signal and the biggest ranking factor — but they take months to accumulate, so the Google Business Profile needs to start now. Nothing fake goes here, ever.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section tint" id="faq">
+    <div class="wrap">
+      <p class="eyebrow rv">Questions</p>
+      <h2 class="h2 uline rv" style="--i:1">Before you ask.</h2>
+      <div class="faq rv" style="--i:2">
+        <div class="qa">
+          <button class="qa__b" aria-expanded="false">How fast can you print my job?</button>
+          <div class="qa__p"><div class="qa__inner"><p>PLACEHOLDER — most jobs in X business days, with same-day rush available on many items. Bring your file in early and we'll tell you honestly whether the deadline is possible.</p></div></div>
+        </div>
+        <div class="qa">
+          <button class="qa__b" aria-expanded="false">Is there a minimum order?</button>
+          <div class="qa__p"><div class="qa__inner"><p>PLACEHOLDER — no minimum on most items. One t-shirt, one banner, one sign is fine. Business cards and flyers are cheaper per piece the more you order.</p></div></div>
+        </div>
+        <div class="qa">
+          <button class="qa__b" aria-expanded="false">What file format should I send?</button>
+          <div class="qa__p"><div class="qa__inner"><p>PLACEHOLDER — a print-ready PDF is best. We also accept AI, PSD, PNG and JPG. Don't have artwork? We can design it for you.</p></div></div>
+        </div>
+        <div class="qa">
+          <button class="qa__b" aria-expanded="false">Do you deliver, or is it pickup only?</button>
+          <div class="qa__p"><div class="qa__inner"><p>PLACEHOLDER — pickup from the Ray Lawson Blvd shop, with local delivery available in Brampton and Mississauga. Ask when you get your quote.</p></div></div>
+        </div>
+        <div class="qa">
+          <button class="qa__b" aria-expanded="false">How do I pay?</button>
+          <div class="qa__p"><div class="qa__inner"><p>PLACEHOLDER — cash, debit, credit and e-Transfer. Larger orders may need a deposit up front.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="section" id="quote">
+    <div class="wrap">
+      <div class="quote rv">
+        <p class="eyebrow">Free quote</p>
+        <h2 class="h2">Tell us what you need.<br>We'll price it today.</h2>
+        <p class="lead">Five questions, thirty seconds — or send a photo on WhatsApp and we'll work from that.</p>
+        <form class="form" action="https://formspree.io/f/PLACEHOLDER" method="POST">
+          <div class="field"><label for="name">Your name</label>
+            <input id="name" name="name" type="text" required autocomplete="name"></div>
+          <div class="field"><label for="phone">Phone or WhatsApp</label>
+            <input id="phone" name="phone" type="tel" required autocomplete="tel"></div>
+          <div class="field"><label for="job">What do you need printed?</label>
+            <select id="job" name="job" required>
+              <option value="" selected disabled>Choose one…</option>
+              <option>Business cards</option><option>Banners &amp; signs</option>
+              <option>Flyers &amp; brochures</option><option>Wedding &amp; shaadi cards</option>
+              <option>Apparel</option><option>Stickers &amp; decals</option>
+              <option>Repeat order / business account</option><option>Something else</option>
+            </select></div>
+          <div class="field"><label for="qty">How many?</label>
+            <input id="qty" name="quantity" type="text" placeholder="e.g. 500, or not sure yet"></div>
+          <div class="field field--full"><label for="details">Anything else? <span style="opacity:.6">(optional)</span></label>
+            <textarea id="details" name="details" placeholder="Size, colours, deadline…"></textarea></div>
+          <button class="btn btn--primary" type="submit"><span>Send my request</span></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__g">
+      <div><p class="logo" style="margin-bottom:12px">AZ <b>Printing</b></p>
+        <p style="font-size:15px;color:var(--ink-soft);max-width:34ch">Family-run printing and signs shop serving Brampton, Mississauga and the GTA.</p></div>
+      <div><h4>Visit</h4><ul>
+        <li><a href="https://maps.google.com/?q=499+Ray+Lawson+Blvd+%2324+Brampton+ON" target="_blank" rel="noopener">499 Ray Lawson Blvd #24<br>Brampton, ON L6Y 4E3</a></li>
+        <li><a href="https://maps.google.com/?q=499+Ray+Lawson+Blvd+%2324+Brampton+ON" target="_blank" rel="noopener">Get directions →</a></li>
+        <li style="color:var(--ink-soft)">Mon–Sat 10am–7pm · Sun closed</li></ul></div>
+      <div><h4>Contact</h4><ul>
+        <li><a href="tel:+19055550142">(905) 555-0142</a></li>
+        <li><a href="https://wa.me/19055550142">WhatsApp us</a></li>
+        <li><a href="mailto:hello@example.invalid">hello@placeholder.ca</a></li></ul></div>
+    </div>
+    <p class="legal">© 2026 AZ Printing and Signs — PLACEHOLDER CONTENT, not for publication.</p>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/19055550142" aria-label="Message us on WhatsApp">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.5-.3.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.2.4-.2.6-.1l2 1c.3.1.4.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+  WhatsApp
+</a>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"AZ Printing and Signs",
+"description":"Family-run printing and signs shop in Brampton, Ontario.",
+"address":{"@type":"PostalAddress","streetAddress":"499 Ray Lawson Blvd #24","addressLocality":"Brampton","addressRegion":"ON","postalCode":"L6Y 4E3","addressCountry":"CA"},
+"telephone":"+1-905-555-0142","openingHours":"Mo-Sa 10:00-19:00","areaServed":["Brampton","Mississauga","Toronto"]}
+</script>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var raf = requestAnimationFrame;
+
+  // FAQ accordion works regardless of motion preference.
+  document.querySelectorAll('.qa').forEach(function(qa){
+    var btn = qa.querySelector('.qa__b');
+    btn.addEventListener('click', function(){
+      var open = qa.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+
+  // Hero showcase: slow crossfade, no arrows, no dots.
+  // Pauses on hover/focus, when the tab is hidden, and when scrolled out of
+  // view — so it never burns battery animating something nobody is looking at.
+  (function(){
+    var box = document.getElementById('showcase');
+    if (!box) return;
+    var slides = box.querySelectorAll('.slide');
+    if (slides.length < 2 || reduce) return;   // reduced motion: first slide only
+    var i = 0, timer = null, hovered = false, visible = true;
+    function step(){
+      slides[i].classList.remove('active');
+      i = (i + 1) % slides.length;
+      slides[i].classList.add('active');
+    }
+    function run(){ stop(); if (!hovered && visible && !document.hidden) timer = setInterval(step, 5000); }
+    function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+    box.addEventListener('pointerenter', function(){ hovered = true; stop(); });
+    box.addEventListener('pointerleave', function(){ hovered = false; run(); });
+    box.addEventListener('focusin', function(){ hovered = true; stop(); });
+    box.addEventListener('focusout', function(){ hovered = false; run(); });
+    document.addEventListener('visibilitychange', run);
+    new IntersectionObserver(function(es){
+      visible = es[0].isIntersecting; run();
+    }, { threshold: 0.25 }).observe(box);
+    run();
+  })();
+
+  if (reduce) {
+    document.body.classList.add('loaded');
+    document.querySelectorAll('.rv,.wipe,.uline,.showcase').forEach(function(el){ el.classList.add('in'); });
+    document.querySelectorAll('[data-count]').forEach(function(n){ n.textContent = n.dataset.count; });
+    return;
+  }
+
+  raf(function(){ document.body.classList.add('loaded'); });
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+  document.querySelectorAll('.rv,.wipe,.uline,.showcase').forEach(function(el){ io.observe(el); });
+
+  var prog = document.getElementById('prog'), nav = document.getElementById('nav');
+  var last = 0, t1 = false;
+  function onScroll(){
+    var y = scrollY, max = document.documentElement.scrollHeight - innerHeight;
+    prog.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
+    nav.classList.toggle('stuck', y > 8);
+    nav.classList.toggle('hidden', y > last && y > 420);
+    last = y; t1 = false;
+  }
+  addEventListener('scroll', function(){ if (!t1) { raf(onScroll); t1 = true; } }, { passive: true });
+  onScroll();
+
+  var sheet = document.getElementById('sheet'), bgs = document.querySelectorAll('.piece__art'), t2 = false;
+  function parallax(){
+    var vh = innerHeight;
+    if (sheet) {
+      var r = sheet.getBoundingClientRect();
+      sheet.style.transform = 'translateY(' + (((r.top + r.height/2 - vh/2) / vh) * -26) + 'px)';
+    }
+    bgs.forEach(function(b){
+      var r = b.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;
+      b.style.transform = 'translateY(' + (((r.top + r.height/2 - vh/2) / vh) * 30) + 'px)';
+    });
+    t2 = false;
+  }
+  addEventListener('scroll', function(){ if (!t2) { raf(parallax); t2 = true; } }, { passive: true });
+  parallax();
+
+  if (matchMedia('(pointer:fine)').matches) {
+    document.querySelectorAll('.tilt').forEach(function(el){
+      el.addEventListener('pointermove', function(ev){
+        var r = el.getBoundingClientRect();
+        var x = (ev.clientX - r.left)/r.width - .5, y = (ev.clientY - r.top)/r.height - .5;
+        el.style.transform = 'perspective(900px) rotateX(' + (-y*4.5) + 'deg) rotateY(' + (x*5.5) + 'deg)';
+      });
+      el.addEventListener('pointerleave', function(){ el.style.transform = ''; });
+    });
+    document.querySelectorAll('.btn').forEach(function(b){
+      b.addEventListener('pointermove', function(ev){
+        var r = b.getBoundingClientRect();
+        b.style.transform = 'translate(' + ((ev.clientX-r.left-r.width/2)*.15) + 'px,'
+                                         + ((ev.clientY-r.top-r.height/2)*.28) + 'px)';
+      });
+      b.addEventListener('pointerleave', function(){ b.style.transform = ''; });
+    });
+  }
+
+  var nio = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var el = e.target, t = +el.dataset.count, s = performance.now(), d = 1400;
+      (function tick(now){
+        var p = Math.min((now - s)/d, 1);
+        el.textContent = Math.round(t * (1 - Math.pow(1-p, 3))).toLocaleString();
+        if (p < 1) raf(tick);
+      })(s);
+      nio.unobserve(el);
+    });
+  }, { threshold: .6 });
+  document.querySelectorAll('[data-count]').forEach(function(n){ nio.observe(n); });
+})();
+</script>
+
+</body>
+</html>

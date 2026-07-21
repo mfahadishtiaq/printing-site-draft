@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Navigation font options</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,600..900;1,600..900&family=Literata:opsz,wght@7..72,400..600&family=Space+Mono:wght@400;700&family=Schibsted+Grotesk:wght@400;500;700&family=Familjen+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --flame:#FF4D1C;--accent:#D92B0E;--accent-deep:#B01F04;
+  --ink:#14100F;--ink-soft:#5C5650;--surface:#fff;--surface-2:#F6F4F2;--border:#E7E3DF;
+  --display:'Fraunces',Georgia,serif;--body:'Literata',Georgia,serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--surface-2);color:var(--ink);font-family:var(--body);
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin-inline:auto;padding-inline:24px}
+h1,h2{font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0}
+
+.flag{background:repeating-linear-gradient(45deg,#111 0 12px,#f5c518 12px 24px);
+  color:#fff;font-size:11px;font-weight:600;letter-spacing:.08em;text-align:center;
+  padding:7px 14px;text-transform:uppercase;font-family:var(--body)}
+.flag span{background:#111;padding:2px 8px;border-radius:6px}
+
+.intro{padding:52px 0 24px}
+.intro h1{font-size:clamp(28px,4.6vw,42px);margin-bottom:14px}
+.intro h1 em{font-style:italic;color:var(--flame)}
+.intro p{color:var(--ink-soft);max-width:64ch;margin-bottom:10px}
+.intro strong{color:var(--ink)}
+
+.opt{margin-bottom:26px}
+.opt__label{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:10px}
+.opt__n{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#fff;
+  background:var(--ink);width:26px;height:26px;border-radius:50%;display:grid;place-content:center;flex:none}
+.opt__name{font-weight:600;font-size:16px}
+.opt__why{font-size:14px;color:var(--ink-soft);margin-top:10px;padding-left:14px;
+  border-left:3px solid var(--border)}
+
+/* the mock nav bar */
+.bar{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:0 26px;min-height:76px;display:flex;align-items:center;justify-content:space-between;
+  gap:24px;overflow-x:auto}
+.bar__logo{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:-.04em;flex:none}
+.bar__logo b{color:var(--accent)}
+.bar__links{display:flex;gap:30px;list-style:none;margin:0;padding:0;flex:none}
+.bar__links a{color:var(--ink);text-decoration:none;white-space:nowrap}
+.bar__cta{background:var(--accent);color:#fff;padding:12px 22px;border-radius:999px;
+  font-size:15px;font-weight:600;white-space:nowrap;flex:none;text-decoration:none}
+
+/* --- the five treatments --- */
+.n1 .bar__links a{font-family:'Literata',serif;font-size:16px}
+.n1 .bar__cta{font-family:'Literata',serif}
+
+.n2 .bar__links a{font-family:'Fraunces',serif;font-size:13px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.14em}
+.n2 .bar__cta{font-family:'Fraunces',serif;font-weight:700;font-size:14px;
+  text-transform:uppercase;letter-spacing:.08em}
+
+.n3 .bar__links a{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em}
+.n3 .bar__cta{font-family:'Space Mono',monospace;font-weight:700;font-size:13px;
+  text-transform:uppercase;letter-spacing:.06em}
+
+.n4 .bar__links a{font-family:'Schibsted Grotesk',sans-serif;font-size:15px;font-weight:500}
+.n4 .bar__cta{font-family:'Schibsted Grotesk',sans-serif;font-weight:600}
+
+.n5 .bar__links a{font-family:'Familjen Grotesk',sans-serif;font-size:13px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.13em}
+.n5 .bar__cta{font-family:'Familjen Grotesk',sans-serif;font-weight:700;font-size:14px}
+
+.outro{padding:22px 0 90px}
+.outro h2{font-size:24px;margin-bottom:12px}
+.outro p{color:var(--ink-soft);max-width:64ch;margin-bottom:10px}
+@media(max-width:700px){.bar{padding:16px 18px;min-height:0;flex-wrap:wrap}}
+</style>
+</head>
+<body>
+
+<div class="flag">Navigation font &nbsp;·&nbsp; <span>Headlines stay Fraunces · body stays Literata · only the nav changes</span></div>
+
+<div class="wrap intro">
+  <h1>Five ways to set the <em>navigation</em>.</h1>
+  <p>Navigation is <strong>interface</strong>, not reading — so it doesn't have to use the body font, and usually shouldn't. Small serif text in a nav bar tends to look cramped, which is what's bothering you.</p>
+  <p>Look at the row of links in each bar below. Everything else is identical.</p>
+</div>
+
+<div class="wrap">
+
+  <div class="opt n1">
+    <div class="opt__label"><span class="opt__n">1</span><span class="opt__name">Literata — what's there now</span></div>
+    <div class="bar">
+      <span class="bar__logo">AZ <b>Printing</b></span>
+      <ul class="bar__links"><li><a href="#">Work</a></li><li><a href="#">Services</a></li><li><a href="#">About</a></li><li><a href="#">FAQ</a></li></ul>
+      <a class="bar__cta" href="#">Free Quote</a>
+    </div>
+    <p class="opt__why">The body font doing interface work. Slightly soft and cramped at this size — this is the one you flagged.</p>
+  </div>
+
+  <div class="opt n2">
+    <div class="opt__label"><span class="opt__n">2</span><span class="opt__name">Fraunces, uppercase and spaced</span></div>
+    <div class="bar">
+      <span class="bar__logo">AZ <b>Printing</b></span>
+      <ul class="bar__links"><li><a href="#">Work</a></li><li><a href="#">Services</a></li><li><a href="#">About</a></li><li><a href="#">FAQ</a></li></ul>
+      <a class="bar__cta" href="#">Free Quote</a>
+    </div>
+    <p class="opt__why">Same family as the headlines, but small, capitalised and widely spaced so it reads as navigation. No third font introduced — the most cohesive option.</p>
+  </div>
+
+  <div class="opt n3">
+    <div class="opt__label"><span class="opt__n">3</span><span class="opt__name">Space Mono — typewriter</span></div>
+    <div class="bar">
+      <span class="bar__logo">AZ <b>Printing</b></span>
+      <ul class="bar__links"><li><a href="#">Work</a></li><li><a href="#">Services</a></li><li><a href="#">About</a></li><li><a href="#">FAQ</a></li></ul>
+      <a class="bar__cta" href="#">Free Quote</a>
+    </div>
+    <p class="opt__why">The language of job tickets and print specs. Most distinctive and most obviously "print shop" — nothing generic about it. Slightly technical in feel.</p>
+  </div>
+
+  <div class="opt n4">
+    <div class="opt__label"><span class="opt__n">4</span><span class="opt__name">Schibsted Grotesk — clean sans</span></div>
+    <div class="bar">
+      <span class="bar__logo">AZ <b>Printing</b></span>
+      <ul class="bar__links"><li><a href="#">Work</a></li><li><a href="#">Services</a></li><li><a href="#">About</a></li><li><a href="#">FAQ</a></li></ul>
+      <a class="bar__cta" href="#">Free Quote</a>
+    </div>
+    <p class="opt__why">A crisp sans purely for interface — nav, buttons, form labels. Clearest to read and most familiar. Costs one extra font file.</p>
+  </div>
+
+  <div class="opt n5">
+    <div class="opt__label"><span class="opt__n">5</span><span class="opt__name">Familjen Grotesk, uppercase</span></div>
+    <div class="bar">
+      <span class="bar__logo">AZ <b>Printing</b></span>
+      <ul class="bar__links"><li><a href="#">Work</a></li><li><a href="#">Services</a></li><li><a href="#">About</a></li><li><a href="#">FAQ</a></li></ul>
+      <a class="bar__cta" href="#">Free Quote</a>
+    </div>
+    <p class="opt__why">Sans with character rather than a neutral one — confident and slightly unusual, sharp against the serif headlines.</p>
+  </div>
+
+</div>
+
+<div class="wrap outro">
+  <h2>My pick</h2>
+  <p><strong>2 or 3.</strong> Number 2 keeps the site to two fonts and makes the nav unmistakably part of the same family. Number 3 is bolder and the most "print shop" thing on the page — it looks like a job ticket, which no competitor in Brampton is doing.</p>
+  <p>Whichever you pick also sets the buttons and form labels, so the whole interface stays consistent. Give me a number.</p>
+</div>
+
+</body>
+</html>

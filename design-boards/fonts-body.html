@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Body font options — paired with Fraunces</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&family=IBM+Plex+Sans:wght@400;500;600&family=Karla:wght@400;500;700&family=Work+Sans:wght@400;500;600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Libre+Franklin:wght@400;500;600&family=Public+Sans:wght@400;500;600&family=Archivo:wght@400;500;600&family=Hanken+Grotesk:wght@400;500;600&family=Source+Sans+3:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E0E12; --ink-soft:#5F5F6B;
+  --surface:#fff; --surface-2:#F5F5F8; --border:#E4E4EC;
+  --maxw:940px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--surface-2);color:var(--ink);line-height:1.6;
+  font-family:'Public Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:24px}
+h1,h2,h3,.disp{font-family:'Fraunces',Georgia,serif;font-weight:700;letter-spacing:-.02em;
+  line-height:1.05;margin:0;font-variation-settings:'SOFT' 0,'WONK' 1}
+
+.flag{background:repeating-linear-gradient(45deg,#111 0 12px,#f5c518 12px 24px);
+  color:#fff;font-size:11px;font-weight:600;letter-spacing:.08em;text-align:center;
+  padding:7px 14px;text-transform:uppercase}
+.flag span{background:#111;padding:2px 8px;border-radius:6px}
+
+.intro{padding:56px 0 28px}
+.intro h1{font-size:clamp(30px,5vw,46px);margin-bottom:16px}
+.intro p{color:var(--ink-soft);max-width:64ch;margin-bottom:10px}
+.intro strong{color:var(--ink)}
+
+.spec{background:var(--surface);border:1px solid var(--border);border-radius:18px;
+  padding:36px 32px;margin-bottom:20px}
+.spec__head{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;
+  padding-bottom:18px;margin-bottom:26px;border-bottom:1px solid var(--border)}
+.spec__num{font-size:12px;font-weight:700;color:#fff;background:var(--ink);
+  width:26px;height:26px;border-radius:50%;display:grid;place-content:center;flex:none;
+  font-family:'Public Sans',sans-serif}
+.spec__name{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.spec__tag{margin-left:auto;font-size:11px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--ink-soft);background:var(--surface-2);
+  padding:5px 12px;border-radius:999px;white-space:nowrap}
+
+/* the headline stays Fraunces in every sample — only the body changes */
+.spec__h{font-size:clamp(28px,4.4vw,44px);margin-bottom:18px}
+.spec__h em{font-style:italic}
+.sample{font-size:17px;color:var(--ink);max-width:60ch}
+.sample--muted{color:var(--ink-soft);margin-top:14px;font-size:16px}
+.ui{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:26px;
+  padding-top:22px;border-top:1px dashed var(--border)}
+.btn{display:inline-flex;align-items:center;font-size:15px;font-weight:600;
+  background:var(--ink);color:#fff;padding:13px 24px;border-radius:999px}
+.eyebrow{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft)}
+.label{font-size:14px;font-weight:500}
+.pill{font-size:13px;font-weight:600;border:1px solid var(--border);padding:8px 14px;border-radius:8px}
+.note{font-size:14px;color:var(--ink-soft);margin-top:22px;padding-left:14px;
+  border-left:3px solid var(--surface-2)}
+
+/* --- the eleven body fonts --- */
+.b1  .sample,.b1  .ui,.b1  .note{font-family:'Public Sans',sans-serif}
+.b2  .sample,.b2  .ui,.b2  .note{font-family:'IBM Plex Sans',sans-serif}
+.b3  .sample,.b3  .ui,.b3  .note{font-family:'Karla',sans-serif}
+.b4  .sample,.b4  .ui,.b4  .note{font-family:'Work Sans',sans-serif}
+.b5  .sample,.b5  .ui,.b5  .note{font-family:'DM Sans',sans-serif}
+.b6  .sample,.b6  .ui,.b6  .note{font-family:'Libre Franklin',sans-serif}
+.b7  .sample,.b7  .ui,.b7  .note{font-family:'Archivo',sans-serif}
+.b8  .sample,.b8  .ui,.b8  .note{font-family:'Hanken Grotesk',sans-serif}
+.b9  .sample,.b9  .ui,.b9  .note{font-family:'Source Sans 3',sans-serif}
+.b10 .sample,.b10 .ui,.b10 .note{font-family:'Instrument Sans',sans-serif}
+.b11 .sample,.b11 .ui,.b11 .note{font-family:'Inter',sans-serif}
+
+.outro{padding:20px 0 90px}
+.outro h2{font-size:26px;margin-bottom:14px}
+.outro ol{color:var(--ink-soft);padding-left:20px;max-width:64ch}
+.outro li{margin-bottom:8px}
+@media(max-width:640px){.spec{padding:26px 20px}.spec__tag{margin-left:0}}
+</style>
+</head>
+<body>
+
+<div class="flag">Body font specimen &nbsp;·&nbsp; <span>Headline is Fraunces in all of them — only the body text changes</span></div>
+
+<div class="wrap intro">
+  <h1>You picked Fraunces. Now the <em>body</em> font.</h1>
+  <p>The headline below is <strong>Fraunces</strong> in every sample — that part is settled. What changes is the smaller text: paragraphs, buttons, labels, form fields. That's the font doing 90% of the actual work on the site.</p>
+  <p>You were right that Inter reads generic — it's the default of half the web right now. It's shown last as <strong>#11</strong> so you can see the difference directly.</p>
+  <p>Still black and white on purpose. Colour comes after this.</p>
+</div>
+
+<div class="wrap">
+
+  <section class="spec b1">
+    <div class="spec__head"><span class="spec__num">1</span><span class="spec__name">Public Sans</span>
+      <span class="spec__tag">Official</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Built for US government sites — designed to be unmistakably clear and neutral. Serious and public-service professional. Very legible at small sizes for older readers.</p>
+  </section>
+
+  <section class="spec b2">
+    <div class="spec__head"><span class="spec__num">2</span><span class="spec__name">IBM Plex Sans</span>
+      <span class="spec__tag">Engineered</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">IBM's corporate typeface. Slightly technical, with real personality in the letterforms — reads as a company that makes things. Strong contrast against Fraunces.</p>
+  </section>
+
+  <section class="spec b3">
+    <div class="spec__head"><span class="spec__num">3</span><span class="spec__name">Karla</span>
+      <span class="spec__tag">Characterful</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">A grotesque with quirks — slightly odd proportions that give it warmth. Designers pair this with characterful serifs constantly, and it will never be mistaken for a default.</p>
+  </section>
+
+  <section class="spec b4">
+    <div class="spec__head"><span class="spec__num">4</span><span class="spec__name">Work Sans</span>
+      <span class="spec__tag">Warm neutral</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Neutral like Inter but noticeably warmer and less corporate. A safe upgrade if you want clean without cold.</p>
+  </section>
+
+  <section class="spec b5">
+    <div class="spec__head"><span class="spec__num">5</span><span class="spec__name">DM Sans</span>
+      <span class="spec__tag">Modern</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Geometric and rounded — friendly, contemporary, slightly softer. Reads well on phones. Common on modern sites, so less distinctive than 2 or 3.</p>
+  </section>
+
+  <section class="spec b6">
+    <div class="spec__head"><span class="spec__num">6</span><span class="spec__name">Libre Franklin</span>
+      <span class="spec__tag">Editorial</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Descended from Franklin Gothic, the classic American newspaper and poster face. Genuinely printerly — it belongs next to a press. My personal pick for this business.</p>
+  </section>
+
+  <section class="spec b7">
+    <div class="spec__head"><span class="spec__num">7</span><span class="spec__name">Archivo</span>
+      <span class="spec__tag">Sturdy</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Solid and grounded, made for high-performance print and signage. Pairs naturally with a shop that produces physical things.</p>
+  </section>
+
+  <section class="spec b8">
+    <div class="spec__head"><span class="spec__num">8</span><span class="spec__name">Hanken Grotesk</span>
+      <span class="spec__tag">Approachable</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Clean and friendly without being childish. Comfortable for long reading — good for older visitors who make up a lot of walk-in trade.</p>
+  </section>
+
+  <section class="spec b9">
+    <div class="spec__head"><span class="spec__num">9</span><span class="spec__name">Source Sans 3</span>
+      <span class="spec__tag">Workhorse</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Adobe's open-source workhorse, drawn for interfaces and long text. Extremely professional, deliberately unshowy. Recedes so Fraunces can lead.</p>
+  </section>
+
+  <section class="spec b10">
+    <div class="spec__head"><span class="spec__num">10</span><span class="spec__name">Instrument Sans</span>
+      <span class="spec__tag">Current</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Tight, modern and slightly compressed — a designer's choice right now. Sharp and premium, and it's the sibling of Instrument Serif from the first sheet.</p>
+  </section>
+
+  <section class="spec b11">
+    <div class="spec__head"><span class="spec__num">11</span><span class="spec__name">Inter</span>
+      <span class="spec__tag">The one you rejected</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Here for comparison only. Nothing wrong with it technically — it's just everywhere, which is exactly why it reads as generic. Scroll back up to 2, 3 or 6 and the difference is obvious.</p>
+  </section>
+
+</div>
+
+<div class="wrap outro">
+  <h2>How to choose</h2>
+  <ol>
+    <li><strong>Read the paragraph, not the headline.</strong> The headline is Fraunces in all of them — the small text is the decision.</li>
+    <li><strong>Look at the button and the label.</strong> Those two bits of text appear hundreds of times across the site.</li>
+    <li><strong>Ask: does this look like a business that charges properly?</strong> That's the whole job of the body font.</li>
+    <li><strong>Tell me one number.</strong> Then I rebuild the homepage in Fraunces + your pick, with the animation, and we finally pick a colour.</li>
+  </ol>
+</div>
+
+</body>
+</html>

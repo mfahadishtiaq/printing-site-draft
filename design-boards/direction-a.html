@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Design Board A — The Chapter Rail | Printing in Brampton (PLACEHOLDER)</title>
+<meta name="description" content="Design board A for AZ Printing and Signs. All content is placeholder.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN BOARD A — "The Chapter Rail"
+   Corner Press palette, rebuilt from the grid up.
+   Everything is placeholder content. No external images.
+   ============================================================ */
+
+:root{
+  /* ---- colour ---- */
+  --paper:#FAF5EC;
+  --paper-2:#F3ECDF;
+  --ink:#2A2119;
+  --ink-soft:#5C5347;
+  --accent:#B84A26;        /* display type >=28px, solid fills, eyebrows >=18px */
+  --accent-deep:#96391B;   /* ALL inline links + focus text, any size */
+  --accent-on-ink:#E8763A; /* accent on the dark movement */
+  --white:#FFFFFF;
+
+  --rule:rgba(42,33,25,.30);
+  --hairline:rgba(42,33,25,.22);
+  --hairline-soft:rgba(42,33,25,.12);
+
+  /* ---- type ---- */
+  --display:'Fraunces',Georgia,serif;
+  --body:'Inter',system-ui,-apple-system,sans-serif;
+
+  /* jumping ramp — deliberately uneven */
+  --t-spec:13px;
+  --t-sm:15px;
+  --t-body:17px;
+  --t-lead:21px;
+  --t-h3:34px;
+  --t-h2:56px;
+  --t-h1:92px;
+
+  /* ---- geometry ---- */
+  --rail:96px;
+  --gutter:20px;
+  --max:1120px;
+  --unit:8px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:var(--t-body);
+  line-height:1.65;
+  font-synthesis-weight:none;
+  padding-top:var(--banner-h,56px);
+  /* paper texture: two whisper-thin gradient grains, no images */
+  background-image:
+    repeating-linear-gradient(94deg, rgba(42,33,25,.016) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(2deg, rgba(42,33,25,.014) 0 1px, transparent 1px 4px);
+}
+
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.04;letter-spacing:-.025em}
+h1{font-size:clamp(38px,9vw,var(--t-h1));font-variation-settings:'opsz' 144,'wght' 700,'SOFT' 40,'WONK' 1}
+h2{font-size:clamp(32px,6.4vw,var(--t-h2));font-variation-settings:'opsz' 96,'wght' 650,'SOFT' 30,'WONK' 1}
+h3{font-size:clamp(24px,4vw,var(--t-h3));font-variation-settings:'opsz' 40,'wght' 600,'SOFT' 20,'WONK' 0;line-height:1.12}
+p{margin:0 0 calc(var(--unit)*3)}
+a{color:var(--accent-deep);text-underline-offset:.22em;text-decoration-thickness:1px}
+a:hover{color:var(--accent-deep);text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--accent-deep);outline-offset:3px}
+img,svg{max-width:100%}
+
+/* ---------- board banner (not part of the site) ---------- */
+.board-banner{
+  position:fixed;inset:0 0 auto 0;z-index:200;
+  background:var(--ink);color:var(--paper);
+  font-family:var(--body);font-size:11px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;line-height:1.4;
+  padding:10px 16px;text-align:center;
+}
+.board-banner b{color:var(--accent-on-ink);font-weight:700}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:var(--banner-h,56px);z-index:150;
+  background:rgba(250,245,236,.94);
+  backdrop-filter:saturate(120%) blur(6px);
+  border-bottom:1px solid var(--hairline);
+}
+.nav__in{
+  max-width:calc(var(--max) + var(--rail));margin:0 auto;
+  padding:14px var(--gutter);
+  display:flex;align-items:center;gap:var(--gutter);justify-content:space-between;
+}
+.wordmark{
+  font-family:var(--display);font-size:20px;letter-spacing:-.02em;
+  font-variation-settings:'opsz' 24,'wght' 900,'SOFT' 0,'WONK' 0;
+  color:var(--ink);text-decoration:none;line-height:1;
+}
+.wordmark span{display:block;font-family:var(--body);font-size:10px;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
+.nav__links{display:none;gap:26px;align-items:center}
+.nav__links a{
+  font-size:var(--t-sm);font-weight:500;color:var(--ink);text-decoration:none;
+  padding-bottom:2px;border-bottom:1px solid transparent;transition:border-color .18s ease-out;
+}
+.nav__links a:hover,.nav__links a[aria-current]{border-bottom-color:var(--accent-deep)}
+.nav__call{
+  display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+  font-size:var(--t-sm);font-weight:600;color:var(--ink);text-decoration:none;
+  border:1px solid var(--rule);border-radius:2px;padding:9px 14px;
+  transition:background .18s ease-out,color .18s ease-out;
+}
+.nav__call:hover{background:var(--ink);color:var(--paper)}
+@media(min-width:900px){
+  .nav__links{display:flex}
+}
+
+/* ---------- the chapter rail ---------- */
+.chapter{
+  max-width:calc(var(--max) + var(--rail));margin:0 auto;
+  padding:0 var(--gutter);
+  position:relative;
+}
+.chapter__body{padding:calc(var(--unit)*8) 0}
+.rail{
+  display:flex;align-items:baseline;gap:14px;
+  padding-top:calc(var(--unit)*8);
+}
+.rail__num{
+  font-family:var(--display);font-size:22px;line-height:1;
+  font-variation-settings:'opsz' 144,'wght' 900,'SOFT' 0,'WONK' 0;
+  color:var(--accent-deep);
+}
+.rail__label{
+  font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.rail__rule{flex:1;height:1px;background:var(--rule)}
+
+@media(min-width:900px){
+  .chapter{display:grid;grid-template-columns:var(--rail) 1fr;padding:0 calc(var(--gutter) * 2)}
+  .chapter__side{
+    border-right:1px solid var(--rule);
+    position:relative;
+  }
+  .rail{
+    position:sticky;top:calc(var(--banner-h,56px) + 96px);
+    display:block;padding:calc(var(--unit)*8) 0 0;
+  }
+  .rail__num{font-size:40px;display:block;margin-bottom:18px;letter-spacing:-.04em}
+  .rail__label{
+    writing-mode:vertical-rl;transform:rotate(180deg);
+    display:block;white-space:nowrap;
+  }
+  .rail__rule{display:none}
+  .chapter__body{padding:calc(var(--unit)*12) 0 calc(var(--unit)*12) calc(var(--unit)*6)}
+}
+@media(min-width:1200px){
+  .chapter__body{padding-left:calc(var(--unit)*9)}
+}
+
+/* alternating paper plane */
+.band-2{background:var(--paper-2);border-block:1px solid var(--hairline-soft)}
+
+/* ---------- shared bits ---------- */
+.eyebrow{
+  font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent-deep);margin:0 0 calc(var(--unit)*2);
+}
+.lead{font-size:var(--t-lead);line-height:1.5;max-width:34ch;color:var(--ink)}
+.prose{max-width:62ch}
+.spec{
+  font-size:var(--t-spec);letter-spacing:.02em;color:var(--ink-soft);
+  line-height:1.55;margin:0;
+}
+.spec b{font-weight:600;color:var(--ink)}
+.ph{
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  color:var(--accent-deep);
+}
+
+/* buttons — 2px radius, zero box-shadow anywhere on this page */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--body);font-size:var(--t-sm);font-weight:600;letter-spacing:.01em;
+  padding:14px 24px;border-radius:2px;border:1px solid transparent;
+  text-decoration:none;cursor:pointer;
+  transition:background .18s ease-out,color .18s ease-out,transform .18s ease-out;
+}
+.btn--primary{background:var(--accent);color:var(--white)}
+.btn--primary:hover{background:var(--accent-deep);color:var(--white);transform:translateY(-1px)}
+.btn--ghost{background:transparent;color:var(--ink);border-color:var(--rule)}
+.btn--ghost:hover{background:var(--ink);color:var(--paper)}
+.btn--onink{background:var(--paper);color:var(--ink)}
+.btn--onink:hover{background:var(--accent-on-ink);color:var(--ink)}
+
+/* ---------- TRUE-TRIM SPECIMENS ---------- */
+/* every piece of work is drawn at its real product aspect ratio */
+.trim{position:relative;display:block}
+.trim__paper{
+  position:relative;background:var(--white);
+  border:1px solid var(--hairline);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(14px,3vw,28px);overflow:hidden;
+  transition:transform .2s ease-out;
+}
+.trim__paper::after{ /* offset ink rule — a printed-object shadow made of ink, never a blur */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  transform:translate(6px,6px);opacity:.9;
+}
+a.trim:hover .trim__paper,.trim--hoverable:hover .trim__paper{transform:translate(-2px,-2px)}
+.trim--card    .trim__paper{aspect-ratio:3.5/2}
+.trim--wedding .trim__paper{aspect-ratio:5/7}
+.trim--sign    .trim__paper{aspect-ratio:4/3}
+.trim--banner  .trim__paper{aspect-ratio:24/9}
+.trim--letter  .trim__paper{aspect-ratio:8.5/11}
+.trim__cap{margin-top:calc(var(--unit)*2)}
+.trim__title{
+  font-family:var(--display);font-size:19px;line-height:1.15;margin:0 0 4px;
+  font-variation-settings:'opsz' 30,'wght' 600,'SOFT' 20,'WONK' 0;
+}
+
+/* typographic artwork inside specimens */
+.art-name{font-family:var(--display);font-variation-settings:'opsz' 60,'wght' 700,'SOFT' 30,'WONK' 1;
+  font-size:clamp(15px,2.4vw,22px);line-height:1;letter-spacing:-.02em}
+.art-sub{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin-top:8px}
+.art-lines{display:flex;flex-direction:column;gap:5px;margin-top:12px}
+.art-lines i{display:block;height:2px;background:var(--hairline)}
+.art-rule{height:1px;background:var(--ink);opacity:.5;margin:10px 0}
+.art-center{text-align:center;align-items:center}
+.art-wed{font-family:var(--display);font-style:italic;
+  font-variation-settings:'opsz' 72,'wght' 500,'SOFT' 60,'WONK' 1;
+  font-size:clamp(20px,3.6vw,34px);line-height:1.05}
+.art-shout{
+  font-family:var(--display);font-variation-settings:'opsz' 144,'wght' 900,'SOFT' 0,'WONK' 0;
+  font-size:clamp(26px,5.6vw,52px);line-height:.92;letter-spacing:-.04em;text-transform:uppercase;
+}
+.art-wide{
+  font-family:var(--display);font-variation-settings:'opsz' 144,'wght' 800,'SOFT' 10,'WONK' 1;
+  font-size:clamp(18px,4.4vw,44px);line-height:1;letter-spacing:-.03em;white-space:nowrap;
+}
+.ink-fill{background:var(--ink)!important;color:var(--paper)}
+.ink-fill .art-sub{color:rgba(250,245,236,.72)}
+.ink-fill .art-lines i{background:rgba(250,245,236,.28)}
+.accent-fill{background:var(--accent)!important;color:var(--white)}
+.accent-fill .art-sub{color:rgba(255,255,255,.82)}
+
+/* ---------- 01 HERO ---------- */
+.hero__grid{display:grid;gap:calc(var(--unit)*6)}
+.hero h1{margin-bottom:calc(var(--unit)*3)}
+.hero h1 em{font-style:italic;font-variation-settings:'opsz' 144,'wght' 600,'SOFT' 70,'WONK' 1}
+.hero__baseline{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:18px 22px;
+  margin-top:calc(var(--unit)*4);
+}
+.hero__baseline .spec{max-width:26ch}
+.fork{display:grid;gap:1px;background:var(--hairline);border:1px solid var(--hairline)}
+.fork__cell{background:var(--paper);padding:calc(var(--unit)*3)}
+.fork__cell h3{font-size:21px;margin-bottom:6px;font-variation-settings:'opsz' 24,'wght' 600,'SOFT' 20,'WONK' 0}
+.fork__cell p{font-size:var(--t-sm);color:var(--ink-soft);margin:0 0 10px}
+.fork__cell a{font-size:var(--t-sm);font-weight:600}
+@media(min-width:900px){
+  .hero__grid{grid-template-columns:7fr 4fr;gap:calc(var(--unit)*8);align-items:end}
+}
+
+/* ---------- 02 JOB FORK BAND (5 unequal true-trim tiles) ---------- */
+.jobs{display:grid;gap:calc(var(--unit)*5);margin-top:calc(var(--unit)*6)}
+@media(min-width:640px){
+  .jobs{grid-template-columns:repeat(2,1fr)}
+}
+@media(min-width:900px){
+  /* 7/4 asymmetric, five items, deliberately not divisible by the column count */
+  .jobs{grid-template-columns:7fr 4fr 4fr;gap:calc(var(--unit)*5) calc(var(--unit)*5);align-items:start}
+  .jobs > :nth-child(1){grid-column:1;grid-row:1/span 2}
+  .jobs > :nth-child(2){grid-column:2;grid-row:1}
+  .jobs > :nth-child(3){grid-column:3;grid-row:1/span 2}
+  .jobs > :nth-child(4){grid-column:2;grid-row:2}
+  .jobs > :nth-child(5){grid-column:1/span 2;grid-row:3}
+}
+
+/* ---------- 03 SINGLE BIG SPECIMEN ---------- */
+.solo{display:grid;gap:calc(var(--unit)*4)}
+@media(min-width:900px){
+  .solo{grid-template-columns:4fr 7fr;align-items:center;direction:rtl}
+  .solo > *{direction:ltr}
+}
+
+/* ---------- 04 FROM $X ANCHOR ---------- */
+.anchors{border-top:1px solid var(--rule);margin-top:calc(var(--unit)*5)}
+.anchor{
+  display:grid;gap:4px 24px;padding:calc(var(--unit)*3) 0;
+  border-bottom:1px solid var(--hairline);
+  align-items:baseline;
+}
+.anchor__name{font-family:var(--display);font-size:24px;
+  font-variation-settings:'opsz' 30,'wght' 600,'SOFT' 20,'WONK' 0;line-height:1.1}
+.anchor__price{
+  font-family:var(--display);font-size:clamp(28px,5vw,40px);line-height:1;
+  font-variation-settings:'opsz' 144,'wght' 800,'SOFT' 10,'WONK' 1;
+  letter-spacing:-.03em;color:var(--accent);white-space:nowrap;
+}
+.anchor__price small{font-family:var(--body);font-size:12px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px}
+@media(min-width:640px){
+  .anchor{grid-template-columns:1fr auto;grid-template-areas:"name price" "spec price"}
+  .anchor__name{grid-area:name}
+  .anchor .spec{grid-area:spec}
+  .anchor__price{grid-area:price;text-align:right}
+}
+
+/* ---------- 05 PROOF — the one dark movement ---------- */
+.dark{background:var(--ink);color:var(--paper)}
+.dark h2,.dark h3{color:var(--paper)}
+.dark .eyebrow{color:var(--accent-on-ink)}
+.dark .spec{color:rgba(250,245,236,.72)}
+.dark .chapter__side{border-right-color:rgba(250,245,236,.28)}
+.dark .rail__num{color:var(--accent-on-ink)}
+.dark .rail__label{color:rgba(250,245,236,.66)}
+.dark .rail__rule{background:rgba(250,245,236,.28)}
+.dark a{color:var(--accent-on-ink)}
+.figs{display:grid;gap:0;margin-top:calc(var(--unit)*5);border-top:1px solid rgba(250,245,236,.28)}
+.fig{padding:calc(var(--unit)*3) 0;border-bottom:1px solid rgba(250,245,236,.18)}
+.fig__n{font-family:var(--display);font-size:clamp(38px,7vw,64px);line-height:1;letter-spacing:-.04em;
+  font-variation-settings:'opsz' 144,'wght' 800,'SOFT' 10,'WONK' 1;color:var(--paper)}
+.fig__l{font-size:var(--t-spec);letter-spacing:.02em;color:rgba(250,245,236,.72);margin-top:8px}
+@media(min-width:640px){
+  .figs{grid-template-columns:repeat(3,1fr);gap:calc(var(--unit)*4)}
+}
+.quote{
+  font-family:var(--display);font-style:italic;font-size:clamp(21px,3.4vw,30px);line-height:1.32;
+  font-variation-settings:'opsz' 60,'wght' 500,'SOFT' 60,'WONK' 1;
+  margin:calc(var(--unit)*6) 0 0;max-width:30ch;
+}
+.quote footer{font-family:var(--body);font-style:normal;font-size:var(--t-spec);
+  letter-spacing:.02em;color:rgba(250,245,236,.72);margin-top:14px}
+
+/* ---------- 06 QUOTE FORM ---------- */
+.formgrid{display:grid;gap:calc(var(--unit)*5)}
+@media(min-width:900px){.formgrid{grid-template-columns:4fr 7fr;gap:calc(var(--unit)*8)}}
+.field{display:block;margin-bottom:calc(var(--unit)*3)}
+.field > span{display:block;font-size:var(--t-spec);font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px}
+.field input,.field select,.field textarea{
+  width:100%;font-family:var(--body);font-size:var(--t-body);color:var(--ink);
+  background:var(--paper-2);border:1px solid var(--hairline);border-radius:2px;
+  padding:13px 14px;transition:border-color .18s ease-out,background .18s ease-out;
+}
+.dark .field input,.dark .field select,.dark .field textarea{background:rgba(250,245,236,.06);color:var(--paper);border-color:rgba(250,245,236,.3)}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:2px solid var(--accent-deep);outline-offset:2px;border-color:var(--accent-deep);background:var(--white);
+}
+.field textarea{min-height:104px;resize:vertical}
+.two{display:grid;gap:0 calc(var(--unit)*3)}
+@media(min-width:640px){.two{grid-template-columns:1fr 1fr}}
+
+/* ---------- 07 VISIT ---------- */
+.visit{display:grid;gap:calc(var(--unit)*5)}
+@media(min-width:900px){.visit{grid-template-columns:7fr 4fr;gap:calc(var(--unit)*8)}}
+.hours{width:100%;border-collapse:collapse;font-size:var(--t-sm)}
+.hours th,.hours td{text-align:left;padding:10px 0;border-bottom:1px solid var(--hairline);font-weight:400}
+.hours th{font-weight:600;width:52%}
+.plaque{
+  border:1px solid var(--rule);padding:calc(var(--unit)*4);position:relative;background:var(--paper-2);
+}
+.plaque::after{content:"";position:absolute;inset:0;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:translate(6px,6px)}
+
+/* ---------- footer ---------- */
+.foot{background:var(--ink);color:var(--paper);margin-top:0}
+.foot__in{max-width:calc(var(--max) + var(--rail));margin:0 auto;padding:calc(var(--unit)*8) var(--gutter)}
+.foot a{color:var(--paper);text-decoration:none}
+.foot a:hover{color:var(--accent-on-ink);text-decoration:underline}
+.foot__cols{display:grid;gap:calc(var(--unit)*4)}
+@media(min-width:640px){.foot__cols{grid-template-columns:2fr 1fr 1fr}}
+.foot h3{font-size:15px;font-family:var(--body);font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(250,245,236,.66);margin-bottom:12px}
+.foot ul{list-style:none;margin:0;padding:0;font-size:var(--t-sm);line-height:2}
+.foot__mark{font-family:var(--display);font-size:28px;line-height:1;
+  font-variation-settings:'opsz' 40,'wght' 900,'SOFT' 0,'WONK' 0;letter-spacing:-.02em}
+.foot__legal{margin-top:calc(var(--unit)*6);padding-top:calc(var(--unit)*3);
+  border-top:1px solid rgba(250,245,236,.18);font-size:var(--t-spec);color:rgba(250,245,236,.72)}
+
+/* ---------- floating WhatsApp ---------- */
+.wa{
+  position:fixed;right:16px;bottom:16px;z-index:160;
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--accent);color:var(--white);text-decoration:none;
+  font-size:var(--t-sm);font-weight:600;padding:13px 18px;border-radius:2px;
+  border:1px solid var(--accent-deep);
+  transition:background .18s ease-out,transform .18s ease-out;
+}
+.wa:hover{background:var(--accent-deep);color:var(--white);transform:translateY(-2px)}
+.wa svg{width:20px;height:20px;flex:none;fill:currentColor}
+.wa span{display:none}
+@media(min-width:640px){.wa span{display:inline}.wa{right:24px;bottom:24px}}
+
+/* ---------- SPECIMEN STRIP ---------- */
+.strip{background:var(--paper-2);border-top:2px solid var(--ink)}
+.strip__in{max-width:calc(var(--max) + var(--rail));margin:0 auto;padding:calc(var(--unit)*8) var(--gutter) calc(var(--unit)*14)}
+.strip h2{font-size:clamp(26px,4vw,var(--t-h3))}
+.strip section{margin-top:calc(var(--unit)*7)}
+.strip h3{font-size:15px;font-family:var(--body);font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-soft);border-bottom:1px solid var(--rule);
+  padding-bottom:8px;margin-bottom:calc(var(--unit)*3)}
+.sw{display:grid;gap:calc(var(--unit)*2);grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.sw figure{margin:0}
+.sw .chip{height:72px;border:1px solid var(--hairline)}
+.sw figcaption{font-size:12px;line-height:1.5;margin-top:8px;color:var(--ink-soft)}
+.sw figcaption b{display:block;color:var(--ink);font-size:var(--t-spec);letter-spacing:.04em}
+.ramp > div{border-bottom:1px solid var(--hairline-soft);padding:10px 0;display:flex;
+  gap:16px;align-items:baseline;flex-wrap:wrap}
+.ramp .k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);
+  min-width:150px;flex:none}
+.comps{display:grid;gap:calc(var(--unit)*4)}
+@media(min-width:900px){.comps{grid-template-columns:repeat(3,1fr)}}
+.comps .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.state{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.err{border-color:var(--accent-deep)!important;background:var(--white)!important}
+.errmsg{font-size:var(--t-spec);color:var(--accent-deep);margin-top:6px}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="board-banner" role="note">
+  Design Board A — The Chapter Rail (Corner Press, rebuilt from the grid up) — <b>All content is placeholder</b>
+</div>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav">
+  <div class="nav__in">
+    <a class="wordmark" href="#ch-01">AZ&nbsp;Printing<span>Placeholder name · Brampton</span></a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#ch-02" aria-current="page">Services</a>
+      <a href="#ch-04">Rates</a>
+      <a href="#ch-05">Our work</a>
+      <a href="#ch-07">Visit</a>
+    </nav>
+    <a class="nav__call" href="tel:+19050000000">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg>
+      (905) 000-0000
+    </a>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== 01 HERO ===================== -->
+<section class="chapter hero" id="ch-01" aria-labelledby="h-01">
+  <div class="chapter__side">
+    <div class="rail"><span class="rail__num">01</span><span class="rail__label">The shop</span><span class="rail__rule"></span></div>
+  </div>
+  <div class="chapter__body">
+    <div class="hero__grid">
+      <div>
+        <p class="eyebrow">Printing in Brampton · Ray Lawson Blvd</p>
+        <h1>Ink on paper,<br>done <em>properly</em>,<br>since [YEAR].</h1>
+        <div class="hero__baseline">
+          <a class="btn btn--primary" href="#ch-06">Get a free quote</a>
+          <a class="btn btn--ghost" href="tel:+19050000000">Call (905) 000-0000</a>
+          <p class="spec"><b>Placeholder:</b> real turnaround, hours and prices arrive with the client questionnaire.</p>
+        </div>
+      </div>
+
+      <!-- dual-audience fork, right column of the 7/4 split -->
+      <div class="fork">
+        <div class="fork__cell">
+          <h3>Walking in with one job</h3>
+          <p>Wedding cards, invitations, a stack of flyers, a lawn sign for Saturday. Bring a file or bring an idea.</p>
+          <a href="#ch-02">See what we print &rarr;</a>
+        </div>
+        <div class="fork__cell">
+          <h3>Printing every month</h3>
+          <p>Business cards, letterhead, menus, banners — held on file, reprinted on a phone call, invoiced monthly.</p>
+          <a href="#ch-06">Open a shop account &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 02 JOB FORK BAND ===================== -->
+<div class="band-2">
+<section class="chapter" id="ch-02" aria-labelledby="h-02">
+  <div class="chapter__side">
+    <div class="rail"><span class="rail__num">02</span><span class="rail__label">What we print</span><span class="rail__rule"></span></div>
+  </div>
+  <div class="chapter__body">
+    <p class="eyebrow">Five jobs, five shapes</p>
+    <h2 id="h-02">Every job leaves the shop a different size.<br>So does every specimen here.</h2>
+    <p class="prose spec" style="margin-top:16px">Each block below is drawn at the true trim size of the real product — a card is 3.5&thinsp;&times;&thinsp;2, a wedding card is 5&thinsp;&times;&thinsp;7, a banner is 6&thinsp;ft. Placeholder artwork until the shop's own work is photographed.</p>
+
+    <div class="jobs">
+      <!-- 1: wedding card, tall 5:7 -->
+      <a class="trim trim--wedding" href="#ch-06">
+        <div class="trim__paper art-center">
+          <p class="art-sub">Placeholder specimen</p>
+          <div class="art-wed">Aisha<br>&amp;<br>Rehan</div>
+          <div class="art-rule" style="width:60%;margin-inline:auto"></div>
+          <p class="art-sub">Twelfth of Never · Brampton</p>
+        </div>
+        <div class="trim__cap">
+          <h3 class="trim__title">Wedding &amp; shaadi cards</h3>
+          <p class="spec">100 cards &middot; foil or letterpress &middot; envelopes included &middot; <b>from $XX</b></p>
+        </div>
+      </a>
+
+      <!-- 2: business card 3.5:2 -->
+      <a class="trim trim--card" href="#ch-06">
+        <div class="trim__paper">
+          <div class="art-name">[Shop&nbsp;Name]</div>
+          <p class="art-sub">Placeholder &middot; Brampton, ON</p>
+          <div class="art-lines"><i style="width:70%"></i><i style="width:48%"></i></div>
+        </div>
+        <div class="trim__cap">
+          <h3 class="trim__title">Business cards</h3>
+          <p class="spec">500 cards &middot; next day &middot; 16pt matte &middot; <b>from $XX</b></p>
+        </div>
+      </a>
+
+      <!-- 3: lawn sign 4:3 -->
+      <a class="trim trim--sign" href="#ch-06">
+        <div class="trim__paper accent-fill art-center">
+          <div class="art-shout">Open<br>House</div>
+          <p class="art-sub">Sat 1&ndash;4 &middot; placeholder</p>
+        </div>
+        <div class="trim__cap">
+          <h3 class="trim__title">Lawn &amp; coroplast signs</h3>
+          <p class="spec">25 signs &middot; 18&thinsp;&times;&thinsp;24 &middot; H-stakes included &middot; <b>from $XX</b></p>
+        </div>
+      </a>
+
+      <!-- 4: letterhead 8.5:11 -->
+      <a class="trim trim--letter" href="#ch-06">
+        <div class="trim__paper">
+          <div class="art-name" style="font-size:15px">[Shop&nbsp;Name]</div>
+          <div class="art-rule"></div>
+          <div class="art-lines">
+            <i style="width:92%"></i><i style="width:88%"></i><i style="width:95%"></i>
+            <i style="width:60%"></i><i style="width:90%"></i><i style="width:44%"></i>
+          </div>
+        </div>
+        <div class="trim__cap">
+          <h3 class="trim__title">Letterhead &amp; forms</h3>
+          <p class="spec">250 sheets &middot; 24lb bond &middot; NCR available &middot; <b>from $XX</b></p>
+        </div>
+      </a>
+
+      <!-- 5: banner 24:9 -->
+      <a class="trim trim--banner" href="#ch-06">
+        <div class="trim__paper ink-fill art-center">
+          <div class="art-wide">GRAND&nbsp;OPENING</div>
+          <p class="art-sub">6 ft &times; 2 ft placeholder artwork</p>
+        </div>
+        <div class="trim__cap">
+          <h3 class="trim__title">Vinyl banners &amp; large format</h3>
+          <p class="spec">6&thinsp;ft banner &middot; 13oz vinyl &middot; hemmed + grommets &middot; <b>from $XX</b></p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===================== 03 ONE JOB, LARGE ===================== -->
+<section class="chapter" id="ch-03" aria-labelledby="h-03">
+  <div class="chapter__side">
+    <div class="rail"><span class="rail__num">03</span><span class="rail__label">One job, up close</span><span class="rail__rule"></span></div>
+  </div>
+  <div class="chapter__body">
+    <div class="solo">
+      <div>
+        <p class="eyebrow">Job no. 0000 · placeholder</p>
+        <h2 id="h-03">A 6-foot banner for a shop three doors down.</h2>
+        <p class="prose" style="margin-top:16px">Placeholder copy. When the real job photos arrive, this slot holds one piece of work at full width with a factual caption underneath — the specification <em>is</em> the sales argument.</p>
+        <p class="spec"><b>Spec:</b> 72&thinsp;&times;&thinsp;27&thinsp;in &middot; 13oz scrim vinyl &middot; hemmed, 8 grommets &middot; artwork adjusted in-shop &middot; printed and collected same day &middot; <b>from $XX</b></p>
+        <p style="margin-top:22px"><a class="btn btn--ghost" href="#ch-06">Ask about a banner</a></p>
+      </div>
+      <div class="trim trim--banner trim--hoverable">
+        <div class="trim__paper ink-fill art-center">
+          <div class="art-wide">NOW&nbsp;OPEN</div>
+          <p class="art-sub">Placeholder artwork &middot; no client work shown yet</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 04 FROM $X ANCHOR ===================== -->
+<div class="band-2">
+<section class="chapter" id="ch-04" aria-labelledby="h-04">
+  <div class="chapter__side">
+    <div class="rail"><span class="rail__num">04</span><span class="rail__label">What it costs</span><span class="rail__rule"></span></div>
+  </div>
+  <div class="chapter__body">
+    <p class="eyebrow">Starting points, not a price list</p>
+    <h2 id="h-04">Four anchors so you know the neighbourhood.</h2>
+    <p class="prose spec" style="margin-top:16px">Every number below is a placeholder <b>$XX</b> until the shop confirms real ranges. Final price depends on stock, quantity and finishing — the quote comes back the same day.</p>
+
+    <div class="anchors">
+      <div class="anchor">
+        <div class="anchor__name">Business cards</div>
+        <p class="spec">500 &middot; 16pt matte or gloss &middot; next-day pickup</p>
+        <div class="anchor__price"><small>from</small>$XX</div>
+      </div>
+      <div class="anchor">
+        <div class="anchor__name">Flyers</div>
+        <p class="spec">1,000 &middot; 8.5&thinsp;&times;&thinsp;11 &middot; full colour both sides</p>
+        <div class="anchor__price"><small>from</small>$XX</div>
+      </div>
+      <div class="anchor">
+        <div class="anchor__name">Wedding cards</div>
+        <p class="spec">100 &middot; foil or letterpress &middot; envelopes included</p>
+        <div class="anchor__price"><small>from</small>$XX</div>
+      </div>
+      <div class="anchor">
+        <div class="anchor__name">Vinyl banner</div>
+        <p class="spec">6&thinsp;ft &middot; 13oz &middot; hemmed with grommets</p>
+        <div class="anchor__price"><small>from</small>$XX</div>
+      </div>
+    </div>
+    <p style="margin-top:26px"><a class="btn btn--primary" href="#ch-06">Get your number</a></p>
+  </div>
+</section>
+</div>
+
+<!-- ===================== 05 PROOF — the dark movement ===================== -->
+<div class="dark">
+<section class="chapter" id="ch-05" aria-labelledby="h-05">
+  <div class="chapter__side">
+    <div class="rail"><span class="rail__num">05</span><span class="rail__label">Why the shop</span><span class="rail__rule"></span></div>
+  </div>
+  <div class="chapter__body">
+    <p class="eyebrow">Placeholder proof</p>
+    <h2 id="h-05">Numbers first. They are the only claim that survives a second reading.</h2>
+
+    <div class="figs">
+      <div class="fig"><div class="fig__n">00</div><div class="fig__l">years on Ray Lawson Blvd &middot; placeholder</div></div>
+      <div class="fig"><div class="fig__n">00</div><div class="fig__l">Google reviews &middot; placeholder until GBP is live</div></div>
+      <div class="fig"><div class="fig__n">24h</div><div class="fig__l">typical turnaround on standard jobs &middot; to confirm</div></div>
+    </div>
+
+    <blockquote class="quote">
+      &ldquo;Placeholder testimonial. Real reviews go here once the Google Business Profile has been collecting for a month.&rdquo;
+      <footer>— [Customer name], [business], Brampton · <span class="ph">sample text</span></footer>
+    </blockquote>
+    <p style="margin-top:28px"><a class="btn btn--onink" href="#ch-06">Send us the job</a></p>
+  </div>
+</section>
+</div>
+
+<!-- ===================== 06 QUOTE FORM ===================== -->
+<section class="chapter" id="ch-06" aria-labelledby="h-06">
+  <div class="chapter__side">
+    <div class="rail"><span class="rail__num">06</span><span class="rail__label">Get a quote</span><span class="rail__rule"></span></div>
+  </div>
+  <div class="chapter__body">
+    <div class="formgrid">
+      <div>
+        <p class="eyebrow">Five fields, one reply</p>
+        <h2 id="h-06">Tell us the job.<br>We'll price it today.</h2>
+        <p class="spec" style="margin-top:18px">Or skip the form: <a href="tel:+19050000000">(905) 000-0000</a> &middot; <a href="#ch-06">WhatsApp</a> &middot; walk in at 499 Ray Lawson Blvd #24. <b>All contact details are placeholders.</b></p>
+      </div>
+
+      <form action="#formspree-placeholder" method="post" novalidate>
+        <div class="two">
+          <label class="field"><span>Name</span><input type="text" name="name" autocomplete="name" required></label>
+          <label class="field"><span>Phone or email</span><input type="text" name="contact" autocomplete="tel" required></label>
+        </div>
+        <div class="two">
+          <label class="field"><span>What do you need?</span>
+            <select name="job" required>
+              <option>Business cards</option>
+              <option>Flyers &amp; brochures</option>
+              <option>Wedding / shaadi cards</option>
+              <option>Signs &amp; banners</option>
+              <option>Something else</option>
+            </select>
+          </label>
+          <label class="field"><span>Quantity</span><input type="text" name="qty" placeholder="e.g. 500" ></label>
+        </div>
+        <label class="field"><span>Details (size, stock, deadline)</span><textarea name="details"></textarea></label>
+        <button class="btn btn--primary" type="submit">Send the request</button>
+        <p class="spec" style="margin-top:14px">Form is a mockup — no Formspree endpoint exists yet.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 07 VISIT ===================== -->
+<div class="band-2">
+<section class="chapter" id="ch-07" aria-labelledby="h-07">
+  <div class="chapter__side">
+    <div class="rail"><span class="rail__num">07</span><span class="rail__label">Come by</span><span class="rail__rule"></span></div>
+  </div>
+  <div class="chapter__body">
+    <div class="visit">
+      <div>
+        <p class="eyebrow">Unit 24, the one with the door propped open</p>
+        <h2 id="h-07">499 Ray Lawson Blvd&nbsp;#24<br>Brampton, ON&nbsp;L6Y&nbsp;4E3</h2>
+        <table class="hours">
+          <caption class="spec" style="text-align:left;padding-bottom:10px">Hours below are placeholders.</caption>
+          <tbody>
+            <tr><th scope="row">Monday &ndash; Friday</th><td>0:00 &ndash; 0:00</td></tr>
+            <tr><th scope="row">Saturday</th><td>0:00 &ndash; 0:00</td></tr>
+            <tr><th scope="row">Sunday</th><td>Closed</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="plaque">
+        <p class="eyebrow" style="margin-bottom:10px">Direct lines</p>
+        <p style="font-size:var(--t-lead);margin-bottom:8px"><a href="tel:+19050000000">(905) 000-0000</a></p>
+        <p class="spec">WhatsApp: same number &middot; placeholder<br>Email: hello@[domain-to-buy].ca</p>
+        <p style="margin-top:18px"><a class="btn btn--ghost" href="tel:+19050000000">Call the shop</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="foot">
+  <div class="foot__in">
+    <div class="foot__cols">
+      <div>
+        <div class="foot__mark">AZ Printing</div>
+        <p class="spec" style="color:rgba(250,245,236,.72);margin-top:12px;max-width:34ch">
+          Placeholder wordmark and placeholder shop description. A family print shop on Ray Lawson Blvd, Brampton.
+        </p>
+      </div>
+      <div>
+        <h3>Pages</h3>
+        <ul>
+          <li><a href="#ch-02">Services</a></li>
+          <li><a href="#ch-04">Rates</a></li>
+          <li><a href="#ch-05">About</a></li>
+          <li><a href="#ch-06">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Reach us</h3>
+        <ul>
+          <li><a href="tel:+19050000000">(905) 000-0000</a></li>
+          <li><a href="#ch-06">WhatsApp</a></li>
+          <li>499 Ray Lawson Blvd&nbsp;#24</li>
+          <li>Brampton, ON L6Y 4E3</li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot__legal">Design board only &middot; every name, number, price, hour and review on this page is a placeholder &middot; &copy; [YEAR] [Shop Name]</p>
+  </div>
+</footer>
+
+<a class="wa" href="#ch-06" aria-label="Chat with the shop on WhatsApp (placeholder link)">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1s-.6.8-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5s-.6-1.4-.8-1.9c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2-.3 3.4a11 11 0 0 0 4.6 4.3c1.8.7 2.5.8 3.4.7.6-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/></svg>
+  <span>WhatsApp us</span>
+</a>
+
+<!-- ===================== SPECIMEN STRIP ===================== -->
+<div class="strip">
+  <div class="strip__in">
+    <p class="eyebrow">Board A · specimen strip</p>
+    <h2>The system underneath the page</h2>
+
+    <section>
+      <h3>Palette &amp; measured contrast</h3>
+      <div class="sw">
+        <figure><div class="chip" style="background:#FAF5EC"></div><figcaption><b>#FAF5EC paper</b>page base · ink on it 14.54:1 AAA</figcaption></figure>
+        <figure><div class="chip" style="background:#F3ECDF"></div><figcaption><b>#F3ECDF paper-2</b>bands, fields · ink 13.44:1 AAA</figcaption></figure>
+        <figure><div class="chip" style="background:#2A2119"></div><figcaption><b>#2A2119 ink</b>text, dark movement, footer</figcaption></figure>
+        <figure><div class="chip" style="background:#5C5347"></div><figcaption><b>#5C5347 ink-soft</b>spec lines · 6.95:1 on paper AAA</figcaption></figure>
+        <figure><div class="chip" style="background:#B84A26"></div><figcaption><b>#B84A26 accent</b>display ≥28px, fills, eyebrows ≥18px only · 4.78:1 paper / 4.27:1 paper-2 → never a link</figcaption></figure>
+        <figure><div class="chip" style="background:#96391B"></div><figcaption><b>#96391B accent-deep</b>ALL links + focus · 6.67:1 paper, 6.17:1 paper-2</figcaption></figure>
+        <figure><div class="chip" style="background:#E8763A"></div><figcaption><b>#E8763A accent-on-ink</b>5.33:1 on ink — value raised, chroma kept</figcaption></figure>
+        <figure><div class="chip" style="background:#FFFFFF"></div><figcaption><b>#FFFFFF white</b>on accent (5.19:1) and specimen stock only</figcaption></figure>
+        <figure><div class="chip" style="background:#F2C14E;position:relative"><span style="position:absolute;inset:0;display:grid;place-items:center;font-size:26px;color:#2A2119">&#10005;</span></div><figcaption><b>#F2C14E marigold — DROPPED</b>1.55:1 on paper. Not text, not an icon, not a rule.</figcaption></figure>
+      </div>
+    </section>
+
+    <section>
+      <h3>Type ramp — jumping, not even (13 / 15 / 17 / 21 / 34 / 56 / 92)</h3>
+      <div class="ramp">
+        <div><span class="k">Fraunces 92 · opsz 144</span><span style="font-family:var(--display);font-size:clamp(38px,9vw,92px);line-height:1;letter-spacing:-.025em;font-variation-settings:'opsz' 144,'wght' 700,'SOFT' 40,'WONK' 1">Hand-set</span></div>
+        <div><span class="k">Fraunces 56 · opsz 96</span><span style="font-family:var(--display);font-size:clamp(32px,6.4vw,56px);line-height:1.04;font-variation-settings:'opsz' 96,'wght' 650,'SOFT' 30,'WONK' 1">Section heading</span></div>
+        <div><span class="k">Fraunces 34 · opsz 40</span><span style="font-family:var(--display);font-size:34px;font-variation-settings:'opsz' 40,'wght' 600,'SOFT' 20,'WONK' 0">Subheading</span></div>
+        <div><span class="k">Inter 21 · lead 1.5</span><span style="font-size:21px">A lead paragraph, one step above body.</span></div>
+        <div><span class="k">Inter 17 · body 1.65</span><span style="font-size:17px">Body copy at 17/1.65 on a 62ch measure — the book-page setting.</span></div>
+        <div><span class="k">Inter 15 · small</span><span style="font-size:15px">Navigation, buttons, secondary UI.</span></div>
+        <div><span class="k">Inter 13 · spec line</span><span class="spec">500 business cards &middot; next day &middot; 16pt matte &middot; <b>from $XX</b></span></div>
+        <div><span class="k">Inter 12 · eyebrow</span><span class="eyebrow" style="margin:0">Printing in Brampton</span></div>
+        <div><span class="k">Fraunces 14 · opsz 14</span><span style="font-family:var(--display);font-size:17px;font-variation-settings:'opsz' 14,'wght' 400,'SOFT' 0,'WONK' 0">Same family, different letterform — small optical size, no wonk.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Components &amp; states</h3>
+      <div class="comps">
+        <div>
+          <p class="state">Buttons — 2px radius, zero box-shadow</p>
+          <div class="row"><a class="btn btn--primary" href="#ch-06">Primary</a><span class="state">default</span></div>
+          <div class="row"><a class="btn btn--primary" href="#ch-06" style="background:var(--accent-deep);transform:translateY(-1px)">Primary</a><span class="state">hover / pressed</span></div>
+          <div class="row"><a class="btn btn--ghost" href="#ch-06">Ghost</a><span class="state">secondary</span></div>
+          <div class="row"><a class="btn btn--ghost" href="#ch-06" style="background:var(--ink);color:var(--paper)">Ghost</a><span class="state">hover</span></div>
+          <div class="row"><a class="btn btn--primary" href="#ch-06" style="outline:2px solid var(--accent-deep);outline-offset:3px">Primary</a><span class="state">focus-visible</span></div>
+        </div>
+        <div>
+          <p class="state">True-trim specimen — offset ink rule, no blur</p>
+          <div class="trim trim--card trim--hoverable" style="max-width:280px">
+            <div class="trim__paper">
+              <div class="art-name">[Shop&nbsp;Name]</div>
+              <p class="art-sub">Placeholder &middot; 3.5 &times; 2 in</p>
+              <div class="art-lines"><i style="width:70%"></i><i style="width:48%"></i></div>
+            </div>
+            <div class="trim__cap">
+              <p class="spec">500 cards &middot; 16pt matte &middot; <b>from $XX</b></p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="state">Form fields</p>
+          <label class="field"><span>Default</span><input type="text" value="Placeholder"></label>
+          <label class="field"><span>Focus (simulated)</span><input type="text" value="Placeholder" style="outline:2px solid var(--accent-deep);outline-offset:2px;border-color:var(--accent-deep);background:var(--white)"></label>
+          <label class="field"><span>Error</span><input type="text" class="err" value="" aria-invalid="true"><span class="errmsg">We need a phone number or an email.</span></label>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Layout signature</h3>
+      <p class="prose spec">96px chapter rail from 900px up, carrying 01–07 numerals in Fraunces 900 and a continuous 1px ink rule at 30% · asymmetric 7/4 splits that flip side between sections · five job tiles against a three-column frame so the grid cannot resolve into thirds · everything snapped to an 8px baseline · radius 0 except 2px on buttons · no centred max-width:720px block anywhere in the file.</p>
+    </section>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"[PLACEHOLDER] AZ Printing and Signs","image":"","telephone":"+1-905-000-0000","address":{"@type":"PostalAddress","streetAddress":"499 Ray Lawson Blvd #24","addressLocality":"Brampton","addressRegion":"ON","postalCode":"L6Y 4E3","addressCountry":"CA"},"url":"https://example.invalid/placeholder","priceRange":"$$","description":"PLACEHOLDER schema for design board A. Not for production."}
+</script>
+
+<script>
+/* banner height -> sticky offsets, so the nav never hides under it at 360px */
+(function(){
+  var b=document.querySelector('.board-banner');
+  function set(){document.documentElement.style.setProperty('--banner-h',b.offsetHeight+'px');}
+  set();window.addEventListener('resize',set);
+})();
+</script>
+</body>
+</html>

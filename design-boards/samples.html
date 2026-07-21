@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample work &mdash; slideshow &amp; projects</title><meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600..900;1,9..144,600..900&family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400..500&family=Familjen+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --flame:#FF4D1C;        /* display + graphics ONLY, never small text */
+  --accent:#D92B0E;       /* buttons, links, small accent text — AA */
+  --accent-deep:#B01F04;  /* hover / pressed */
+  --ink:#14100F;          /* 18.9:1 on white */
+  --ink-soft:#5C5650;
+  --surface:#fff;
+  --surface-2:#F6F4F2;
+  --border:#E7E3DF;
+  --c:#00AEEF; --m:#EC008C; --y:#FFD400;   /* press inks — motif only */
+
+  /* three roles: display = character · body = reading · ui = interface */
+  --display:'Fraunces',Georgia,serif;
+  --body:'Literata',Georgia,serif;
+  --ui:'Familjen Grotesk',system-ui,sans-serif;
+
+  --ease:cubic-bezier(.16,.84,.44,1);
+  --out:cubic-bezier(.22,1,.36,1);
+  --maxw:1180px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--surface-2);color:var(--ink);font-family:var(--body);
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1{font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:24px}
+.flag{background:repeating-linear-gradient(45deg,#111 0 12px,#f5c518 12px 24px);color:#fff;
+  font-size:11px;font-weight:600;letter-spacing:.08em;text-align:center;padding:7px 14px;
+  text-transform:uppercase;font-family:var(--ui)}
+.flag span{background:#111;padding:2px 8px;border-radius:6px}
+.intro{padding:52px 0 26px}
+.intro h1{font-size:clamp(30px,5vw,48px);margin-bottom:14px}
+.intro h1 em{font-style:italic;color:var(--flame)}
+.intro p{color:var(--ink-soft);max-width:64ch;margin:0 0 10px}
+.intro strong{color:var(--ink)}
+.sec{font-family:var(--ui);font-size:12px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-soft);margin:44px 0 16px;padding-bottom:10px;
+  border-bottom:2px solid var(--ink)}
+.grid{display:grid;gap:22px}
+@media(min-width:760px){.grid{grid-template-columns:repeat(2,1fr)}.cell--w{grid-column:span 2}}
+.cell{margin:0}
+.stage{position:relative;aspect-ratio:16/10;border-radius:18px;overflow:hidden;
+  background:linear-gradient(158deg,#fff,var(--surface-2));border:1px solid var(--border);
+  display:grid;place-items:center;padding:5%}
+.cell--w .stage{aspect-ratio:21/9}
+figcaption{font-family:var(--ui);font-size:12px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-soft);margin-top:14px}
+.plate{opacity:.8!important;transform:none!important}
+.reg{opacity:.45!important}
+.piece__art{padding:0!important;background:none!important;min-height:0!important;display:contents!important}
+.end{padding:34px 0 90px;color:var(--ink-soft);font-size:15px}
+/* Shared: soft paper sheen + layered shadow so pieces read as physical objects
+   rather than flat rectangles. Two shadows — a tight contact one and a wide
+   ambient one — is what makes something look like it's sitting on a surface. */
+.pc{position:relative;box-shadow:0 2px 4px rgba(20,16,15,.10),0 26px 60px rgba(20,16,15,.20)}
+.pc::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(118deg,rgba(255,255,255,.42) 0%,transparent 34%,transparent 66%,rgba(20,16,15,.05) 100%)}
+
+/* slide 2 — business cards, one face up, one face down */
+.bcards{position:relative;width:min(74%,520px);aspect-ratio:7/4.4}
+.bcard{position:absolute;width:72%;aspect-ratio:3.5/2;border-radius:9px;background:#fff;
+  padding:7% 8%;display:flex;flex-direction:column;justify-content:space-between}
+.bcard--back{right:0;top:0;transform:rotate(6deg);background:var(--ink);color:#fff;
+  align-items:center;justify-content:center}
+.bcard--front{left:0;bottom:0;transform:rotate(-3deg)}
+.bcard__n{font-family:var(--display);font-weight:800;font-size:clamp(15px,2.6vw,30px);
+  letter-spacing:-.035em;line-height:.98}
+.bcard__r{width:26px;height:3px;background:var(--flame);margin-top:5%;border-radius:2px}
+.bcard__d{font-family:var(--ui);font-size:clamp(6px,.92vw,10px);font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);line-height:1.9}
+.bcard__mark{font-family:var(--display);font-weight:900;font-size:clamp(13px,2.1vw,24px);
+  letter-spacing:-.04em;color:var(--flame)}
+
+/* slide 3 — wedding invitation, botanical.
+   The floral garland is drawn as SVG so it scales without ever going soft. */
+.invite{width:min(40%,252px);aspect-ratio:5/7;border-radius:3px;
+  background:radial-gradient(120% 90% at 50% 0%,#FFFEFA,#FBF6EA 68%,#F7EFDE);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:11% 9%}
+.invite__vine{position:absolute;left:8%;right:8%;height:auto}
+.invite__vine--t{top:6%}
+.invite__vine--b{bottom:6%;transform:scaleY(-1)}
+.invite__pre,.invite__post{font-family:var(--ui);font-size:clamp(5px,.78vw,8px);font-weight:600;
+  letter-spacing:.32em;text-transform:uppercase;color:#A8925C}
+.invite__n{font-family:var(--display);font-style:italic;font-weight:600;
+  font-size:clamp(20px,3.3vw,40px);letter-spacing:-.015em;line-height:1.08;margin:6% 0 5%;
+  background:linear-gradient(128deg,#8C6B18 6%,#F2E2A6 30%,#B08829 50%,#F7EBC2 70%,#8C6B18 96%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.invite__amp{display:block;font-size:.4em;margin:3% 0;font-style:italic;opacity:.85}
+.invite__rule{display:flex;align-items:center;gap:6px;width:52%;margin:2% 0 6%}
+.invite__rule i{flex:1;height:1px;background:linear-gradient(90deg,transparent,#C9A227)}
+.invite__rule i+i{background:linear-gradient(90deg,#C9A227,transparent)}
+.invite__rule b{width:4px;height:4px;flex:none;background:#C9A227;transform:rotate(45deg)}
+
+/* slide 4 — vinyl banner, properly composed:
+   ink panel + monogram on the left, message stack on the right, info bar beneath.
+   The MS-Paint look came from having no composition at all — just text on a gradient. */
+.banner{width:min(92%,660px);aspect-ratio:24/9;border-radius:4px;overflow:hidden;
+  display:grid;grid-template-columns:26% 1fr;color:#fff;background:var(--accent-deep)}
+.banner__panel{background:var(--ink);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8%;padding:6% 3%;position:relative}
+.banner__panel::after{content:"";position:absolute;right:0;top:8%;bottom:8%;width:1px;
+  background:rgba(255,255,255,.16)}
+.banner__mono{font-family:var(--display);font-weight:900;font-size:clamp(15px,2.9vw,34px);
+  letter-spacing:-.05em;color:var(--flame);line-height:1}
+.banner__vert{font-family:var(--ui);font-size:clamp(5px,.78vw,8px);font-weight:700;
+  letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+.banner__main{position:relative;display:flex;flex-direction:column;justify-content:center;
+  padding:5% 6%;background:
+    linear-gradient(112deg,var(--accent-deep) 0%,var(--flame) 58%,#FF7C41 100%)}
+.banner__main::before{content:"";position:absolute;inset:0;opacity:.16;
+  background:repeating-linear-gradient(58deg,#fff 0 1px,transparent 1px 13px)}
+.banner__k{position:relative;font-family:var(--ui);font-size:clamp(5px,.8vw,9px);font-weight:700;
+  letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.86);margin-bottom:2%}
+.banner__t{position:relative;font-family:var(--display);font-weight:900;
+  font-size:clamp(17px,4.1vw,50px);letter-spacing:-.04em;line-height:.9}
+.banner__badge{position:absolute;right:5%;top:12%;background:#fff;color:var(--accent-deep);
+  font-family:var(--ui);font-weight:700;font-size:clamp(5px,.86vw,10px);letter-spacing:.1em;
+  text-transform:uppercase;padding:.5em .9em;border-radius:999px;transform:rotate(4deg);
+  box-shadow:0 4px 12px rgba(0,0,0,.22)}
+.banner__bar{position:relative;margin-top:auto;display:flex;flex-wrap:wrap;gap:4% 7%;
+  align-items:center;padding-top:3.4%;border-top:1px solid rgba(255,255,255,.34);
+  font-family:var(--ui);font-size:clamp(5px,.82vw,10px);font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(255,255,255,.94)}
+.grommet{position:absolute;width:2.6%;aspect-ratio:1;border-radius:50%;z-index:4;
+  background:radial-gradient(circle at 34% 30%,#fff,#B9B3AC 62%,#6E6862);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.55),0 1px 2px rgba(0,0,0,.3)}
+.grommet:nth-of-type(1){top:6%;left:1.8%}.grommet:nth-of-type(2){top:6%;right:1.8%}
+.grommet:nth-of-type(3){bottom:6%;left:1.8%}.grommet:nth-of-type(4){bottom:6%;right:1.8%}
+
+/* slide 5 — restaurant flyer / menu */
+.flyer{width:min(40%,240px);aspect-ratio:1/1.414;border-radius:3px;background:#fff;
+  padding:9%;display:flex;flex-direction:column;gap:6%}
+.flyer__k{font-family:var(--ui);font-size:clamp(5px,.8vw,8px);font-weight:700;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--flame)}
+.flyer__t{font-family:var(--display);font-weight:900;font-size:clamp(15px,2.5vw,28px);
+  letter-spacing:-.035em;line-height:.98}
+.flyer__rows{display:flex;flex-direction:column;gap:9%;margin-top:auto}
+.flyer__row{display:flex;align-items:baseline;gap:6px}
+.flyer__row i{flex:1;height:1px;background:var(--border)}
+.flyer__row b{font-family:var(--ui);font-size:clamp(5px,.82vw,9px);font-weight:700;color:var(--ink)}
+.flyer__row s{flex:none;width:34%;height:5px;border-radius:3px;background:#EDEAE6;text-decoration:none}
+.flyer__band{height:12%;border-radius:3px;background:linear-gradient(100deg,var(--accent-deep),var(--flame))}
+.reg::before,.reg::after{content:"";position:absolute;background:var(--ink)}
+.reg::before{left:50%;top:0;bottom:0;width:1px;transform:translateX(-50%)}
+.reg::after{top:50%;left:0;right:0;height:1px;transform:translateY(-50%)}
+.reg--tl{top:16px;left:16px}.reg--tr{top:16px;right:16px}
+.reg--bl{bottom:16px;left:16px}.reg--br{bottom:16px;right:16px}
+
+/* ---------- project artwork ---------- */
+/* lawn sign */
+.lawn{width:min(86%,220px);aspect-ratio:4/3.4;display:flex;flex-direction:column;align-items:center}
+.lawn__b{width:100%;flex:1;background:#fff;border-radius:3px;overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:0 2px 3px rgba(20,16,15,.1),0 16px 34px rgba(20,16,15,.16)}
+.lawn__top{background:var(--accent-deep);color:#fff;font-family:var(--ui);font-weight:700;
+  font-size:clamp(7px,1.2vw,12px);letter-spacing:.24em;text-transform:uppercase;
+  text-align:center;padding:7% 0}
+.lawn__mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5%;padding:6%}
+.lawn__n{font-family:var(--display);font-weight:900;font-size:clamp(11px,1.9vw,20px);
+  letter-spacing:-.03em;line-height:1;text-align:center}
+.lawn__p{font-family:var(--ui);font-size:clamp(6px,1vw,10px);font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.lawn__legs{display:flex;gap:38%;width:64%;height:16%}
+.lawn__legs i{flex:1;background:linear-gradient(90deg,#C7C2BB,#9A948C)}
+
+/* apparel */
+.tee{width:min(84%,215px)}
+.tee svg{width:100%;height:auto;filter:drop-shadow(0 16px 30px rgba(20,16,15,.18))}
+.tee__print{font-family:var(--display);font-weight:900;letter-spacing:-.04em}
+
+/* sticker sheet */
+.stick{width:min(88%,235px);aspect-ratio:1/1.06;background:#fff;border-radius:4px;padding:8%;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:9%;place-content:center;
+  box-shadow:0 2px 3px rgba(20,16,15,.1),0 18px 36px rgba(20,16,15,.16)}
+.stick i{aspect-ratio:1;border-radius:50%;display:grid;place-content:center;
+  font-family:var(--display);font-weight:900;font-size:clamp(7px,1.15vw,13px);
+  letter-spacing:-.03em;outline:1.5px dashed rgba(20,16,15,.22);outline-offset:3px}
+.stick i:nth-child(3n+1){background:var(--flame);color:#fff}
+.stick i:nth-child(3n+2){background:var(--ink);color:var(--flame)}
+.stick i:nth-child(3n+3){background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.stick i:nth-child(even){border-radius:6px}
+
+/* event poster */
+.poster{width:min(58%,170px);aspect-ratio:1/1.414;background:var(--ink);color:#fff;
+  border-radius:3px;padding:9%;display:flex;flex-direction:column;overflow:hidden;
+  box-shadow:0 2px 4px rgba(20,16,15,.14),0 22px 44px rgba(20,16,15,.24)}
+.poster__k{font-family:var(--ui);font-size:clamp(5px,.8vw,8px);font-weight:700;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--flame)}
+.poster__t{font-family:var(--display);font-weight:900;font-size:clamp(15px,2.6vw,30px);
+  letter-spacing:-.045em;line-height:.88;margin-top:6%}
+.poster__disc{width:46%;aspect-ratio:1;border-radius:50%;margin:auto 0 6% auto;
+  background:linear-gradient(140deg,var(--flame),var(--accent-deep));
+  display:grid;place-content:center;text-align:center;
+  font-family:var(--ui);font-weight:700;font-size:clamp(5px,.86vw,9px);
+  letter-spacing:.14em;text-transform:uppercase}
+.poster__f{font-family:var(--ui);font-size:clamp(5px,.78vw,8px);font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6);
+  padding-top:5%;border-top:1px solid rgba(255,255,255,.22)}
+.piece__t{position:relative;z-index:2;font-family:var(--display);font-size:27px;font-weight:800;letter-spacing:-.03em}
+.piece__p{position:relative;z-index:2;font-size:15px;color:var(--ink-soft);margin-top:6px}
+.piece__f{position:relative;z-index:2;margin-top:16px;font-size:13px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+/* each tile links to its own service page — those pages come after launch,
+   and each one can rank separately for "<service> printing Brampton" */
+.piece__go{position:relative;z-index:2;margin-top:10px;font-size:13px;font-weight:600;
+  color:var(--ink-soft);opacity:0;transform:translateY(6px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.piece:hover .piece__go,.piece:focus-visible .piece__go{opacity:1;transform:none}
+@media(min-width:700px){.show{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){.show{grid-template-columns:repeat(4,1fr)}}
+
+
+</style></head><body>
+<div class="flag">Sample work &nbsp;&middot;&nbsp; <span>Invented businesses &mdash; illustrative only, never shown as real jobs</span></div>
+<div class="wrap intro">
+  <h1>Slideshow pieces and <em>past projects.</em></h1>
+  <p>The first five take turns in the homepage hero. The last four are the &ldquo;recent work&rdquo; tiles further down &mdash; <strong>all nine are different pieces</strong>.</p>
+  <p>The wedding card is now botanical rather than a bordered rectangle, and the banner has a real layout &mdash; ink panel, monogram, message stack, info bar &mdash; instead of text sitting on a gradient.</p>
+</div>
+<div class="wrap">
+  <p class="sec">Homepage slideshow &mdash; 5 pieces</p>
+  <div class="grid">
+  <figure class="cell cell--w"><div class="stage"><div class="reg reg--tl"></div><div class="reg reg--tr"></div>
+          <div class="reg reg--bl"></div><div class="reg reg--br"></div>
+          <div class="sheet" id="sheet">
+            <div class="plate plate--c"></div><div class="plate plate--m"></div><div class="plate plate--y"></div>
+            <div class="sheet__t">YOUR WORK,<br>PRINTED SHARP</div>
+            <div class="sheet__s">Cyan · Magenta · Yellow · Black</div>
+          </div></div><figcaption>Four-colour press · CMYK</figcaption></figure>
+  <figure class="cell"><div class="stage"><div class="bcards">
+            <div class="bcard bcard--back pc"><span class="bcard__mark">SR</span></div>
+            <div class="bcard bcard--front pc">
+              <div><div class="bcard__n">Sandhu<br>Realty</div><div class="bcard__r"></div></div>
+              <div class="bcard__d">Priya Sandhu · Broker<br>905 555 0142 · Brampton</div>
+            </div>
+          </div></div><figcaption>Business cards · 16pt matte</figcaption></figure>
+  <figure class="cell"><div class="stage"><div class="invite pc">
+            <svg class="invite__vine invite__vine--t" viewBox="0 0 240 54" fill="none" aria-hidden="true">
+              <defs>
+                <path id="leaf" d="M0 0c7-5.4 17.5-5.4 24.5 0-7 5.4-17.5 5.4-24.5 0z"/>
+                <g id="bloom">
+                  <g fill="#EED9A0" fill-opacity=".85" stroke="#B08829" stroke-width=".7">
+                    <ellipse cx="0" cy="-5.6" rx="2.9" ry="5.6"/>
+                    <ellipse cx="0" cy="-5.6" rx="2.9" ry="5.6" transform="rotate(72)"/>
+                    <ellipse cx="0" cy="-5.6" rx="2.9" ry="5.6" transform="rotate(144)"/>
+                    <ellipse cx="0" cy="-5.6" rx="2.9" ry="5.6" transform="rotate(216)"/>
+                    <ellipse cx="0" cy="-5.6" rx="2.9" ry="5.6" transform="rotate(288)"/>
+                  </g>
+                  <circle r="2.1" fill="#B08829"/>
+                </g>
+              </defs>
+              <g stroke="#B08829" stroke-width="1" stroke-linecap="round">
+                <path d="M120 50C99 47 74 39 52 25 42 18 33 13 24 10"/>
+                <path d="M120 50c21-3 46-11 68-25 10-7 19-12 28-15"/>
+                <path d="M120 50c-8-6-13-13-15-21M120 50c8-6 13-13 15-21"/>
+              </g>
+              <g fill="#D9C48A" fill-opacity=".7" stroke="#B08829" stroke-width=".65">
+                <use href="#leaf" transform="translate(96 40) rotate(196)"/>
+                <use href="#leaf" transform="translate(74 32) rotate(208)"/>
+                <use href="#leaf" transform="translate(52 22) rotate(220)"/>
+                <use href="#leaf" transform="translate(88 30) rotate(150)"/>
+                <use href="#leaf" transform="translate(64 18) rotate(160)"/>
+                <use href="#leaf" transform="translate(144 40) rotate(-16)"/>
+                <use href="#leaf" transform="translate(166 32) rotate(-28)"/>
+                <use href="#leaf" transform="translate(188 22) rotate(-40)"/>
+                <use href="#leaf" transform="translate(152 30) rotate(-150)"/>
+                <use href="#leaf" transform="translate(176 18) rotate(-160)"/>
+                <use href="#leaf" transform="translate(112 26) rotate(-108)"/>
+                <use href="#leaf" transform="translate(128 26) rotate(-72)"/>
+              </g>
+              <use href="#bloom" transform="translate(120 20) scale(1.15)"/>
+              <use href="#bloom" transform="translate(84 33) scale(.8)"/>
+              <use href="#bloom" transform="translate(156 33) scale(.8)"/>
+              <use href="#bloom" transform="translate(40 17) scale(.62)"/>
+              <use href="#bloom" transform="translate(200 17) scale(.62)"/>
+            </svg>
+            <span class="invite__pre">Together with their families</span>
+            <div class="invite__n">Aisha<span class="invite__amp">and</span>Bilal</div>
+            <div class="invite__rule"><i></i><b></b><i></i></div>
+            <span class="invite__post">Fourteenth September</span>
+            <svg class="invite__vine invite__vine--b" viewBox="0 0 240 54" fill="none" aria-hidden="true">
+              <g stroke="#B08829" stroke-width="1" stroke-linecap="round">
+                <path d="M120 50c-16-2-35-8-52-19M120 50c16-2 35-8 52-19"/>
+              </g>
+              <g fill="#D9C48A" fill-opacity=".7" stroke="#B08829" stroke-width=".65">
+                <use href="#leaf" transform="translate(98 42) rotate(198)"/>
+                <use href="#leaf" transform="translate(78 34) rotate(210)"/>
+                <use href="#leaf" transform="translate(142 42) rotate(-18)"/>
+                <use href="#leaf" transform="translate(162 34) rotate(-30)"/>
+              </g>
+              <use href="#bloom" transform="translate(120 40) scale(.72)"/>
+            </svg>
+          </div></div><figcaption>Wedding cards · gold foil</figcaption></figure>
+  <figure class="cell cell--w"><div class="stage"><div class="banner pc">
+            <i class="grommet"></i><i class="grommet"></i><i class="grommet"></i><i class="grommet"></i>
+            <div class="banner__panel">
+              <span class="banner__mono">TK</span>
+              <span class="banner__vert">Est. 2019</span>
+            </div>
+            <div class="banner__main">
+              <span class="banner__badge">20% off</span>
+              <span class="banner__k">Tandoori Kitchen</span>
+              <div class="banner__t">GRAND<br>OPENING</div>
+              <div class="banner__bar">
+                <span>Sat 14 Sept · 10am</span>
+                <span>905 555 0142</span>
+                <span>Ray Lawson Blvd</span>
+              </div>
+            </div>
+          </div></div><figcaption>Vinyl banner · 3 × 6 ft</figcaption></figure>
+  <figure class="cell"><div class="stage"><div class="flyer pc">
+            <span class="flyer__k">Now serving</span>
+            <div class="flyer__t">Lunch<br>Specials</div>
+            <div class="flyer__rows">
+              <div class="flyer__row"><b>Butter chicken</b><i></i><b>$14</b></div>
+              <div class="flyer__row"><b>Lamb karahi</b><i></i><b>$17</b></div>
+              <div class="flyer__row"><b>Daal &amp; naan</b><i></i><b>$11</b></div>
+            </div>
+            <div class="flyer__band"></div>
+          </div></div><figcaption>Flyers · 100 double-sided</figcaption></figure>
+  </div>
+  <p class="sec">Recent work tiles &mdash; 4 projects</p>
+  <div class="grid">
+  <figure class="cell"><div class="stage"><div class="lawn">
+              <div class="lawn__b">
+                <div class="lawn__top">Open House</div>
+                <div class="lawn__mid">
+                  <div class="lawn__n">42 Maple<br>Grove Ave</div>
+                  <div class="lawn__p">Sun 1–4pm</div>
+                </div>
+              </div>
+              <div class="lawn__legs"><i></i><i></i></div>
+            </div></div><figcaption>Lawn signs</figcaption></figure>
+  <figure class="cell"><div class="stage"><div class="tee">
+              <svg viewBox="0 0 200 180" aria-hidden="true">
+                <path d="M68 14 44 26 18 44l16 26 18-11v90c0 3 2 5 5 5h86c3 0 5-2 5-5V59l18 11 16-26-26-18-24-12h-20a16 16 0 0 1-32 0H68z"
+                      fill="#1D3B6E" stroke="#14294D" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M68 14a32 32 0 0 0 64 0" fill="none" stroke="#14294D" stroke-width="2"/>
+                <text class="tee__print" x="100" y="104" text-anchor="middle" font-size="26" fill="#FFD400">SHARMA</text>
+                <text class="tee__print" x="100" y="126" text-anchor="middle" font-size="15" fill="#fff" letter-spacing="2">PLUMBING</text>
+                <circle cx="100" cy="140" r="3" fill="#FFD400"/>
+              </svg>
+            </div></div><figcaption>Team uniforms</figcaption></figure>
+  <figure class="cell"><div class="stage"><div class="stick"><i>AZ</i><i>★</i><i>24h</i><i>♥</i><i>AZ</i><i>★</i><i>NEW</i><i>AZ</i><i>♥</i></div></div><figcaption>Stickers &amp; decals</figcaption></figure>
+  <figure class="cell"><div class="stage"><div class="poster">
+              <span class="poster__k">Brampton Mela</span>
+              <div class="poster__t">SUMMER<br>NIGHTS</div>
+              <div class="poster__disc">Aug<br>23</div>
+              <div class="poster__f">Chinguacousy Park</div>
+            </div></div><figcaption>Event posters</figcaption></figure>
+  </div>
+  <p class="end">All placeholders for real photographs of your uncle&rsquo;s actual jobs.</p>
+</div>
+</body></html>

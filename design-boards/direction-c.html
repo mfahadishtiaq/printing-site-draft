@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design Board C — The Job Ticket | AZ Printing and Signs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DIRECTION C — "THE JOB TICKET"
+   Premium = precision. Rules, not cards. Specs, not adjectives.
+   ============================================================ */
+:root{
+  --trace:#F4F1EA;
+  --kraft:#DCCDAE;
+  --ink:#16150F;
+  --mono:#6A665C;
+  --press:#14503C;
+  --press-deep:#0E3B2C;
+  --reg:#C8102E;
+
+  --f-display:'Archivo',system-ui,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,monospace;
+
+  --t-label:12px; --t-spec:14px; --t-body:16px; --t-lead:19px;
+  --t-h3:clamp(22px,3.2vw,30px); --t-h2:clamp(28px,5.4vw,46px);
+  --t-h1:clamp(36px,8.5vw,78px);
+
+  --rule-hair:.5px; --rule:1px; --rule-sec:2px; --rule-docket:4px;
+
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s6:24px;--s8:32px;
+  --s12:48px;--s16:64px;--s24:96px;--s32:128px;
+
+  --frame:16px;
+  --banner:34px;
+  --max:1120px;
+}
+@media (min-width:900px){ :root{ --frame:24px; --banner:30px; } }
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--trace);
+  color:var(--ink);
+  font-family:var(--f-display);
+  font-variation-settings:'wdth' 100,'wght' 400;
+  font-size:var(--t-body);
+  line-height:1.6;
+  font-variant-numeric:tabular-nums;
+  padding-top:var(--banner);
+  overflow-x:hidden;
+}
+img,svg{max-width:100%;display:block}
+a{color:var(--press);text-underline-offset:3px;text-decoration-thickness:1px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:2px solid var(--press);outline-offset:3px;
+}
+h1,h2,h3{margin:0;line-height:1.05;letter-spacing:-.02em}
+h1{font-size:var(--t-h1);font-variation-settings:'wdth' 125,'wght' 700}
+h2{font-size:var(--t-h2);font-variation-settings:'wdth' 112,'wght' 600}
+h3{font-size:var(--t-h3);font-variation-settings:'wdth' 100,'wght' 600;line-height:1.15}
+p{margin:0 0 var(--s4)}
+
+/* ---------- mono docket language ---------- */
+.lbl{
+  font-family:var(--f-mono);font-size:var(--t-label);font-weight:500;
+  text-transform:uppercase;letter-spacing:.08em;line-height:1.3;color:var(--mono);
+  margin:0;
+}
+.lbl--ink{color:var(--ink)}
+.lbl--reg{color:var(--reg)}
+.val{font-size:var(--t-spec);font-variation-settings:'wdth' 100,'wght' 500;line-height:1.45}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* PLACEHOLDER flag — registration red, error/attention register only */
+.ph{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--reg);border:var(--rule) solid var(--reg);padding:1px 4px;white-space:nowrap;
+  display:inline-block;vertical-align:2px;margin-left:6px;line-height:1.4;
+}
+
+/* ---------- board banner ---------- */
+.board-banner{
+  position:fixed;top:0;left:0;right:0;z-index:90;height:var(--banner);
+  background:var(--reg);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  text-align:center;padding:0 8px;
+}
+
+/* ---------- the printed-sheet frame + register marks ---------- */
+.sheet-frame{
+  position:fixed;z-index:80;pointer-events:none;
+  top:calc(var(--banner) + var(--frame));left:var(--frame);
+  right:var(--frame);bottom:var(--frame);
+  border:var(--rule) solid var(--ink);
+}
+.regmark{position:absolute;width:22px;height:22px}
+.regmark::before,.regmark::after{content:"";position:absolute;background:var(--reg)}
+.regmark::before{left:0;right:0;top:50%;height:1px}
+.regmark::after{top:0;bottom:0;left:50%;width:1px}
+.regmark.tl{top:-11px;left:-11px}
+.regmark.tr{top:-11px;right:-11px}
+.regmark.bl{bottom:-11px;left:-11px}
+.regmark.br{bottom:-11px;right:-11px}
+
+.sheet{padding:0 calc(var(--frame) + 14px)}
+@media (min-width:900px){ .sheet{padding:0 calc(var(--frame) + 28px)} }
+.wrap{max-width:var(--max);margin:0 auto;width:100%}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:var(--banner);z-index:70;background:var(--trace);
+  border-bottom:var(--rule) solid var(--ink);
+}
+.nav-in{display:flex;align-items:stretch;gap:var(--s4);min-height:60px}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);padding:10px 0}
+.mark-box{
+  width:34px;height:34px;border:var(--rule-sec) solid var(--ink);display:grid;place-items:center;
+  font-variation-settings:'wdth' 125,'wght' 700;font-size:15px;letter-spacing:0;line-height:1;
+}
+.mark-txt{display:flex;flex-direction:column;line-height:1.1}
+.mark-txt b{font-variation-settings:'wdth' 112,'wght' 700;font-size:14px;letter-spacing:.01em}
+.mark-txt span{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;color:var(--mono);text-transform:uppercase}
+.nav-links{display:none;margin-left:auto;align-items:stretch;gap:0}
+.nav-links a{
+  display:flex;align-items:center;padding:0 16px;text-decoration:none;color:var(--ink);
+  font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  border-left:var(--rule) solid var(--ink);
+}
+.nav-links a:hover{background:var(--ink);color:var(--trace)}
+.nav-links a[aria-current]{box-shadow:inset 0 -3px 0 var(--press)}
+.nav-call{
+  margin-left:auto;display:flex;align-items:center;gap:8px;text-decoration:none;
+  background:var(--press);color:var(--trace);padding:0 14px;
+  font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+}
+.nav-call:hover{background:var(--press-deep)}
+@media (min-width:900px){
+  .nav-links{display:flex}
+  .nav-call{margin-left:0;border-left:var(--rule) solid var(--ink)}
+}
+
+/* ---------- section scaffolding ---------- */
+.sec{border-top:var(--rule-sec) solid var(--ink);padding:var(--s16) 0}
+.sec--docket{border-top-width:var(--rule-docket)}
+.sec-head{display:flex;align-items:baseline;gap:var(--s4);margin-bottom:var(--s8);flex-wrap:wrap}
+.sec-no{font-family:var(--f-mono);font-size:var(--t-label);color:var(--reg);letter-spacing:.08em}
+.sec-note{margin-left:auto;max-width:34ch}
+
+/* ---------- LEDGER (the core structure) ---------- */
+.ledger{border-top:var(--rule) solid var(--ink)}
+.row{
+  display:grid;grid-template-columns:1fr;gap:var(--s2) var(--s6);
+  padding:var(--s6) 0;border-bottom:var(--rule) solid var(--ink);
+}
+.row:hover{background:rgba(22,21,15,.035)}
+.row-key{display:flex;flex-direction:column;gap:var(--s2)}
+.row-body>h3{margin-bottom:var(--s2)}
+.row-body p{margin-bottom:var(--s3);max-width:62ch}
+@media (min-width:900px){
+  .row{grid-template-columns:140px minmax(0,1fr) auto;align-items:start}
+  .row--flip{grid-template-columns:minmax(0,1fr) 140px}
+  .row--flip .row-key{order:2;text-align:right;align-items:flex-end}
+}
+
+/* spec pairs — label left / value right */
+.specs{list-style:none;margin:0;padding:0;border-top:var(--rule-hair) solid rgba(22,21,15,.45)}
+.specs li{
+  display:flex;justify-content:space-between;align-items:baseline;gap:var(--s4);
+  padding:6px 0;border-bottom:var(--rule-hair) solid rgba(22,21,15,.28);
+}
+.specs .val{text-align:right}
+.specs--tight li{padding:4px 0}
+
+/* trim-mark thumbnail */
+.trim{position:relative;width:100%;max-width:150px}
+.trim svg{width:100%;height:auto;border:var(--rule) solid var(--ink)}
+.trim::before,.trim::after{content:"";position:absolute;background:var(--reg);opacity:.85}
+.trim::before{top:-6px;left:-6px;width:12px;height:1px}
+.trim::after{top:-6px;left:-6px;width:1px;height:12px}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;text-decoration:none;border:var(--rule) solid var(--press);
+  background:var(--press);color:var(--trace);padding:14px 26px;border-radius:0;cursor:pointer;
+  font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  transition:background 180ms ease-out,color 180ms ease-out;
+}
+.btn:hover{background:var(--press-deep);border-color:var(--press-deep)}
+.btn--ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn--ghost:hover{background:var(--ink);color:var(--trace);border-color:var(--ink)}
+.btn[disabled],.btn--disabled{opacity:.42;pointer-events:none}
+.btn-row{display:flex;flex-wrap:wrap;gap:var(--s3)}
+
+/* ---------- HERO ---------- */
+.hero{padding:var(--s12) 0 var(--s16)}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:var(--s8)}
+@media (min-width:900px){
+  .hero-grid{grid-template-columns:minmax(0,1fr) 300px;gap:var(--s16);align-items:end}
+}
+.hero h1{margin:var(--s4) 0 var(--s6)}
+.hero h1 em{font-style:normal;color:var(--press)}
+.hero-lead{font-size:var(--t-lead);max-width:46ch;font-variation-settings:'wdth' 100,'wght' 400}
+.docket{border-top:var(--rule-docket) solid var(--ink)}
+.docket-title{padding:10px 0;border-bottom:var(--rule) solid var(--ink)}
+.hero-fork{
+  display:grid;grid-template-columns:1fr;gap:0;margin-top:var(--s12);
+  border-top:var(--rule) solid var(--ink);
+}
+@media (min-width:640px){ .hero-fork{grid-template-columns:1fr 1fr} }
+.fork{
+  padding:var(--s6) var(--s6) var(--s6) 0;border-bottom:var(--rule) solid var(--ink);
+}
+@media (min-width:640px){
+  .fork+.fork{border-left:var(--rule) solid var(--ink);padding-left:var(--s6)}
+}
+.fork h3{margin:var(--s2) 0 var(--s3)}
+.fork p{font-size:var(--t-spec);color:var(--ink);max-width:40ch}
+
+/* ---------- KRAFT BAND ---------- */
+.band{
+  background:var(--kraft);
+  background-image:
+    repeating-linear-gradient(90deg,rgba(22,21,15,.035) 0 1px,transparent 1px 3px),
+    repeating-linear-gradient(0deg,rgba(22,21,15,.028) 0 1px,transparent 1px 4px);
+  border-top:var(--rule-docket) solid var(--ink);border-bottom:var(--rule-docket) solid var(--ink);
+  margin:0;padding:var(--s16) 0;
+}
+.band .lbl{color:var(--ink)} /* mono grey is not AA on kraft — labels go full ink */
+.band .specs{border-top-color:rgba(22,21,15,.55)}
+.band .specs li{border-bottom-color:rgba(22,21,15,.32)}
+.band .row:hover{background:rgba(22,21,15,.05)}
+.band .row{border-bottom-color:var(--ink)}
+.band .ledger{border-top-color:var(--ink)}
+
+.feature{display:grid;grid-template-columns:1fr;gap:var(--s8)}
+.feature-art{border:var(--rule-sec) solid var(--ink);background:var(--trace);position:relative}
+.feature-art svg{width:100%;height:auto}
+.feature-cap{display:grid;grid-template-columns:1fr;gap:var(--s6)}
+@media (min-width:640px){ .feature-cap{grid-template-columns:1fr 1fr} }
+
+/* ---------- PROOF ---------- */
+.proof{display:grid;grid-template-columns:1fr;gap:0;border-top:var(--rule) solid var(--ink)}
+@media (min-width:640px){ .proof{grid-template-columns:repeat(2,1fr)} }
+@media (min-width:900px){ .proof{grid-template-columns:repeat(4,1fr)} }
+.proof-cell{padding:var(--s6) var(--s4) var(--s6) 0;border-bottom:var(--rule) solid var(--ink)}
+@media (min-width:640px){
+  .proof-cell+.proof-cell{border-left:var(--rule) solid var(--ink);padding-left:var(--s4)}
+}
+.proof-fig{
+  font-variation-settings:'wdth' 112,'wght' 700;font-size:clamp(30px,6vw,46px);
+  line-height:1;letter-spacing:-.03em;display:block;margin:var(--s3) 0 var(--s2);
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- FORM ---------- */
+.form-grid{display:grid;grid-template-columns:1fr;gap:var(--s8)}
+@media (min-width:900px){ .form-grid{grid-template-columns:minmax(0,1fr) 320px;gap:var(--s16)} }
+.field{display:block;margin-bottom:var(--s6);border-top:var(--rule) solid var(--ink);padding-top:var(--s2)}
+.field .lbl{display:flex;justify-content:space-between;gap:var(--s3);margin-bottom:6px}
+.field input,.field select,.field textarea{
+  width:100%;font-family:var(--f-display);font-size:var(--t-body);color:var(--ink);
+  background:var(--kraft);border:var(--rule) solid var(--ink);border-radius:0;
+  padding:12px 14px;font-variation-settings:'wdth' 100,'wght' 400;
+}
+.field textarea{min-height:104px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:#6E6650}
+.field--err input{border-color:var(--reg);border-width:var(--rule-sec)}
+.err-msg{display:flex;gap:6px;align-items:center;margin-top:6px;color:var(--reg);
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.04em}
+.form-note{font-size:var(--t-spec);color:var(--mono)}
+
+/* ---------- FOOTER ---------- */
+.foot{background:var(--ink);color:var(--trace);border-top:var(--rule-docket) solid var(--ink);padding:var(--s16) 0 var(--s24)}
+.foot a{color:var(--trace)}
+.foot .lbl{color:#A7A292}
+.foot .ledger,.foot .row{border-color:rgba(244,241,234,.35)}
+.foot .specs{border-top-color:rgba(244,241,234,.35)}
+.foot .specs li{border-bottom-color:rgba(244,241,234,.22)}
+.foot-grid{display:grid;grid-template-columns:1fr;gap:var(--s8)}
+@media (min-width:640px){ .foot-grid{grid-template-columns:repeat(2,1fr);gap:var(--s12)} }
+@media (min-width:900px){ .foot-grid{grid-template-columns:repeat(3,1fr)} }
+
+/* ---------- floating WhatsApp ---------- */
+.wa{
+  position:fixed;right:calc(var(--frame) + 10px);bottom:calc(var(--frame) + 10px);z-index:75;
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  background:var(--press);color:var(--trace);border:var(--rule-sec) solid var(--ink);
+  padding:12px 16px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+}
+.wa:hover{background:var(--press-deep)}
+.wa svg{width:18px;height:18px;fill:currentColor}
+.wa span{display:none}
+@media (min-width:640px){ .wa span{display:inline} }
+
+/* ---------- SPECIMEN ---------- */
+.specimen{background:var(--ink);color:var(--trace);padding:var(--s16) 0 var(--s24)}
+.specimen .lbl{color:#A7A292}
+.specimen h2,.specimen h3{color:var(--trace)}
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:var(--s4)}
+.chip{border:var(--rule) solid rgba(244,241,234,.4);padding:0}
+.chip-fill{height:78px;border-bottom:var(--rule) solid rgba(244,241,234,.4)}
+.chip-meta{padding:10px 12px}
+.chip-meta .val{color:var(--trace)}
+.scale-row{display:flex;align-items:baseline;gap:var(--s6);border-bottom:var(--rule-hair) solid rgba(244,241,234,.3);padding:var(--s3) 0}
+.scale-row .lbl{min-width:118px;flex:0 0 auto}
+.scale-row .sample{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--trace)}
+.states{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--s6)}
+.state-box{border:var(--rule) solid rgba(244,241,234,.4);padding:var(--s6);background:var(--trace);color:var(--ink)}
+.state-box.on-kraft{background:var(--kraft)}
+.state-box .lbl{color:var(--mono)}
+.state-box.on-kraft .lbl{color:var(--ink)}
+.hr-demo{display:grid;gap:var(--s4);margin-top:var(--s6)}
+.hr-demo div{background:var(--trace)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:var(--s4);top:calc(var(--banner) + 4px);z-index:99;background:var(--ink);color:var(--trace);padding:8px 12px}
+</style>
+</head>
+<body>
+
+<div class="board-banner" role="note">Design Board C — The Job Ticket — All content is placeholder</div>
+
+<div class="sheet-frame" aria-hidden="true">
+  <span class="regmark tl"></span><span class="regmark tr"></span>
+  <span class="regmark bl"></span><span class="regmark br"></span>
+</div>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="sheet"><div class="wrap">
+    <nav class="nav-in" aria-label="Primary">
+      <a class="mark" href="#top">
+        <span class="mark-box" aria-hidden="true">AZ</span>
+        <span class="mark-txt"><b>AZ PRINTING &amp; SIGNS</b><span>Brampton, ON · Est. placeholder</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#services" aria-current="page">Services</a>
+        <a href="#rates">Rates</a>
+        <a href="#proof">About</a>
+        <a href="#quote">Contact</a>
+      </div>
+      <a class="nav-call" href="tel:+19050000000">
+        <span aria-hidden="true">☏</span> (905) 000-0000
+      </a>
+    </nav>
+  </div></div>
+</header>
+
+<main id="main">
+
+<!-- ================= HERO / DOCKET HEADER ================= -->
+<section class="sheet" id="top">
+ <div class="wrap hero">
+  <div class="hero-grid">
+    <div>
+      <p class="lbl lbl--reg">Job ticket № 0001 — homepage</p>
+      <h1>Every job leaves here <em>measured.</em></h1>
+      <p class="hero-lead">Stock, weight, finish, quantity, turnaround, price band — stated before you ask.
+        A Brampton print shop that writes it down.</p>
+      <div class="btn-row" style="margin-top:var(--s8)">
+        <a class="btn" href="#quote">Start a job ticket</a>
+        <a class="btn btn--ghost" href="tel:+19050000000">Call (905) 000-0000</a>
+      </div>
+    </div>
+
+    <aside class="docket" aria-label="Shop specifications">
+      <p class="lbl lbl--ink docket-title">Shop docket</p>
+      <ul class="specs" style="border-top:0">
+        <li><span class="lbl">Open</span><span class="val num">MON–SAT 9–7 <span class="ph">placeholder</span></span></li>
+        <li><span class="lbl">Turnaround</span><span class="val">Same-day available <span class="ph">unverified</span></span></li>
+        <li><span class="lbl">Minimum</span><span class="val">None</span></li>
+        <li><span class="lbl">Languages</span><span class="val">Pending Q26 <span class="ph">tbc</span></span></li>
+        <li><span class="lbl">Address</span><span class="val">499 Ray Lawson Blvd #24</span></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- dual-audience fork -->
+  <div class="hero-fork">
+    <div class="fork">
+      <p class="lbl lbl--reg">Route A</p>
+      <h3>One job, once</h3>
+      <p>Wedding &amp; shaadi cards, invitations, a lawn sign, 100 flyers. Walk in, or send the file — priced on the spot.</p>
+      <p><a href="#services">See walk-in work →</a></p>
+    </div>
+    <div class="fork">
+      <p class="lbl lbl--reg">Route B</p>
+      <h3>Repeat business printing</h3>
+      <p>Cards, brochures, banners, coroplast, apparel on a standing spec sheet, re-run on a phone call.</p>
+      <p><a href="#rates">See trade rates →</a></p>
+    </div>
+  </div>
+ </div>
+</section>
+
+<!-- ================= SERVICES LEDGER ================= -->
+<section class="sheet" id="services">
+ <div class="wrap sec sec--docket">
+  <div class="sec-head">
+    <span class="sec-no">§ 01</span>
+    <h2>The work, specified</h2>
+    <p class="lbl sec-note">Every line states stock, quantity, finish and turnaround. Nothing here is a description.</p>
+  </div>
+
+  <div class="ledger">
+
+    <article class="row">
+      <div class="row-key">
+        <p class="lbl">Item 01</p>
+        <div class="trim">
+          <svg viewBox="0 0 150 88" role="img" aria-label="Placeholder artwork: business card, typographic"><rect width="150" height="88" fill="#F4F1EA"/><rect x="12" y="14" width="126" height="60" fill="#DCCDAE"/><rect x="12" y="14" width="126" height="8" fill="#14503C"/><text x="22" y="46" font-family="Archivo,sans-serif" font-size="15" font-weight="700" fill="#16150F">AZ</text><rect x="22" y="52" width="60" height="2" fill="#16150F"/><rect x="22" y="58" width="40" height="2" fill="#6A665C"/></svg>
+        </div>
+      </div>
+      <div class="row-body">
+        <h3>Business cards</h3>
+        <p>Trimmed on the guillotine here, not shipped in from a broker.</p>
+        <ul class="specs specs--tight">
+          <li><span class="lbl">Stock</span><span class="val">16pt matte laminate</span></li>
+          <li><span class="lbl">Qty</span><span class="val num">100 / 500 / 1,000</span></li>
+          <li><span class="lbl">Finish</span><span class="val">Matte · gloss · soft-touch · spot UV</span></li>
+          <li><span class="lbl">Turnaround</span><span class="val">Next business day</span></li>
+          <li><span class="lbl lbl--ink">From</span><span class="val num">$00 / 500 <span class="ph">placeholder</span></span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="row">
+      <div class="row-key">
+        <p class="lbl">Item 02</p>
+        <div class="trim">
+          <svg viewBox="0 0 150 88" role="img" aria-label="Placeholder artwork: flyer, typographic"><rect width="150" height="88" fill="#F4F1EA"/><rect x="34" y="8" width="82" height="72" fill="#fff" stroke="#16150F"/><rect x="42" y="16" width="66" height="18" fill="#14503C"/><rect x="42" y="40" width="66" height="2" fill="#16150F"/><rect x="42" y="47" width="52" height="2" fill="#6A665C"/><rect x="42" y="54" width="58" height="2" fill="#6A665C"/><rect x="42" y="64" width="28" height="8" fill="#C8102E"/></svg>
+        </div>
+      </div>
+      <div class="row-body">
+        <h3>Flyers &amp; brochures</h3>
+        <p>Full-bleed, folded and counted before you collect them.</p>
+        <ul class="specs specs--tight">
+          <li><span class="lbl">Stock</span><span class="val">100lb gloss text · 80lb uncoated</span></li>
+          <li><span class="lbl">Sizes</span><span class="val num">8.5×11 · 5.5×8.5 · tri-fold</span></li>
+          <li><span class="lbl">Qty</span><span class="val num">50 – 10,000</span></li>
+          <li><span class="lbl">Turnaround</span><span class="val num">24–48 hrs <span class="ph">unverified</span></span></li>
+          <li><span class="lbl lbl--ink">From</span><span class="val num">$00 / 500 <span class="ph">placeholder</span></span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="row row--flip">
+      <div class="row-key">
+        <p class="lbl">Item 03</p>
+        <div class="trim" style="margin-left:auto">
+          <svg viewBox="0 0 150 88" role="img" aria-label="Placeholder artwork: vinyl banner"><rect width="150" height="88" fill="#F4F1EA"/><rect x="10" y="26" width="130" height="36" fill="#14503C"/><circle cx="16" cy="44" r="3" fill="#F4F1EA"/><circle cx="134" cy="44" r="3" fill="#F4F1EA"/><rect x="26" y="38" width="70" height="6" fill="#F4F1EA"/><rect x="26" y="48" width="44" height="4" fill="#DCCDAE"/></svg>
+        </div>
+      </div>
+      <div class="row-body">
+        <h3>Banners &amp; signage</h3>
+        <p>Grommets every 2 ft, hemmed edges, wind-slits on request.</p>
+        <ul class="specs specs--tight">
+          <li><span class="lbl">Material</span><span class="val">13oz vinyl · 4mm coroplast · 3mm ACM</span></li>
+          <li><span class="lbl">Sizes</span><span class="val num">2×4 ft up to 4×20 ft</span></li>
+          <li><span class="lbl">Finish</span><span class="val">Hemmed + grommeted</span></li>
+          <li><span class="lbl">Turnaround</span><span class="val num">Same day under 3×6 ft <span class="ph">unverified</span></span></li>
+          <li><span class="lbl lbl--ink">From</span><span class="val num">$00 / sq ft <span class="ph">placeholder</span></span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="row">
+      <div class="row-key">
+        <p class="lbl">Item 04</p>
+        <div class="trim">
+          <svg viewBox="0 0 150 88" role="img" aria-label="Placeholder artwork: wedding card with foil rule"><rect width="150" height="88" fill="#F4F1EA"/><rect x="44" y="6" width="62" height="76" fill="#DCCDAE" stroke="#16150F"/><rect x="52" y="18" width="46" height="1.5" fill="#C8102E"/><text x="75" y="48" text-anchor="middle" font-family="Archivo,sans-serif" font-style="italic" font-size="16" fill="#16150F">A &amp; Z</text><rect x="52" y="62" width="46" height="1.5" fill="#C8102E"/></svg>
+        </div>
+      </div>
+      <div class="row-body">
+        <h3>Wedding &amp; shaadi cards</h3>
+        <p>Foil, emboss, laser-cut and insert sets. Proof approved by you before the run.</p>
+        <ul class="specs specs--tight">
+          <li><span class="lbl">Stock</span><span class="val">250–350gsm textured · pearlescent</span></li>
+          <li><span class="lbl">Finish</span><span class="val">Gold/silver foil · emboss · laser-cut</span></li>
+          <li><span class="lbl">Qty</span><span class="val num">100 – 2,000 sets</span></li>
+          <li><span class="lbl">Turnaround</span><span class="val num">7–10 days <span class="ph">unverified</span></span></li>
+          <li><span class="lbl lbl--ink">From</span><span class="val num">$0.00 / card <span class="ph">placeholder</span></span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="row">
+      <div class="row-key">
+        <p class="lbl">Item 05</p>
+        <div class="trim">
+          <svg viewBox="0 0 150 88" role="img" aria-label="Placeholder artwork: printed apparel"><rect width="150" height="88" fill="#F4F1EA"/><path d="M45 18 L62 10 L88 10 L105 18 L98 30 L92 26 L92 78 L58 78 L58 26 L52 30 Z" fill="#DCCDAE" stroke="#16150F"/><rect x="66" y="38" width="18" height="18" fill="#14503C"/></svg>
+        </div>
+      </div>
+      <div class="row-body">
+        <h3>Apparel &amp; DTF</h3>
+        <p>Workwear, team kit, event tees — one piece or two hundred.</p>
+        <ul class="specs specs--tight">
+          <li><span class="lbl">Method</span><span class="val">DTF · DTG · vinyl · embroidery</span></li>
+          <li><span class="lbl">Min qty</span><span class="val num">1</span></li>
+          <li><span class="lbl">Placement</span><span class="val">Front · back · sleeve · left chest</span></li>
+          <li><span class="lbl">Turnaround</span><span class="val num">3–5 days <span class="ph">unverified</span></span></li>
+          <li><span class="lbl lbl--ink">From</span><span class="val num">$00 / piece <span class="ph">placeholder</span></span></li>
+        </ul>
+      </div>
+    </article>
+
+  </div>
+ </div>
+</section>
+
+<!-- ================= KRAFT BAND: FEATURE + RATES LEDGER ================= -->
+<section class="band" id="rates">
+ <div class="sheet"><div class="wrap">
+
+  <div class="sec-head">
+    <span class="sec-no">§ 02</span>
+    <h2>Job 0042 — and what it cost</h2>
+    <p class="lbl sec-note">Rate bands only. Exact price comes from your file, your stock, your quantity.</p>
+  </div>
+
+  <div class="feature">
+    <div class="feature-art">
+      <svg viewBox="0 0 900 460" role="img" aria-label="Placeholder specimen: printed poster artwork, typographic only">
+        <rect width="900" height="460" fill="#F4F1EA"/>
+        <g fill="none" stroke="#16150F" stroke-width="1" opacity=".28">
+          <path d="M0 60 H900 M0 400 H900 M60 0 V460 M840 0 V460"/>
+        </g>
+        <text x="60" y="150" font-family="Archivo,sans-serif" font-weight="700" font-size="86" fill="#16150F" letter-spacing="-3">RAY LAWSON</text>
+        <text x="60" y="230" font-family="Archivo,sans-serif" font-weight="700" font-size="86" fill="#14503C" letter-spacing="-3">MARKET DAYS</text>
+        <rect x="60" y="262" width="780" height="4" fill="#16150F"/>
+        <text x="60" y="310" font-family="IBM Plex Mono,monospace" font-size="20" fill="#6A665C" letter-spacing="3">SAT · 09:00 — 17:00 · PLACEHOLDER EVENT</text>
+        <rect x="60" y="340" width="180" height="40" fill="#C8102E"/>
+        <text x="150" y="367" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="16" fill="#F4F1EA" letter-spacing="2">SAMPLE</text>
+        <g stroke="#C8102E" stroke-width="1">
+          <path d="M20 30 H44 M32 18 V42 M856 30 H880 M868 18 V42 M20 430 H44 M32 418 V442 M856 430 H880 M868 418 V442"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="feature-cap">
+      <ul class="specs">
+        <li><span class="lbl">Job</span><span class="val num">0042 <span class="ph">fictional</span></span></li>
+        <li><span class="lbl">Item</span><span class="val">18×24 event poster</span></li>
+        <li><span class="lbl">Stock</span><span class="val">100lb silk cover</span></li>
+        <li><span class="lbl">Qty</span><span class="val num">250</span></li>
+      </ul>
+      <ul class="specs">
+        <li><span class="lbl">Finish</span><span class="val">Full bleed, trimmed</span></li>
+        <li><span class="lbl">Proof</span><span class="val">PDF, approved in 2 hrs</span></li>
+        <li><span class="lbl">Turnaround</span><span class="val num">Next day</span></li>
+        <li><span class="lbl">Total</span><span class="val num">$000.00 <span class="ph">placeholder</span></span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ledger" style="margin-top:var(--s16)">
+    <div class="row">
+      <div class="row-key"><p class="lbl lbl--ink">Band 01</p></div>
+      <div class="row-body"><h3>Business cards</h3><p style="margin:0">500, 16pt matte laminate, next day.</p></div>
+      <p class="val num" style="font-size:22px;font-variation-settings:'wdth' 112,'wght' 700">from $00</p>
+    </div>
+    <div class="row">
+      <div class="row-key"><p class="lbl lbl--ink">Band 02</p></div>
+      <div class="row-body"><h3>Flyers 8.5×11</h3><p style="margin:0">500, 100lb gloss text, double-sided.</p></div>
+      <p class="val num" style="font-size:22px;font-variation-settings:'wdth' 112,'wght' 700">from $00</p>
+    </div>
+    <div class="row">
+      <div class="row-key"><p class="lbl lbl--ink">Band 03</p></div>
+      <div class="row-body"><h3>Vinyl banner</h3><p style="margin:0">3×6 ft, 13oz, hemmed + grommeted.</p></div>
+      <p class="val num" style="font-size:22px;font-variation-settings:'wdth' 112,'wght' 700">from $00</p>
+    </div>
+    <div class="row">
+      <div class="row-key"><p class="lbl lbl--ink">Band 04</p></div>
+      <div class="row-body"><h3>Lawn signs</h3><p style="margin:0">25, 4mm coroplast, H-stakes included.</p></div>
+      <p class="val num" style="font-size:22px;font-variation-settings:'wdth' 112,'wght' 700">from $00</p>
+    </div>
+    <p class="lbl" style="padding:var(--s4) 0 0;color:var(--ink)">
+      All figures above are $00 placeholders <span class="ph">not real pricing</span> — real bands arrive with questionnaire Part 2.
+    </p>
+  </div>
+
+ </div></div>
+</section>
+
+<!-- ================= PROOF ================= -->
+<section class="sheet" id="proof">
+ <div class="wrap sec">
+  <div class="sec-head">
+    <span class="sec-no">§ 03</span>
+    <h2>Checkable claims only</h2>
+    <p class="lbl sec-note">No adjectives. Four numbers, each one verifiable, each one currently unfilled.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-cell">
+      <p class="lbl">Google rating</p>
+      <span class="proof-fig">0.0</span>
+      <p class="val" style="color:var(--mono)">from 000 reviews <span class="ph">placeholder</span></p>
+    </div>
+    <div class="proof-cell">
+      <p class="lbl">Years on Ray Lawson</p>
+      <span class="proof-fig">00</span>
+      <p class="val" style="color:var(--mono)">under one family <span class="ph">placeholder</span></p>
+    </div>
+    <div class="proof-cell">
+      <p class="lbl">Same-day jobs / week</p>
+      <span class="proof-fig">00</span>
+      <p class="val" style="color:var(--mono)">average, last quarter <span class="ph">placeholder</span></p>
+    </div>
+    <div class="proof-cell">
+      <p class="lbl">Quote response</p>
+      <span class="proof-fig">00<span style="font-size:.5em"> min</span></span>
+      <p class="val" style="color:var(--mono)">business hours <span class="ph">placeholder</span></p>
+    </div>
+  </div>
+ </div>
+</section>
+
+<!-- ================= QUOTE FORM ================= -->
+<section class="sheet" id="quote">
+ <div class="wrap sec sec--docket">
+  <div class="sec-head">
+    <span class="sec-no">§ 04</span>
+    <h2>Open a job ticket</h2>
+    <p class="lbl sec-note">Five fields. Reply with a written spec and a price band, not a call-back promise.</p>
+  </div>
+
+  <div class="form-grid">
+    <form action="https://formspree.io/f/PLACEHOLDER" method="post" novalidate>
+      <label class="field" for="f-name">
+        <span class="lbl lbl--ink">Field 01 / Name <span class="lbl lbl--reg">required</span></span>
+        <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+      </label>
+      <label class="field" for="f-contact">
+        <span class="lbl lbl--ink">Field 02 / Phone or email <span class="lbl lbl--reg">required</span></span>
+        <input id="f-contact" name="contact" type="text" autocomplete="tel" placeholder="(000) 000-0000" required>
+      </label>
+      <label class="field" for="f-job">
+        <span class="lbl lbl--ink">Field 03 / Job type</span>
+        <select id="f-job" name="job">
+          <option>Business cards</option><option>Flyers &amp; brochures</option>
+          <option>Banners &amp; signage</option><option>Wedding &amp; shaadi cards</option>
+          <option>Apparel &amp; DTF</option><option>Something else</option>
+        </select>
+      </label>
+      <label class="field" for="f-qty">
+        <span class="lbl lbl--ink">Field 04 / Quantity &amp; deadline</span>
+        <input id="f-qty" name="qty" type="text" placeholder="e.g. 500, needed Friday">
+      </label>
+      <label class="field field--err" for="f-detail">
+        <span class="lbl lbl--ink">Field 05 / Spec or question</span>
+        <textarea id="f-detail" name="detail" placeholder="Size, stock, finish — or just describe it and we'll spec it."></textarea>
+        <span class="err-msg" role="note"><span aria-hidden="true">✕</span> Error state shown for the board — this is what a validation message looks like.</span>
+      </label>
+      <div class="btn-row" style="margin-top:var(--s8)">
+        <button class="btn" type="submit">Submit ticket</button>
+        <a class="btn btn--ghost" href="tel:+19050000000">Or call the shop</a>
+      </div>
+      <p class="form-note" style="margin-top:var(--s6)">Formspree endpoint is a placeholder — this form does not send.</p>
+    </form>
+
+    <aside>
+      <p class="lbl lbl--ink docket-title" style="border-top:var(--rule-docket) solid var(--ink)">Counter docket</p>
+      <ul class="specs" style="border-top:0">
+        <li><span class="lbl">Phone</span><span class="val"><a href="tel:+19050000000">(905) 000-0000</a> <span class="ph">fake</span></span></li>
+        <li><span class="lbl">WhatsApp</span><span class="val"><a href="https://wa.me/10000000000">Message the shop</a> <span class="ph">fake</span></span></li>
+        <li><span class="lbl">Email</span><span class="val">hello@example-placeholder.ca <span class="ph">fake</span></span></li>
+        <li><span class="lbl">Address</span><span class="val">499 Ray Lawson Blvd #24<br>Brampton, ON L6Y 4E3</span></li>
+        <li><span class="lbl">Parking</span><span class="val">Free, at the unit door <span class="ph">unverified</span></span></li>
+        <li><span class="lbl">File types</span><span class="val num">PDF · AI · PSD · JPG (300dpi)</span></li>
+      </ul>
+    </aside>
+  </div>
+ </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot">
+ <div class="sheet"><div class="wrap">
+  <p class="lbl lbl--reg" style="margin-bottom:var(--s6)">End of sheet — AZ Printing &amp; Signs · Brampton</p>
+  <div class="foot-grid">
+    <div>
+      <p class="lbl">Shop</p>
+      <ul class="specs">
+        <li><span class="lbl">Address</span><span class="val">499 Ray Lawson Blvd #24</span></li>
+        <li><span class="lbl">City</span><span class="val">Brampton, ON L6Y 4E3</span></li>
+        <li><span class="lbl">Phone</span><span class="val"><a href="tel:+19050000000">(905) 000-0000</a></span></li>
+      </ul>
+    </div>
+    <div>
+      <p class="lbl">Hours <span class="ph">placeholder</span></p>
+      <ul class="specs">
+        <li><span class="lbl">Mon–Fri</span><span class="val num">9:00 — 19:00</span></li>
+        <li><span class="lbl">Saturday</span><span class="val num">10:00 — 17:00</span></li>
+        <li><span class="lbl">Sunday</span><span class="val">Closed</span></li>
+      </ul>
+    </div>
+    <div>
+      <p class="lbl">Pages</p>
+      <ul class="specs">
+        <li><span class="lbl">01</span><span class="val"><a href="#services">Services</a></span></li>
+        <li><span class="lbl">02</span><span class="val"><a href="#rates">Rates</a></span></li>
+        <li><span class="lbl">03</span><span class="val"><a href="#proof">About</a></span></li>
+        <li><span class="lbl">04</span><span class="val"><a href="#quote">Contact</a></span></li>
+      </ul>
+    </div>
+  </div>
+  <p class="lbl" style="margin-top:var(--s12)">© 2026 AZ Printing &amp; Signs — design board only, not a live site. All business details on this page are fabricated placeholders.</p>
+ </div></div>
+</footer>
+
+<a class="wa" href="https://wa.me/10000000000" aria-label="WhatsApp the shop (placeholder number)">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.6 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a12 12 0 0 1-5.6-4.7c-.4-.7-.9-1.6-.9-2.5s.5-1.4.7-1.6c.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.1.2-.3.3-.1.6.4.7.9 1.3 1.5 1.8.6.5 1.1.7 1.4.8.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l1.8.9c.2.1.4.2.4.3v.9Z"/></svg>
+  <span>WhatsApp</span>
+</a>
+
+<!-- ================= SPECIMEN STRIP ================= -->
+<section class="specimen" aria-label="Design specimen">
+ <div class="sheet"><div class="wrap">
+  <p class="lbl lbl--reg">Specimen sheet — Direction C</p>
+  <h2 style="margin:var(--s3) 0 var(--s12)">Palette, scale, states</h2>
+
+  <p class="lbl" style="margin-bottom:var(--s4)">01 / Palette &amp; measured contrast</p>
+  <div class="spec-grid" style="margin-bottom:var(--s16)">
+    <div class="chip"><div class="chip-fill" style="background:#F4F1EA"></div><div class="chip-meta">
+      <p class="lbl">Trace — page ground</p><p class="val num">#F4F1EA</p><p class="lbl">ink on trace 16.21:1 AAA</p></div></div>
+    <div class="chip"><div class="chip-fill" style="background:#DCCDAE"></div><div class="chip-meta">
+      <p class="lbl">Kraft — material band</p><p class="val num">#DCCDAE</p><p class="lbl">ink on kraft 11.66:1 AAA</p></div></div>
+    <div class="chip"><div class="chip-fill" style="background:#16150F"></div><div class="chip-meta">
+      <p class="lbl">Ink — text, rules, footer</p><p class="val num">#16150F</p><p class="lbl">trace on ink 16.21:1 AAA</p></div></div>
+    <div class="chip"><div class="chip-fill" style="background:#6A665C"></div><div class="chip-meta">
+      <p class="lbl">Mono — docket labels</p><p class="val num">#6A665C</p><p class="lbl">on trace 5.08:1 AA · never on kraft</p></div></div>
+    <div class="chip"><div class="chip-fill" style="background:#14503C"></div><div class="chip-meta">
+      <p class="lbl">Press green — sole accent</p><p class="val num">#14503C</p><p class="lbl">8.30:1 trace · 5.97:1 kraft — AA as body text on both</p></div></div>
+    <div class="chip"><div class="chip-fill" style="background:#C8102E"></div><div class="chip-meta">
+      <p class="lbl">Registration red — marks &amp; errors only</p><p class="val num">#C8102E</p><p class="lbl">5.22:1 on trace · never a link, never a fill</p></div></div>
+  </div>
+
+  <p class="lbl" style="margin-bottom:var(--s4)">02 / Type scale — Archivo (wdth axis) + IBM Plex Mono</p>
+  <div style="margin-bottom:var(--s16)">
+    <div class="scale-row"><span class="lbl">H1 · 78 / wdth125 / 700</span><span class="sample" style="font-size:48px;font-variation-settings:'wdth' 125,'wght' 700;letter-spacing:-.02em">Measured, not guessed</span></div>
+    <div class="scale-row"><span class="lbl">H2 · 46 / wdth112 / 600</span><span class="sample" style="font-size:34px;font-variation-settings:'wdth' 112,'wght' 600;letter-spacing:-.02em">The work, specified</span></div>
+    <div class="scale-row"><span class="lbl">H3 · 30 / wdth100 / 600</span><span class="sample" style="font-size:26px;font-variation-settings:'wdth' 100,'wght' 600">Banners &amp; signage</span></div>
+    <div class="scale-row"><span class="lbl">Lead · 19 / 400</span><span class="sample" style="font-size:19px">Stock, weight, finish, quantity, turnaround.</span></div>
+    <div class="scale-row"><span class="lbl">Body · 16 / 400</span><span class="sample" style="font-size:16px">Grommets every 2 ft, hemmed edges, wind-slits on request.</span></div>
+    <div class="scale-row"><span class="lbl">Value · 14 / 500</span><span class="sample val">13oz vinyl · 4mm coroplast · 3mm ACM</span></div>
+    <div class="scale-row"><span class="lbl">Label · 12 mono / .08em</span><span class="sample lbl" style="color:#A7A292">TURNAROUND · NEXT BUSINESS DAY</span></div>
+    <div class="scale-row"><span class="lbl">Figures · tabular</span><span class="sample num" style="font-size:20px">1,000 · 500 · 250 · $00.00</span></div>
+  </div>
+
+  <p class="lbl" style="margin-bottom:var(--s4)">03 / Components &amp; states</p>
+  <div class="states">
+    <div class="state-box">
+      <p class="lbl">Buttons on trace</p>
+      <div class="btn-row" style="margin-top:var(--s4)">
+        <a class="btn" href="#quote">Primary</a>
+        <a class="btn btn--ghost" href="#quote">Ghost</a>
+        <span class="btn btn--disabled" aria-hidden="true">Disabled</span>
+      </div>
+    </div>
+    <div class="state-box on-kraft">
+      <p class="lbl">Buttons on kraft</p>
+      <div class="btn-row" style="margin-top:var(--s4)">
+        <a class="btn" href="#quote">Primary</a>
+        <a class="btn btn--ghost" href="#quote">Ghost</a>
+      </div>
+      <p class="val" style="margin-top:var(--s4)">Accent link at body size: <a href="#rates">see rate bands</a></p>
+    </div>
+    <div class="state-box">
+      <p class="lbl">Field — default / error</p>
+      <label class="field" for="s-ok" style="margin-top:var(--s4)"><span class="lbl lbl--ink">Default</span>
+        <input id="s-ok" type="text" placeholder="Your name"></label>
+      <label class="field field--err" for="s-err" style="margin-bottom:0"><span class="lbl lbl--ink">Error</span>
+        <input id="s-err" type="text" value="" placeholder="(000) 000-0000">
+        <span class="err-msg"><span aria-hidden="true">✕</span> Phone or email required</span></label>
+    </div>
+    <div class="state-box">
+      <p class="lbl">Rule weights — the hierarchy system</p>
+      <div class="hr-demo">
+        <div style="height:.5px;background:rgba(22,21,15,.5)"></div>
+        <div style="height:1px;background:var(--ink)"></div>
+        <div style="height:2px;background:var(--ink)"></div>
+        <div style="height:4px;background:var(--ink)"></div>
+      </div>
+      <p class="lbl" style="margin-top:var(--s3)">0.5 hairline · 1 row · 2 section · 4 docket</p>
+    </div>
+    <div class="state-box">
+      <p class="lbl">Ledger row (no card, no radius, no shadow)</p>
+      <ul class="specs specs--tight" style="margin-top:var(--s4)">
+        <li><span class="lbl">Stock</span><span class="val">16pt matte laminate</span></li>
+        <li><span class="lbl">Qty</span><span class="val num">500</span></li>
+        <li><span class="lbl lbl--ink">From</span><span class="val num">$00 <span class="ph">placeholder</span></span></li>
+      </ul>
+    </div>
+    <div class="state-box">
+      <p class="lbl">Register mark — section anchor</p>
+      <div style="position:relative;height:80px;border:1px solid var(--ink);margin-top:var(--s4)">
+        <span class="regmark tl"></span><span class="regmark br"></span>
+      </div>
+    </div>
+  </div>
+
+  <p class="lbl" style="margin-top:var(--s16)">Board only. Fonts: Archivo + IBM Plex Mono (Google Fonts, one request). No images, no stock photography, no depiction of people. All business data fabricated.</p>
+ </div></div>
+</section>
+
+</body>
+</html>

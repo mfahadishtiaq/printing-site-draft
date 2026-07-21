@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Body font — round 2, genuinely different options</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400..500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400..500&family=Epilogue:wght@400;500;600&family=Familjen+Grotesk:wght@400;500;700&family=Schibsted+Grotesk:wght@400;500;700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Space+Mono:wght@400;700&family=Gabarito:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0E0E12;--ink-soft:#5F5F6B;--surface:#fff;--surface-2:#F5F5F8;--border:#E4E4EC;--maxw:940px}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--surface-2);color:var(--ink);line-height:1.6;
+  font-family:'Schibsted Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:24px}
+h1,h2,.disp{font-family:'Fraunces',Georgia,serif;font-weight:700;letter-spacing:-.02em;
+  line-height:1.05;margin:0;font-variation-settings:'SOFT' 0,'WONK' 1}
+
+.flag{background:repeating-linear-gradient(45deg,#111 0 12px,#f5c518 12px 24px);
+  color:#fff;font-size:11px;font-weight:600;letter-spacing:.08em;text-align:center;
+  padding:7px 14px;text-transform:uppercase}
+.flag span{background:#111;padding:2px 8px;border-radius:6px}
+
+.intro{padding:56px 0 24px}
+.intro h1{font-size:clamp(30px,5vw,46px);margin-bottom:16px}
+.intro p{color:var(--ink-soft);max-width:64ch;margin-bottom:10px}
+.intro strong{color:var(--ink)}
+
+.group{font-family:'Fraunces',serif;font-size:13px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.18em;color:var(--ink-soft);margin:44px 0 16px;padding-bottom:10px;
+  border-bottom:2px solid var(--ink)}
+.group:first-of-type{margin-top:24px}
+
+.spec{background:var(--surface);border:1px solid var(--border);border-radius:18px;
+  padding:36px 32px;margin-bottom:18px}
+.spec__head{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;
+  padding-bottom:18px;margin-bottom:26px;border-bottom:1px solid var(--border)}
+.spec__num{font-size:12px;font-weight:700;color:#fff;background:var(--ink);width:26px;height:26px;
+  border-radius:50%;display:grid;place-content:center;flex:none;font-family:'Space Mono',monospace}
+.spec__name{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.spec__h{font-size:clamp(27px,4.2vw,42px);margin-bottom:18px}
+.spec__h em{font-style:italic}
+.sample{font-size:17px;max-width:60ch}
+.sample--muted{color:var(--ink-soft);margin-top:14px;font-size:16px}
+.ui{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:26px;
+  padding-top:22px;border-top:1px dashed var(--border)}
+.btn{display:inline-flex;align-items:center;font-size:15px;font-weight:600;
+  background:var(--ink);color:#fff;padding:13px 24px;border-radius:999px}
+.eyebrow{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft)}
+.label{font-size:14px;font-weight:500}
+.pill{font-size:13px;font-weight:600;border:1px solid var(--border);padding:8px 14px;border-radius:8px}
+.note{font-size:14px;color:var(--ink-soft);margin-top:22px;padding-left:14px;
+  border-left:3px solid var(--surface-2);font-family:'Schibsted Grotesk',sans-serif}
+
+/* ---- one family ---- */
+.g1 .sample,.g1 .ui{font-family:'Fraunces',Georgia,serif}
+.g1 .sample{font-variation-settings:'SOFT' 0,'WONK' 0}
+/* ---- serif body ---- */
+.g2 .sample,.g2 .ui{font-family:'Newsreader',Georgia,serif}
+.g3 .sample,.g3 .ui{font-family:'Literata',Georgia,serif}
+.g4 .sample,.g4 .ui{font-family:'Source Serif 4',Georgia,serif}
+/* ---- character sans ---- */
+.g5 .sample,.g5 .ui{font-family:'Epilogue',sans-serif}
+.g6 .sample,.g6 .ui{font-family:'Familjen Grotesk',sans-serif}
+.g7 .sample,.g7 .ui{font-family:'Bricolage Grotesque',sans-serif}
+.g8 .sample,.g8 .ui{font-family:'Gabarito',sans-serif}
+/* ---- mono accents ---- */
+.g9 .sample{font-family:'Newsreader',Georgia,serif}
+.g9 .ui,.g9 .eyebrow,.g9 .pill,.g9 .label,.g9 .btn{font-family:'Space Mono',monospace}
+.g9 .eyebrow,.g9 .pill{letter-spacing:.06em}
+.g10 .sample{font-family:'Schibsted Grotesk',sans-serif}
+.g10 .ui,.g10 .eyebrow,.g10 .pill,.g10 .label,.g10 .btn{font-family:'Space Mono',monospace}
+.g10 .eyebrow,.g10 .pill{letter-spacing:.06em}
+
+.outro{padding:24px 0 90px}
+.outro h2{font-size:26px;margin-bottom:14px}
+.outro p{color:var(--ink-soft);max-width:64ch;margin-bottom:12px}
+@media(max-width:640px){.spec{padding:26px 20px}}
+</style>
+</head>
+<body>
+
+<div class="flag">Body font — round 2 &nbsp;·&nbsp; <span>Four genuinely different approaches, not ten versions of one</span></div>
+
+<div class="wrap intro">
+  <h1>Round one was eleven versions of <em>the same idea</em>.</h1>
+  <p>They were all neutral sans-serifs. To me that's eleven options; to anyone else it's one option shown eleven times — so of course none of them landed. My mistake.</p>
+  <p>These are four <strong>different approaches</strong>. The headline stays Fraunces throughout. Don't look for a favourite font — look for the <strong>group</strong> that feels right, then we refine inside it.</p>
+</div>
+
+<div class="wrap">
+
+  <p class="group">Approach 1 — One family, no second font</p>
+
+  <section class="spec g1">
+    <div class="spec__head"><span class="spec__num">1</span><span class="spec__name">Fraunces for everything</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">The most literal answer to "matches the website" — there is no second font to clash. Very cohesive and unmistakably yours. Trade-off: serif body text is slightly harder to read on a small phone at length.</p>
+  </section>
+
+  <p class="group">Approach 2 — A serif body. No sans anywhere.</p>
+
+  <section class="spec g2">
+    <div class="spec__head"><span class="spec__num">2</span><span class="spec__name">Newsreader</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Reads like a well-set magazine. Instantly more expensive-feeling than any sans, and it suits wedding-card customers particularly well.</p>
+  </section>
+
+  <section class="spec g3">
+    <div class="spec__head"><span class="spec__num">3</span><span class="spec__name">Literata</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Drawn for Google Books — built specifically to be read comfortably on screens. Warmer and sturdier than Newsreader, easier on older eyes.</p>
+  </section>
+
+  <section class="spec g4">
+    <div class="spec__head"><span class="spec__num">4</span><span class="spec__name">Source Serif 4</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">More upright and businesslike than the other two serifs. Professional rather than romantic — leans B2B.</p>
+  </section>
+
+  <p class="group">Approach 3 — Sans with actual character (not neutral)</p>
+
+  <section class="spec g5">
+    <div class="spec__head"><span class="spec__num">5</span><span class="spec__name">Epilogue</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Tight and slightly angular with distinctive letter shapes. Modern and sharp — nobody would call this a default.</p>
+  </section>
+
+  <section class="spec g6">
+    <div class="spec__head"><span class="spec__num">6</span><span class="spec__name">Familjen Grotesk</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Swedish, with noticeably unusual curves and a confident tone. Designed to sit beside serifs — a natural partner for Fraunces.</p>
+  </section>
+
+  <section class="spec g7">
+    <div class="spec__head"><span class="spec__num">7</span><span class="spec__name">Bricolage Grotesque</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Deliberately imperfect — it has small oddities that make text feel handmade rather than machine-set. Most "designed" of the sans options.</p>
+  </section>
+
+  <section class="spec g8">
+    <div class="spec__head"><span class="spec__num">8</span><span class="spec__name">Gabarito</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Rounder and more energetic, with a bit of swagger. Friendly without being soft — good for walk-in trade.</p>
+  </section>
+
+  <p class="group">Approach 4 — Mono labels, like a real print spec</p>
+
+  <section class="spec g9">
+    <div class="spec__head"><span class="spec__num">9</span><span class="spec__name">Newsreader + Space Mono labels</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Look at the button, the eyebrow and the price pill — typewriter-style. This is the language of job tickets and print specs. Serious, technical, and very distinctive next to an elegant serif.</p>
+  </section>
+
+  <section class="spec g10">
+    <div class="spec__head"><span class="spec__num">10</span><span class="spec__name">Schibsted Grotesk + Space Mono labels</span></div>
+    <h2 class="spec__h">Printed properly. <em>Printed here.</em></h2>
+    <p class="sample">Business cards, banners, signs and wedding cards — printed properly, by a family that has done it for years.</p>
+    <p class="sample sample--muted">We check every file before it goes on the press, so you don't pay twice for someone else's mistake.</p>
+    <div class="ui"><span class="btn">Get a Free Quote</span><span class="eyebrow">Recent work</span>
+      <span class="label">Phone or WhatsApp</span><span class="pill">from $XX / 500</span></div>
+    <p class="note">Same trick, but with a clean sans for reading. The mono only shows up on labels and prices, so it stays sharp without becoming hard work.</p>
+  </section>
+
+</div>
+
+<div class="wrap outro">
+  <h2>Don't pick a font — pick a group</h2>
+  <p><strong>Approach 1</strong> = one font, maximum cohesion. <strong>Approach 2</strong> = magazine, most expensive-feeling. <strong>Approach 3</strong> = modern with personality. <strong>Approach 4</strong> = technical print-shop language.</p>
+  <p>Tell me which <strong>approach</strong> feels closest, even if no single sample is perfect — I'll refine inside it. And if none of the four feel right, say that too: it means the problem isn't the font, and I should stop asking you about fonts.</p>
+</div>
+
+</body>
+</html>
