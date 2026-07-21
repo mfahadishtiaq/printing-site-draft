@@ -322,7 +322,7 @@ html:not(.js) .reg{opacity:.45}
 .marq{border-block:1px solid var(--border);background:var(--ink);color:#fff;
   padding-block:20px;overflow:hidden;white-space:nowrap}
 .marq__t{display:inline-flex;gap:44px;animation:slide 34s linear infinite;will-change:transform}
-.marq:hover .marq__t{animation-play-state:paused}
+.marq:hover .marq__t,.marq:focus-within .marq__t{animation-play-state:paused}
 .marq__i{font-family:var(--display);font-size:23px;font-weight:800;letter-spacing:-.02em;
   display:inline-flex;align-items:center;gap:44px}
 .marq__i::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--flame);flex:none}
@@ -415,6 +415,8 @@ html:not(.js) .reg{opacity:.45}
   color:var(--ink-soft);opacity:0;transform:translateY(6px);
   transition:opacity .3s var(--ease),transform .3s var(--ease)}
 .piece:hover .piece__go,.piece:focus-visible .piece__go{opacity:1;transform:none}
+/* Touch devices have no hover: show the CTA permanently below the desktop breakpoint. */
+@media(max-width:899px){.piece__go{opacity:1;transform:none}}
 @media(min-width:700px){.show{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1100px){.show{grid-template-columns:repeat(4,1fr)}}
 
@@ -459,8 +461,11 @@ html:not(.js) .reg{opacity:.45}
 .qa__b::before{width:18px;height:2px;transform:translateY(-50%)}
 .qa__b::after{width:2px;height:18px;right:16px;transform:translateY(-50%) scaleY(1)}
 .qa[open] .qa__b::after,.qa.open .qa__b::after{transform:translateY(-50%) scaleY(0)}
-.qa__p{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--out)}
-.qa.open .qa__p{grid-template-rows:1fr}
+/* Collapsed state is JS-gated: without script every answer stays open and readable
+   rather than invisible with no way to open it. */
+.qa__p{display:grid;grid-template-rows:1fr}
+html.js .qa__p{grid-template-rows:0fr;transition:grid-template-rows .4s var(--out)}
+html.js .qa.open .qa__p{grid-template-rows:1fr}
 .qa__inner{overflow:hidden}
 .qa__inner p{padding-bottom:26px;color:var(--ink-soft);max-width:70ch}
 
@@ -478,7 +483,7 @@ html:not(.js) .reg{opacity:.45}
   background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:10px;
   padding:15px 16px;min-height:56px;width:100%;transition:border-color .25s,background .25s}
 .field textarea{min-height:110px;resize:vertical}
-.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.42)}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.56)}
 .field input:focus,.field select:focus,.field textarea:focus{background:rgba(255,255,255,.14);border-color:#fff}
 .field select option{color:var(--ink)}
 .form .btn--primary{justify-self:start;background:var(--flame);color:#2A0A00}
@@ -548,7 +553,7 @@ html:not(.js) .reg{opacity:.45}
 
 <script>document.documentElement.classList.add('js')</script>
 
-<div class="flag">Design preview &nbsp;&middot;&nbsp; <span>Phone number and address are real &mdash; prices, statistics, reviews and sample jobs are still placeholders</span></div>
+<div class="flag">Design preview &nbsp;&middot;&nbsp; <span>Phone number and address are real &mdash; prices, hours, statistics, reviews and sample jobs are placeholders, and the quote form is not connected yet</span></div>
 
 <div class="progress" id="prog"></div>
 
@@ -559,7 +564,7 @@ html:not(.js) .reg{opacity:.45}
       <ul class="nav__links">
         <li><a href="#work">Work</a></li>
         <li><a href="#services">Services</a></li>
-        <li><a href="#why">About</a></li>
+        <li><a href="#why">Why us</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
     </nav>
@@ -601,13 +606,13 @@ html:not(.js) .reg{opacity:.45}
         </div>
         <div class="slide" role="group" aria-label="2 of 5">
           <img class="slide__ph" src="images/hero-03-business-cards-1920x1200.jpg"
-               alt="Stacks of premium business cards in cream, navy and burgundy with embossed patterns and gilded edges"
+               alt="Stacks of printed business cards in cream, navy and burgundy"
                width="1920" height="1200" loading="lazy" decoding="async">
           <span class="slide__cap">Business cards · premium papers</span>
         </div>
         <div class="slide" role="group" aria-label="3 of 5">
           <img class="slide__ph" src="images/hero-05-wedding-cards-1920x1200.jpg"
-               alt="Wedding invitation suite with deckle-edge cards, black envelopes and magenta wax seals"
+               alt="Wedding invitation cards with black envelopes and red seals"
                width="1920" height="1200" loading="lazy" decoding="async">
           <span class="slide__cap">Wedding cards · wax seals</span>
         </div>
@@ -619,7 +624,7 @@ html:not(.js) .reg{opacity:.45}
         </div>
         <div class="slide" role="group" aria-label="5 of 5">
           <img class="slide__ph" src="images/hero-02-flyers-brochures-1920x1200.jpg"
-               alt="Folded brochures and flyers with geometric artwork and gold foil accents laid out on a table"
+               alt="Folded brochures and flyers with geometric artwork laid out on a table"
                width="1920" height="1200" loading="lazy" decoding="async">
           <span class="slide__cap">Flyers &amp; brochures · folded</span>
         </div>
@@ -663,7 +668,7 @@ html:not(.js) .reg{opacity:.45}
         <a class="piece wipe tilt" href="#" data-page="apparel" style="--i:1">
           <div class="piece__art piece__art--ph">
             <img src="images/hero-04-custom-shirts-1920x1200.jpg"
-                 alt="Stack of folded screen-printed t-shirts beside a hanging cream shirt with CMYK artwork"
+                 alt="Stack of folded printed t-shirts beside a hanging cream shirt"
                  width="1920" height="1200" loading="lazy" decoding="async">
           </div>
           <div class="piece__txt">
@@ -746,8 +751,8 @@ html:not(.js) .reg{opacity:.45}
   <section class="section tint">
     <div class="wrap stats">
       <div class="rv"><div class="stat__n" data-count="25">0</div><div class="stat__l">Years of printing experience</div></div>
-      <div class="rv" style="--i:1"><div class="stat__n" data-count="24">0</div><div class="stat__l">Hour rush service</div></div>
-      <div class="rv" style="--i:2"><div class="stat__n" data-count="1200">0</div><div class="stat__l">Local jobs printed</div></div>
+      <div class="rv" style="--i:1"><div class="stat__n" data-count="24">0</div><div class="stat__l">Hour rush service [to confirm]</div></div>
+      <div class="rv" style="--i:2"><div class="stat__n" data-count="1200">0</div><div class="stat__l">Local jobs printed [to confirm]</div></div>
     </div>
   </section>
 
@@ -757,13 +762,13 @@ html:not(.js) .reg{opacity:.45}
       <p class="eyebrow rv">What customers say</p>
       <h2 class="h2 uline rv" style="--i:1">Reviews.</h2>
       <div class="revs">
-        <article class="rev rv"><div class="rev__stars" aria-label="5 out of 5">★★★★★</div>
+        <article class="rev rv">
           <p class="rev__q">"PLACEHOLDER — real Google review goes here once the Business Profile is live and customers start leaving them."</p>
           <p class="rev__w">— Placeholder Name</p></article>
-        <article class="rev rv" style="--i:1"><div class="rev__stars" aria-label="5 out of 5">★★★★★</div>
+        <article class="rev rv" style="--i:1">
           <p class="rev__q">"PLACEHOLDER — real Google review goes here once the Business Profile is live and customers start leaving them."</p>
           <p class="rev__w">— Placeholder Name</p></article>
-        <article class="rev rv" style="--i:2"><div class="rev__stars" aria-label="5 out of 5">★★★★★</div>
+        <article class="rev rv" style="--i:2">
           <p class="rev__q">"PLACEHOLDER — real Google review goes here once the Business Profile is live and customers start leaving them."</p>
           <p class="rev__w">— Placeholder Name</p></article>
       </div>
@@ -779,7 +784,7 @@ html:not(.js) .reg{opacity:.45}
       <div class="faq rv" style="--i:2">
         <div class="qa">
           <button class="qa__b" aria-expanded="false">What are your prices?</button>
-          <div class="qa__p"><div class="qa__inner"><p>Starting prices for our most common jobs are listed on the rates page, from <strong>[$X]</strong> for business cards. For anything custom, send us the details through the quote form below and we&rsquo;ll prepare a free quote.</p></div></div>
+          <div class="qa__p"><div class="qa__inner"><p>Price depends on the size, the material and how many you need. Business cards start at <strong>[$X]</strong>. Send us the details through the quote form below and we&rsquo;ll prepare a free quote.</p></div></div>
         </div>
         <div class="qa">
           <button class="qa__b" aria-expanded="false">When will it be ready?</button>
@@ -845,7 +850,7 @@ html:not(.js) .reg{opacity:.45}
       <div><h4>Visit</h4><ul>
         <li><a href="https://maps.google.com/?q=499+Ray+Lawson+Blvd+Unit+24+Brampton+ON+L6Y+4E6" target="_blank" rel="noopener">499 Ray Lawson Blvd, Unit 24<br>Brampton, ON L6Y 4E6</a></li>
         <li><a href="https://maps.google.com/?q=499+Ray+Lawson+Blvd+Unit+24+Brampton+ON+L6Y+4E6" target="_blank" rel="noopener">Get directions →</a></li>
-        <li style="color:var(--ink-soft)">Mon–Sat 10am–7pm · Sun closed</li></ul></div>
+        <li style="color:var(--ink-soft)">[OPENING HOURS &mdash; to confirm]</li></ul></div>
       <div><h4>Contact</h4><ul>
         <li><a href="tel:+14167319229">416-731-9229</a></li>
         <li><a href="https://wa.me/14167319229">WhatsApp us</a></li>
@@ -863,8 +868,18 @@ html:not(.js) .reg{opacity:.45}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"LocalBusiness","name":"AZ Printing and Signs",
 "description":"Family-run printing and signs shop in Brampton, Ontario.",
-"address":{"@type":"PostalAddress","streetAddress":"499 Ray Lawson Blvd #24","addressLocality":"Brampton","addressRegion":"ON","postalCode":"L6Y 4E3","addressCountry":"CA"},
-"telephone":"+1-905-555-0142","openingHours":"Mo-Sa 10:00-19:00","areaServed":["Brampton","Mississauga","Toronto"]}
+"address":{"@type":"PostalAddress","streetAddress":"499 Ray Lawson Blvd, Unit 24","addressLocality":"Brampton","addressRegion":"ON","postalCode":"L6Y 4E6","addressCountry":"CA"},
+"telephone":"+1-416-731-9229","areaServed":["Brampton","Mississauga","Toronto"]}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What are your prices?","acceptedAnswer":{"@type":"Answer","text":"Price depends on the size, the material and how many you need. Send us the details through the quote form and we will prepare a free quote."}},
+{"@type":"Question","name":"When will it be ready?","acceptedAnswer":{"@type":"Answer","text":"Most jobs take a few business days from the moment you approve the artwork. If you need it sooner, let us know your date and we will confirm what is possible before you place the order."}},
+{"@type":"Question","name":"Can you design it for me?","acceptedAnswer":{"@type":"Answer","text":"Yes, we design as well as print. Send us what you have, whether that is a photograph, a rough sketch or an existing file, and we will prepare print-ready artwork for your approval."}},
+{"@type":"Question","name":"Can I see it before you print it?","acceptedAnswer":{"@type":"Answer","text":"Yes. We send you a proof to review, and printing starts only once you have approved it."}},
+{"@type":"Question","name":"Do you deliver, or do I pick it up?","acceptedAnswer":{"@type":"Answer","text":"We deliver across Brampton and Mississauga on larger orders. Everything else is collected from the shop on Ray Lawson Blvd."}},
+{"@type":"Question","name":"Where are you, and can I just walk in?","acceptedAnswer":{"@type":"Answer","text":"We are at 499 Ray Lawson Blvd, Unit 24 in Brampton. Visitors are welcome during opening hours, and artwork can be sent ahead on WhatsApp."}}]}
 </script>
 
 <script>
