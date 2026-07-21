@@ -299,3 +299,48 @@ whether artwork is kept on file for repeat orders.
 **Next:** Fahad is sending the site to Claude design to remove the AI-generated
 feel from the visuals. Copy for services, rates, about and contact still to be
 written; the About page should carry the owner's history as narrative.
+
+---
+
+## 2026-07-22 (later) — Studio hardened: production rules, copy-workshop, and the critic gate
+
+Fahad's direction: fold everything learned today into the skills themselves, and
+build a critic that pushes back before he ever sees the work.
+
+**New:** `team/production-rules.md` — 37 cross-role rules covering how Fahad
+decides, approval gates, fact discipline, language, the ambition floor, build
+verification, and how to treat outside AI output. All six role skills now point at
+it and carry their own role-specific additions. `web-copy-workshop` moved to user
+level so it loads in client-repo sessions. `web-critic` created and wired into
+`/build-site` as mandatory Phase 5.5.
+
+**The critic was run against this repo's homepage immediately, and it earned its
+place.** Verdict REWORK, six blocking findings, twelve worth fixing. The one that
+mattered most had been live and public: the LocalBusiness JSON-LD still carried
+the v1 fake phone number `905-555-0142` and postal code L6Y 4E3, contradicting the
+real 416-731-9229 / L6Y 4E6 shown on the page. Google reads the schema first, and
+NAP inconsistency undercuts the entire local-SEO goal. Two copy passes and a human
+review had all missed it because nobody looks at the schema block.
+
+It also caught the 2026-07-19 "never let content depend on JavaScript" lesson being
+reintroduced in the new FAQ (all six answers invisible with script off), unmarked
+placeholder stats, hover-only CTAs invisible on touch, fifteen fake stars rendering
+in the "empty" reviews section, sub-AA placeholder text, and alt text claiming
+finishes (deckle edges, wax seals, gold foil, screen printing) that no one has
+confirmed this shop offers.
+
+Sixteen mechanical fixes applied and pushed, plus FAQPage schema per the deck's
+own build note. **Deliberately left open** for the design pass and the next copy
+round: the ambition-floor failure (zero asymmetric sections against a required
+two, and five equal-column grids, which is the exact fault v1 was rejected for),
+all four work tiles linking to `#`, both doors resolving to the same quote form,
+the stats band repeating the hero's twenty-five, and the critic's sharpest
+observation — that from the doors section down, almost every line could be pasted
+onto a competitor's site unchanged, because everything uncopyable sits in the top
+two screenfuls.
+
+**Lesson: the QA loop checks work against its own spec; the critic asks whether the
+spec was worth building.** Those are different jobs and the studio needed both.
+
+**Open question for Fahad:** the repo's `CLAUDE.md` says L6Y 4E3 and his own commit
+says L6Y 4E6. One is wrong and only the uncle can settle it.
