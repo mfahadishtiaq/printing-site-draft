@@ -344,3 +344,75 @@ spec was worth building.** Those are different jobs and the studio needed both.
 
 **Open question for Fahad:** the repo's `CLAUDE.md` says L6Y 4E3 and his own commit
 says L6Y 4E6. One is wrong and only the uncle can settle it.
+
+*(Resolved since: commit `786aa91` corrected the postal code to L6Y 4E6 across the
+docs, and `CLAUDE.md` L4 now reads L6Y 4E6 "verified against Google, 2026-07-22".
+The remaining risk is only that the v1 pages still carry an unrelated fake address.)*
+
+---
+
+## 2026-07-22 (later still) — Handoff pack produced, and the work tiles reshot
+
+**Handoff.** A full technical and content handoff was written to
+`../HANDOFF-2026-07-22.md` (outside the repo, alongside
+`AZ-Printing-COMPLETE-HANDOFF.zip`) for a receiving development team. Every item
+labelled VERIFIED / PLACEHOLDER / UNKNOWN / INCOMPLETE against the actual files.
+Repo was already clean and synced at `d43107c`; nothing needed pushing.
+
+Three things the handoff surfaced that were not previously written down:
+- **G0 is still open and now measured:** the Pages root returns HTTP 200 serving
+  the fake PrimePress v1, none of the five v1 pages carry `noindex`, and
+  `/robots.txt` and `/sitemap.xml` both 404. So nothing at any level prevents
+  crawling of the fabricated business, its fake LocalBusiness schema or its three
+  invented testimonials.
+- **The demo has no mobile menu.** `.nav__links` is `display:none` below 960px
+  with no hamburger or drawer. The rejected v1 actually has a working
+  `.nav-toggle`; the approved direction lost it.
+- **Work outside version control:** `AZ-Printing-Home.html` (a second, different
+  Direction F homepage build using `<details>` for the FAQ and carrying no
+  JSON-LD) plus `AZ-Printing home redesign.zip`, which contains the only logo and
+  header-banner option boards that exist on this project. None of it is in git and
+  no document records its provenance or approval status.
+
+**Work tiles reshot (2026-07-22).** Fahad supplied four new AI-generated product
+photos to replace the previous stand-ins in the Recent projects grid. All four are
+a materially better match to the approved captions than what they replaced.
+
+| Tile | New file | Was |
+| --- | --- | --- |
+| Lawn signs | `project-07-lawn-signs-realestate-1200x900.jpg` | `project-03-lawn-signs` |
+| Team uniforms | `project-06-team-uniforms-1600x1000.jpg` | `hero-04-custom-shirts` (a reused hero image) |
+| Vehicle graphics | `project-05-vehicle-wrap-1200x740.jpg` | `project-04-vehicle-decals` |
+| Storefront signs | `project-08-storefront-bakery-1440x1080.jpg` | `project-01-storefront-signage` |
+
+- **One image needed a fix before it could ship.** The van photo had a black
+  fascia sign reading "PRINT & SIGN SOLUTIONS" on the building behind it, i.e. a
+  competing print shop's branding inside a photo presented as AZ Printing's own
+  work. Cropped out (top 160px removed, 1200x900 to 1200x740). At the desktop
+  4-up tile ratio the source is barely cropped, so the sign would have been
+  plainly visible.
+- All four re-encoded at JPEG q0.82 and held under 250 KB (139–235 KB, down from
+  272–465 KB). The supplied webp was converted to JPEG. Declared `width`/`height`
+  now match natural dimensions exactly on all four, so no layout shift.
+- Alt text rewritten to describe what is actually visible, per the standing rule
+  against alt text claiming finishes nobody has confirmed the shop offers.
+- **Copy deliberately NOT touched.** Tile 3 still reads "Door decals for a
+  delivery van" while the new photo shows a full-side graphic wrap. That copy is
+  Fahad-approved and the standing rule is that design may rearrange copy but not
+  rewrite it, so this is raised rather than fixed. **Open for Fahad: approve
+  replacement wording for the Vehicle graphics caption.**
+- Status unchanged by this swap: these remain AI-generated stand-ins with invented
+  customers (Greenline Landscapes, Brampton Falcons, Maya Patel / Parkview Realty,
+  Morning Bloom Bakery) and two visible 555 fake phone numbers. The four job
+  descriptions stay `[NEEDS FACT]` and **gate G3, the real photo shoot, is not
+  closed by this.**
+- Now unused but still tracked: `project-01`, `project-03`, `project-04`,
+  `project-02-menu-boards`, and `hero-04-custom-shirts` (which is no longer
+  referenced anywhere). Kept rather than deleted; candidates for cleanup.
+
+**Tooling note.** No PIL, ffmpeg or ImageMagick on this machine, and `sips` only
+crops from the centre, so the offset crop was done by drawing the image onto a
+canvas in headless Chrome and reading the JPEG back out of `toDataURL` via
+`--dump-dom`. Loading the source over `file://` taints the canvas and makes
+`toDataURL` throw, so the input has to be inlined as a data URI. Script kept at
+the session scratchpad as `crop.py` if it is ever needed again.
